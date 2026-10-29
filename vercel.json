@@ -23,6 +23,11 @@
         "VIEW_COMPILED_PATH": "/tmp",
         "CACHE_DRIVER": "array",
         "LOG_CHANNEL": "stderr",
-        "SESSION_DRIVER": "cookie"
+        "SESSION_DRIVER": "cookie",
+        "DB_CONNECTION": "mysql",
+        "DB_HOST": "4gg.h.filess.io",
+        "DB_PORT": "3306",
+        "DB_DATABASE": "my_project",
+        "DB_USERNAME": "root"
     }
 }
