@@ -9,9 +9,24 @@
     ]
   },
   "resources/js/app.js": {
-    "file": "assets/app-CNT9J02T.js",
+    "file": "assets/app-PAD2qd0v.js",
     "name": "app",
     "src": "resources/js/app.js",
+    "isEntry": true,
+    "imports": [
+      "resources/js/rate-converter.js"
+    ]
+  },
+  "resources/js/rate-converter.js": {
+    "file": "assets/rate-converter-BMk94O4-.js",
+    "name": "rate-converter",
+    "src": "resources/js/rate-converter.js",
+    "isEntry": true
+  },
+  "resources/js/validate-account.js": {
+    "file": "assets/validate-account-B1zLetCe.js",
+    "name": "validate-account",
+    "src": "resources/js/validate-account.js",
     "isEntry": true
   }
 }
