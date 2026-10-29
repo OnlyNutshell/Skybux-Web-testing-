@@ -155,7 +155,7 @@
                     </span>
                 </div>
 
-                <!-- <div class="mt-5 space-y-3 text-sm">
+                <div class="mt-5 space-y-3 text-sm">
                     <div class="flex justify-between gap-4">
                         <span class="text-gray-400">User ID</span>
                         <span id="userId"
@@ -181,7 +181,7 @@
                            class="whitespace-pre-wrap break-words
                                   leading-6 text-gray-300"></p>
                     </div>
-                </div> -->
+                </div>
 
                 <a id="profileLink"
                    href="#"
