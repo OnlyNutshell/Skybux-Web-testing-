@@ -32,7 +32,7 @@
     
     <header class="bg- w-full flex max-w-3xl mx-auto gap-6 justify-between">
         <div class="">
-            <img class="w-30" src="{{ asset('image.png') }}" alt="">
+            <img class="w-30" src="{{ asset('img/image.png') }}" alt="">
             <p class="text-sm mt-4 text-sky-300 font-bold tracking-wider">TOP UP ROBUX</p>
             </div>
             <button class="rounded-2xl border-2 border-black h-fit px-3 py-0.5 font-bold">BUKA</button>
