@@ -19,11 +19,22 @@
         @endif
     </head>
     <body>
+
         @include('component.header')
+
         @include('component.banner')
+        <div class="bg-sky-900 mx-32 h-20 text-white flex justify-between items-center my-7 px-7 rounded-2xl">
+            <div class="flex justify-between items-center gap-3 font-bold pr-10 ">
+                <i data-lucide="shield-check" class="w-10 h-fit"></i>
+                <p>Metode Pembayaran <br> Lengkap dan Mudah </p>
+            </div>
+            @include('component.metode-pembayaran-icon')
+        </div>
+
         <div class="bg-[#FDFDFC] flex p-6 lg:p-8 min-h-screen">
-            @include('component.element-bg-circle')
-            
+
+        @include('component.element-bg-circle')
+
     
 
 
