@@ -23,20 +23,34 @@
         @include('component.header')
 
         @include('component.banner')
-        <div class="bg-sky-900 mx-32 h-20 text-white flex justify-between items-center my-7 px-7 rounded-2xl">
-            <div class="flex justify-between items-center gap-3 font-bold pr-10 ">
-                <i data-lucide="shield-check" class="w-10 h-fit"></i>
-                <p>Metode Pembayaran <br> Lengkap dan Mudah </p>
-            </div>
-            @include('component.metode-pembayaran-icon')
+        <div class="bg-sky-900 text-white
+                mx-4 sm:mx-8 xl:mx-32
+                my-7 px-4 sm:px-6 py-5
+                rounded-2xl
+                flex flex-col 
+                xl:flex-row
+                xl:gap-25
+                xl:items-center
+                gap-5">
+
+        <div class="flex items-center gap-3 font-bold shrink-0">
+            <i data-lucide="shield-check"
+            class="w-9 h-9 shrink-0 text-sky-300">
+            </i>
+
+            <p class="text-sm sm:text-base">
+                Metode Pembayaran <br>
+                Lengkap dan Mudah
+            </p>
         </div>
+
+    @include('component.metode-pembayaran-icon')
+
+</div>
 
         <div class="bg-[#FDFDFC] flex p-6 lg:p-8 min-h-screen">
 
         @include('component.element-bg-circle')
-
-    
-
 
     <main class="relative mx-auto flex w-full max-w-3xl flex-col items-center gap-6">
 

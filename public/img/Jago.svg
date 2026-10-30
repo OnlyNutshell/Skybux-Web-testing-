@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+
+<svg width="100%" height="100%" viewBox="0 0 57 80" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
+    <path d="M48.119,20.554C43.79,20.554 40.28,24.076 40.28,28.421L40.28,51.306C40.28,58.062 34.855,63.731 28.125,63.618C21.628,63.51 16.376,58.17 16.376,51.624L16.376,48.318C16.376,47.563 15.765,46.95 15.013,46.95L2.059,46.95C1.306,46.95 0.696,47.563 0.696,48.318L0.696,51.624C0.696,67.139 13.454,79.719 28.992,79.349C44.077,78.991 55.958,66.247 55.958,51.104L55.958,28.423C55.958,24.078 52.448,20.555 48.119,20.555L48.119,20.554Z" style="fill:rgb(255,172,0);fill-rule:nonzero;"/>
+    <ellipse cx="48.119" cy="8.558" rx="8.526" ry="8.558" style="fill:rgb(255,172,0);"/>
+    <ellipse cx="28.327" cy="8.558" rx="8.526" ry="8.558" style="fill:rgb(255,172,0);"/>
+    <ellipse cx="8.526" cy="8.558" rx="8.526" ry="8.558" style="fill:rgb(255,172,0);"/>
+</svg>
