@@ -1,95 +1,93 @@
-<div class="flex gap-3 w-full min-w-0
-        overflow-x-auto pb-2 xl:justify-between
-        xl:overflow-visible xl:flex-wrap scrollbar-thin">
+<div class="grid grid-cols-3 gap-2 w-full xl:flex min-w-0 pb-2">
 
 <button type="button"
-    class="shrink-0 w-35 p-2 bg-sky-800 rounded-xl
-            flex items-center gap-2 tracking-wide
-            hover:bg-sky-700 transition-colors">
+     class="min-w-0 cursor-pointer border-2 xl:w-35 border-sky-700
+               p-2 bg-sky-800 rounded-xl flex items-center gap-2
+               tracking-wide hover:bg-sky-700 transition-colors">
 
-    <div class="w-10 h-10 shrink-0 rounded-full bg-white p-1
+    <div class="w-7 h-7 shrink-0 rounded-full bg-white p-1
                 flex items-center justify-center">
         <img src="{{ asset('img/QRIS Logo.svg') }}"
                 alt="QRIS"
                 class="max-w-full max-h-full object-contain">
     </div>
 
-    <span class="font-bold text-sm">QRIS</span>
+    <span class="font-bold text-xs">QRIS</span>
 </button>
 
 <button type="button"
-    class="shrink-0 w-35 p-2 bg-sky-800 rounded-xl
-            flex items-center gap-2 tracking-wide
-            hover:bg-sky-700 transition-colors">
+     class="min-w-0 cursor-pointer border-2 xl:w-35 border-sky-700
+               p-2 bg-sky-800 rounded-xl flex items-center gap-2
+               tracking-wide hover:bg-sky-700 transition-colors">
 
-    <div class="w-10 h-10 shrink-0 rounded-full bg-white p-1
+    <div class="w-7 h-7 shrink-0 rounded-full bg-white p-1
                 flex items-center justify-center">
         <img src="{{ asset('img/Dana Icon.svg') }}"
                 alt="DANA"
                 class="max-w-full max-h-full object-contain">
     </div>
 
-    <span class="font-bold text-sm">DANA</span>
+    <span class="font-bold text-xs">Dana</span>
 </button>
 
 <button type="button"
-    class="shrink-0 w-35 p-2 bg-sky-800 rounded-xl
-            flex items-center gap-2 tracking-wide
-            hover:bg-sky-700 transition-colors">
+    class="min-w-0 cursor-pointer border-2 xl:w-35 border-sky-700
+               p-2 bg-sky-800 rounded-xl flex items-center gap-2
+               tracking-wide hover:bg-sky-700 transition-colors">
 
-    <div class="w-10 h-10 shrink-0 rounded-full bg-white p-1
+    <div class="w-7 h-7 shrink-0 rounded-full bg-white p-1
                 flex items-center justify-center">
         <img src="{{ asset('img/GoPay Icon.png') }}"
                 alt="GoPay"
                 class="max-w-full max-h-full object-contain">
     </div>
 
-    <span class="font-bold text-sm">GoPay</span>
+    <span class="font-bold text-xs">GoPay</span>
 </button>
 
 <button type="button"
-    class="shrink-0 w-35 p-2 bg-sky-800 rounded-xl
-            flex items-center gap-2 tracking-wide
-            hover:bg-sky-700 transition-colors">
+     class="min-w-0 cursor-pointer border-2 xl:w-35 border-sky-700
+               p-2 bg-sky-800 rounded-xl flex items-center gap-2
+               tracking-wide hover:bg-sky-700 transition-colors">
 
-    <div class="w-10 h-10 shrink-0 rounded-full bg-white p-1
+    <div class="w-7 h-7 shrink-0 rounded-full bg-white p-1
                 flex items-center justify-center">
         <img src="{{ asset('img/Jago.svg') }}"
                 alt="GoPay"
                 class="max-w-full max-h-full object-contain">
     </div>
 
-    <span class="font-bold text-sm">Bank Jago</span>
+    <span class="font-bold text-xs">Bank Jago</span>
 </button>
 
 <button type="button"
-    class="shrink-0 w-35 p-2 bg-sky-800 rounded-xl
-            flex items-center gap-2 tracking-wide
-            hover:bg-sky-700 transition-colors">
+     class="min-w-0 cursor-pointer border-2 xl:w-35 border-sky-700
+               p-2 bg-sky-800 rounded-xl flex items-center gap-2
+               tracking-wide hover:bg-sky-700 transition-colors">
 
-    <div class="w-10 h-10 shrink-0 rounded-full bg-white p-1
+    <div class="w-7 h-7 shrink-0 rounded-full bg-white p-1
                 flex items-center justify-center">
         <img src="{{ asset('img/SeaBank Logo.svg') }}"
                 alt="SeaBank"
                 class="max-w-full max-h-full object-contain">
     </div>
 
-    <span class="font-bold text-sm">SeaBank</span>
+    <span class="font-bold text-xs">SeaBank</span>
 </button>
 
 <button type="button"
-    class="shrink-0 w-35 p-2 bg-sky-800 rounded-xl
-            flex items-center gap-2 tracking-wide
-            hover:bg-sky-700 transition-colors">
+     class="min-w-0 cursor-pointer border-2 xl:w-35 border-sky-700
+               p-2 bg-sky-800 rounded-xl flex items-center gap-2
+               tracking-wide hover:bg-sky-700 transition-colors">
 
-    <div class="w-10 h-10 shrink-0 rounded-full bg-white p-1
+    <div class="w-7 h-7 shrink-0 rounded-full bg-white p-1
                 flex items-center justify-center">
         <img src="{{ asset('img/ShopeePay Icon.png') }}"
                 alt="ShopeePay"
                 class="max-w-full max-h-full object-contain p-1">
     </div>
 
-    <span class="font-bold text-sm">ShopeePay</span>
+    <span class="font-bold text-xs">ShopeePay</span>
 </button>
 
 </div>
