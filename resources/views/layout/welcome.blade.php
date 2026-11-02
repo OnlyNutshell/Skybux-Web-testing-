@@ -40,32 +40,73 @@
 
     </section>
 
-    <h1 class="mx-4 font-bold sm:mx-8 xl:mx-32 text-2xl">Top Up Instant Robux Via Username</h1>
+    <h1 class="mx-4 mb-4 font-bold sm:mx-8 xl:mx-32 text-2xl">Top Up Instant Robux Via Username</h1>
 
     <!-- Store Form Section -->
     <section class="bg-[#FDFDFC] flex mx-4 sm:mx-8 xl:mx-32">
 
         @include('component.element-bg-circle')
     
-    
-        <div class="relative mx-auto flex w-full flex-col items-center gap-6">
-            <div class="relative overflow-hidden rounded-2xl border border-sky-300/20 w-full bg-sky-900 p-8 shadow-[0_0_40px_rgba(56,189,248,0.08)] backdrop-blur-xl">
-                <h2 class="text-sm text-white font-bold sm:text-3xl">Pilih Nominal Robux</h2>
-                <div class="flex justify-between">
-                    <div>
-                        <label for="rupiah">Rupiah</label>
-                        <input id="rupiah" type="number" placeholder="17000">
-                    </div>
-
-                    <div>
-                        <label for="robux">Robux</label>
-                        <input
-                            id="robux"
-                            type="number"
-                            placeholder="100"
-                        >
-                    </div>
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <div class="relative flex lg:col-span-2 min-w-0 flex-col items-center">
+            <div class="relative overflow-hidden rounded-2xl border border-sky-300/20 w-full bg-sky-900 p-6 shadow-[0_0_40px_rgba(56,189,248,0.08)] backdrop-blur-xl">
+            
+            <div class="flex justify-between items-baseline-last mb-5">
+                <h2 class="text-sm text-white font-bold sm:text-xl">Pilih Nominal Robux</h2>
+                <div class="flex justify-between items-center bg-green-500/50 text-green-400 gap-2 px-4 py-1.5 rounded-2xl">
+                    <i data-lucide="check" class="w-4 h-4"></i>
+                    <p class="text-xs">
+                        IN STOCK
+                    </p>
                 </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-5 mb-5">
+                <div class="flex h-15 items-center gap-3 rounded-2xl border border-slate-300 bg-white px-4">
+
+                    <label for="rupiah"
+                        class="shrink-0 text-lg text-slate-700">
+                        Rp
+                    </label>
+
+                    <input
+                        id="rupiah"
+                        type="number"
+                        placeholder="Enter Robux price"
+                        class="min-w-0 w-full border-0 bg-transparent
+                            text-base text-slate-800 outline-none
+                            placeholder:text-slate-500
+                            focus:ring-0"
+                    >
+                </div>
+
+                <div class="flex h-15 items-center gap-3 rounded-2xl
+                            border border-slate-300 bg-white px-4">
+
+                    <label for="robux"
+                        class="min-w-0 text-lg text-slate-700">
+                        RBX
+                    </label>
+
+                    <input
+                        id="robux"
+                        type="number"
+                        placeholder="Enter Robux Amount"
+                        class="min-w-0 w-full border-0 bg-transparent
+                            text-base text-slate-800 outline-none
+                            placeholder:text-slate-500
+                            focus:ring-0"
+                    >
+                </div>
+            </div>
+
+            <div class="flex items-center my-4 gap-4">
+                <div class=" flex-1 dotted-divider"></div>
+
+                <span class="text-sm shrink-0 text-white">Atau Pilih Diantara Ini</span>
+
+                <div class=" flex-1 dotted-divider"></div>
+            </div>
 
                 <section class="rounded-2xl border border-white/10
                             bg-[#171422] p-5 shadow-xl sm:p-7">
@@ -179,7 +220,11 @@
                 
 
                 </div>
-            </div>
+        
+        </div>
+        <div class="min-w-0 h-fit bg-amber-200">tes</div>
+    </div>
+        
 
         </main>
     </div>

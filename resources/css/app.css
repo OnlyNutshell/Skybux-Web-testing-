@@ -4,3 +4,9 @@
 @theme {
     --font-sans: "League Spartan", sans-serif;
 }
+
+.dotted-divider {
+    height: 1px;
+    background-image: radial-gradient(circle, #94a3b8 1px, transparent 1px);
+    background-size: 10px 1px;
+}

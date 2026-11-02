@@ -1,6 +1,6 @@
 {
   "resources/css/app.css": {
-    "file": "assets/app-DtxHzHes.css",
+    "file": "assets/app-BvTsdTFw.css",
     "src": "resources/css/app.css",
     "isEntry": true,
     "name": "app",
@@ -9,7 +9,7 @@
     ]
   },
   "resources/js/app.js": {
-    "file": "assets/app-scGXabxh.js",
+    "file": "assets/app-CeE_VR-e.js",
     "name": "app",
     "src": "resources/js/app.js",
     "isEntry": true,
@@ -24,7 +24,7 @@
     "isEntry": true
   },
   "resources/js/validate-account.js": {
-    "file": "assets/validate-account-B1zLetCe.js",
+    "file": "assets/validate-account-C5aO3C-G.js",
     "name": "validate-account",
     "src": "resources/js/validate-account.js",
     "isEntry": true
