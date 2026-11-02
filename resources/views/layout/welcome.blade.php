@@ -18,7 +18,7 @@
         </style>
     @endif
 </head>
-<body>
+<body class="pb-6">
 
     <!-- Header -->
     @include('component.header')
@@ -27,36 +27,30 @@
     @include('component.banner')
 
     <!-- Layout Metode Pembayaran -->
-    <div class="bg-sky-900 text-white mx-4 sm:mx-8 xl:mx-32 my-7 px-4 sm:px-6 py-5 rounded-2xl flex flex-col xl:flex-row xl:gap-25 xl:items-center gap-5">
-        <div class="flex items-center gap-3 font-bold shrink-0">
+    <section id="metodePembayaranSection" class="bg-sky-900 text-white mx-4 sm:mx-8 xl:mx-32 my-7 px-4 sm:px-6 py-5 rounded-2xl flex flex-col xl:flex-row xl:gap-25 xl:items-center gap-5">
+        <div class="flex items-center gap-3 shrink-0">
             <i data-lucide="shield-check" class="w-9 h-9 shrink-0 text-sky-300"></i>
-            <p class="text-sm sm:text-base">
+            <h2 class="text-sm text-white font-bold sm:text-base">
                 Metode Pembayaran <br>
                 Lengkap dan Mudah
-            </p>
+            </h2>
         </div>
 
         @include('component.metode-pembayaran-icon')
 
-    </div>
+    </section>
 
-    <!-- Form Section -->
-    <div class="bg-[#FDFDFC] flex mx-4 sm:mx-8 xl:mx-32 min-h-screen">
+    <h1 class="mx-4 font-bold sm:mx-8 xl:mx-32 text-2xl">Top Up Instant Robux Via Username</h1>
+
+    <!-- Store Form Section -->
+    <section class="bg-[#FDFDFC] flex mx-4 sm:mx-8 xl:mx-32">
 
         @include('component.element-bg-circle')
-
-        <main class="relative mx-auto flex w-full flex-col items-center gap-6">
-
-
-            <div class="relative overflow-hidden rounded-2xl border border-sky-300/20 w-full bg-sky-900
-                p-8 shadow-[0_0_40px_rgba(56,189,248,0.08)]
-                backdrop-blur-xl">
-                <div class="pointer-events-none absolute
-                    -bottom-20 left-1/2 h-40 w-3/4
-                    -translate-x-1/2 rounded-full
-                    bg-sky-400/20 blur-[70px]">
-                </div>
-
+    
+    
+        <div class="relative mx-auto flex w-full flex-col items-center gap-6">
+            <div class="relative overflow-hidden rounded-2xl border border-sky-300/20 w-full bg-sky-900 p-8 shadow-[0_0_40px_rgba(56,189,248,0.08)] backdrop-blur-xl">
+                <h2 class="text-sm text-white font-bold sm:text-3xl">Pilih Nominal Robux</h2>
                 <div class="flex justify-between">
                     <div>
                         <label for="rupiah">Rupiah</label>
@@ -141,10 +135,10 @@
                         <div class="flex items-start justify-between gap-4">
                             <div class="min-w-0">
                                 <h2 id="displayName"
-                                    class="break-words text-xl font-bold"></h2>
+                                    class="wrap-break-word text-xl font-bold"></h2>
 
                                 <p id="usernameResult"
-                                class="mt-1 break-words text-sm text-gray-400">
+                                class="mt-1 wrap-break-word text-sm text-gray-400">
                                 </p>
                             </div>
 
@@ -161,26 +155,6 @@
                                 <span class="text-gray-400">User ID</span>
                                 <span id="userId"
                                     class="break-all text-right"></span>
-                            </div>
-
-                            <div class="flex justify-between gap-4">
-                                <span class="text-gray-400">Verified badge</span>
-                                <span id="verifiedBadge"
-                                    class="text-right"></span>
-                            </div>
-
-                            <div class="flex justify-between gap-4">
-                                <span class="text-gray-400">Usia 18+</span>
-                                <span id="ageStatus"
-                                    class="max-w-[60%] text-right text-amber-300">
-                                </span>
-                            </div>
-
-                            <div>
-                                <p class="mb-1 text-gray-400">Deskripsi</p>
-                                <p id="description"
-                                class="whitespace-pre-wrap wrap-break-word
-                                        leading-6 text-gray-300"></p>
                             </div>
                         </div>
 
@@ -202,24 +176,7 @@
                 tidak tersedia melalui pemeriksaan publik ini.
             </p>
 
-                <p class="text-sm font-medium text-sky-300">
-                    NEXT GENERATION
-                </p>
-
-                <h1 class="mt-3 text-4xl font-bold tracking-tight">
-                    Build Beyond
-                    <span class="text-sky-300">Limits.</span>
-                </h1>
-
-                <p class="mt-4 text-gray-400">
-                    Clean design. Powerful technology.
-                </p>
-
-                <button class="mt-6 rounded-xl bg-sky-300
-                    px-5 py-3 font-semibold text-[#080B12]
-                    transition hover:bg-sky-200">
-                    Get Started
-                </button>
+                
 
                 </div>
             </div>
@@ -229,6 +186,7 @@
 </body>
 
 </html>
+
 <script>
     window.robloxChecker = {
         searchUrl: @json(route('roblox.search')),

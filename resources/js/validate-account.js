@@ -83,15 +83,6 @@ async function loadProfile(userId) {
     document.getElementById('userId').textContent =
         user.id;
 
-    document.getElementById('verifiedBadge').textContent =
-        user.hasVerifiedBadge ? 'Ya' : 'Tidak';
-
-    document.getElementById('ageStatus').textContent =
-        user.ageVerification.label;
-
-    document.getElementById('description').textContent =
-        user.description || 'Tidak ada deskripsi.';
-
     document.getElementById('profileLink').href =
         user.profileUrl;
 
