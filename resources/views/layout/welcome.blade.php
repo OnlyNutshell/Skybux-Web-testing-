@@ -18,7 +18,7 @@
         </style>
     @endif
 </head>
-<body class="pb-6">
+<body class="pb-6 bg-sky-500/20 backdrop-blur-[140px]">
 
     <!-- Header -->
     @include('component.header')
@@ -27,7 +27,7 @@
     @include('component.banner')
 
     <!-- Layout Metode Pembayaran -->
-    <section id="metodePembayaranSection" class="bg-sky-900 text-white mx-4 sm:mx-8 xl:mx-32 my-7 px-4 sm:px-6 py-5 rounded-2xl flex flex-col xl:flex-row xl:gap-25 xl:items-center gap-5">
+    <section id="metodePembayaranSection" class="bg-sky-900 text-white mx-4 sm:mx-8 xl:mx-32 mt-7 mb-5 px-4 sm:px-6 py-5 rounded-2xl flex flex-col xl:flex-row xl:gap-25 xl:items-center gap-5">
         <div class="flex items-center gap-3 shrink-0">
             <i data-lucide="shield-check" class="w-9 h-9 shrink-0 text-sky-300"></i>
             <h2 class="text-sm text-white font-bold sm:text-base">
@@ -40,19 +40,22 @@
 
     </section>
 
-    <h1 class="mx-4 mb-4 font-bold sm:mx-8 xl:mx-32 text-2xl">Top Up Instant Robux Via Username</h1>
+    <div class="sm:mx-8 lg:p-6 px-6 py-4 mx-4 xl:mx-32 rounded-2xl mb-5 bg-sky-900 border-black">
+        <h1 class=" text-white font-bold lg:text-2xl text-xl">Top Up Instant Robux Via Username</h1>
+        <h2 class="sm:text-xl text-sm text-slate-500">Harga Rp 160 per Robux. Pilih satu nominal, lalu lengkapi data di kotak pesanan.</h2>
+    </div>
 
     <!-- Store Form Section -->
-    <section class="bg-[#FDFDFC] flex mx-4 sm:mx-8 xl:mx-32">
+    <section class=" flex mx-4 sm:mx-8 xl:mx-32">
 
-        @include('component.element-bg-circle')
+    @include('component.element-bg-circle')
     
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
         <div class="relative flex lg:col-span-2 min-w-0 flex-col items-center">
-            <div class="relative overflow-hidden rounded-2xl border border-sky-300/20 w-full bg-sky-900 p-6 shadow-[0_0_40px_rgba(56,189,248,0.08)] backdrop-blur-xl">
+            <div class="relative overflow-hidden rounded-2xl w-full bg-sky-900 p-6">
             
             <div class="flex justify-between items-baseline-last mb-5">
-                <h2 class="text-sm text-white font-bold sm:text-xl">Pilih Nominal Robux</h2>
+                <h2 class="text-l text-white font-bold sm:text-xl">Pilih Nominal Robux</h2>
                 <div class="flex justify-between items-center bg-green-500/50 text-green-400 gap-2 px-4 py-1.5 rounded-2xl">
                     <i data-lucide="check" class="w-4 h-4"></i>
                     <p class="text-xs">
