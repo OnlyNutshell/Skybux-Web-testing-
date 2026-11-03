@@ -2,10 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RobloxAccountController;
+use App\Http\Controllers\RobuxController;
 
-Route::get('/', function () {
-    return view('layout.welcome');
-});
+Route::get('/', [RobuxController::class, 'index']);
 
 Route::get('/checkout', function () {
     return view('layout.checkout');

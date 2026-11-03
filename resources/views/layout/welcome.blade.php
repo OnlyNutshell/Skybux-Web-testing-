@@ -111,7 +111,15 @@
                 <div class=" flex-1 dotted-divider"></div>
             </div>
 
-                <section class="rounded-2xl border border-white/10
+            <div class="grid grid-cols-4 lg:grid-cols-3 gap-5">
+                @foreach ($robux as $item)
+                    @include('component.robux-item-card', ['item' => $item])
+                @endforeach
+            </div>
+                </div>
+        
+        </div>
+        <div class="min-w-0 h-fit"><section class="rounded-2xl border border-white/10
                             bg-[#171422] p-5 shadow-xl sm:p-7">
 
                     <div class="space-y-4">
@@ -218,14 +226,7 @@
                 Data profil mengikuti informasi yang disediakan Roblox.
                 Verified badge bukan bukti usia 18+. Status verifikasi usia
                 tidak tersedia melalui pemeriksaan publik ini.
-            </p>
-
-                
-
-                </div>
-        
-        </div>
-        <div class="min-w-0 h-fit bg-amber-200">tes</div>
+            </p></div>
     </div>
         
 
