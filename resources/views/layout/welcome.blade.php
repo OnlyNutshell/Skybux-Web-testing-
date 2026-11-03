@@ -116,9 +116,30 @@
         <div class="min-w-0 h-fit">
             <section class="rounded-2xl border-2 border-black bg-sky-900 p-6 shadow-xl">
                     <div class="space-y-4">
-                        <label for="username" class="block text-sm font-medium text-gray-200">
-                            Username Roblox
-                        </label>
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <label for="username" class="block text-xl font-bold text-white">
+                                    Username Roblox
+                                </label>
+                                <span class="block text-sm text-slate-300">Gunakan username, bukan display name.</span>
+                            </div>
+                                <div class="relative inline-flex" data-tooltip>
+                                <button type="button" aria-label="Informasi" class="flex h-5 w-5 items-center justify-center text-white hover:text-sky-400 cursor-pointer">
+                                    <i data-lucide="info" class="text-xs"></i>
+                                </button>
+
+                                <div data-tooltip-content class=" absolute z-50 w-64 opacity-0 right-1/2 transition-all duration-200">
+                                    <div class="overflow-hidden rounded-2xl border border-slate-200bg-white shadow-xl px-4 bg-slate-700">
+                                        <img src="{{ asset('img/tooltipUsername.jpeg') }}" alt="Informasi Robux" class="h-20 pt-4 w-full object-cover">
+                                        <div class="py-1">
+                                            <span class="block text-xs leading-relaxed text-white">
+                                                Pastikan kamu memasukkan Username yang ditandai merah, bukan Display Name
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
                         <input
                             id="username"
@@ -130,16 +151,12 @@
                             autocomplete="off"
                             placeholder="Ketik username Roblox..."
                             class="w-full rounded-xl border border-white/10
-                                bg-white px-4 py-3 text-white
+                                bg-white px-4 py-3 text-gray-600
                                 outline-none transition
                                 placeholder:text-gray-600
                                 focus:border-violet-400 focus:ring-2
                                 focus:ring-violet-400/20"
                         >
-
-                        <p class="text-xs text-gray-500">
-                            Gunakan username, bukan display name.
-                        </p>
 
                         <p id="status"
                         role="status"
@@ -165,7 +182,7 @@
                     </div>
 
                     <div id="profile"
-                        class="mt-5 hidden rounded-xl border text-white
+                        class="my-5 hidden rounded-xl border text-white
                                 border-white/10 bg-[#0D0B16] p-5">
 
                         <img
@@ -213,7 +230,7 @@
                         </a>
 
                     </div>
-                    <button id="checkout">checkout</button>
+                    <button class="w-full bg-sky-400/20 border border-white hover:shadow-[inset_0_0_8px_rgba(0,0,0,0.45)] cursor-pointer py-2 font-bold text-white rounded-2xl" id="checkout">Checkout</button>
             </section>
 
             <p class="mt-5 text-xs leading-5 text-gray-500">

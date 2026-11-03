@@ -63,6 +63,23 @@ export function findCard(type, value) {
     selectCard(card || null);
 }
 
+export function syncSelectedCard() {
+    if (!robuxInput.value || !rupiahInput.value) {
+        selectCard(null);
+        return;
+    }
+
+    const robux = Number(robuxInput.value);
+    const price = Number(rupiahInput.value);
+
+    const card = [...cards].find(item =>
+        Number(item.dataset.robux) === robux &&
+        Number(item.dataset.price) === price
+    );
+
+    selectCard(card || null);
+}
+
 
 // Event input Robux
 robuxInput.addEventListener('input', function () {

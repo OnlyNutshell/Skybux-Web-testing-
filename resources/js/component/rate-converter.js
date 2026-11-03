@@ -1,3 +1,5 @@
+import { syncSelectedCard } from '../component/selected-robux.js';
+
 const RATE = 170;
 const ROBUX_STEP = 5;
 
@@ -33,6 +35,8 @@ if (rupiahInput && robuxInput) {
         }
 
         rupiahInput.value = Number(robuxInput.value) * RATE;
+
+        syncSelectedCard();
     });
 
     // Robux -> Rupiah saat mengetik
@@ -54,6 +58,8 @@ if (rupiahInput && robuxInput) {
             Math.floor(robux / ROBUX_STEP) * ROBUX_STEP;
 
         rupiahInput.value = roundedRobux * RATE;
+
+        syncSelectedCard();
     });
 
     // Bulatkan Robux setelah selesai mengetik
@@ -76,5 +82,7 @@ if (rupiahInput && robuxInput) {
 
         robuxInput.value = roundedRobux;
         rupiahInput.value = roundedRobux * RATE;
+
+        syncSelectedCard();
     });
 }
