@@ -111,7 +111,7 @@
                 <div class=" flex-1 dotted-divider"></div>
             </div>
 
-            <div class="grid grid-cols-4 lg:grid-cols-3 gap-5">
+            <div class="grid grid-cols-3 lg:grid-cols-4 gap-5">
                 @foreach ($robux as $item)
                     @include('component.robux-item-card', ['item' => $item])
                 @endforeach
