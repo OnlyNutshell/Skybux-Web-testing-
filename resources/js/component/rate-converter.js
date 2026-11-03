@@ -1,4 +1,3 @@
-
 const RATE = 170;
 const ROBUX_STEP = 5;
 

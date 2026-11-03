@@ -1,6 +1,6 @@
 {
   "resources/css/app.css": {
-    "file": "assets/app-D1rvw6CZ.css",
+    "file": "assets/app-Cbkxrz41.css",
     "src": "resources/css/app.css",
     "isEntry": true,
     "name": "app",
@@ -9,24 +9,15 @@
     ]
   },
   "resources/js/app.js": {
-    "file": "assets/app-CeE_VR-e.js",
+    "file": "assets/app-B1dMe2AR.js",
     "name": "app",
     "src": "resources/js/app.js",
-    "isEntry": true,
-    "imports": [
-      "resources/js/rate-converter.js"
-    ]
-  },
-  "resources/js/rate-converter.js": {
-    "file": "assets/rate-converter-BMk94O4-.js",
-    "name": "rate-converter",
-    "src": "resources/js/rate-converter.js",
     "isEntry": true
   },
-  "resources/js/validate-account.js": {
-    "file": "assets/validate-account-C5aO3C-G.js",
-    "name": "validate-account",
-    "src": "resources/js/validate-account.js",
+  "resources/js/page/home.js": {
+    "file": "assets/home-B-N7bDpQ.js",
+    "name": "home",
+    "src": "resources/js/page/home.js",
     "isEntry": true
   }
 }

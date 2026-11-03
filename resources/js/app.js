@@ -1,6 +1,4 @@
 import './bootstrap';
-import './checkout.js';
-import './rate-converter.js';
 import { createIcons, House, ShoppingCart, ShieldCheck, Check, User, Mail, Menu } from 'lucide';
 
 createIcons({

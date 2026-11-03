@@ -1,10 +1,17 @@
 const form = document.getElementById('searchForm');
-        const input = document.getElementById('username');
-        const button = document.getElementById('searchButton');
-        const statusBox = document.getElementById('status');
-        const choicesWrapper = document.getElementById('choicesWrapper');
-        const choices = document.getElementById('accountChoices');
-        const profile = document.getElementById('profile');
+const input = document.getElementById('username');
+const button = document.getElementById('searchButton');
+const statusBox = document.getElementById('status');
+const choicesWrapper = document.getElementById('choicesWrapper');
+const choices = document.getElementById('accountChoices');
+const profile = document.getElementById('profile');
+
+const configElement = document.getElementById('roblox-config');
+
+const robloxChecker = {
+    searchUrl: configElement.dataset.searchUrl,
+    userUrl: configElement.dataset.userUrl
+};
 
         const csrfToken = document.querySelector(
             'meta[name="csrf-token"]'
@@ -69,7 +76,7 @@ async function loadProfile(userId) {
     showStatus('Mengambil detail profil...');
 
     const data = await requestJson(
-        `${window.robloxChecker.userUrl}/${encodeURIComponent(userId)}`
+        `${robloxChecker.userUrl}/${encodeURIComponent(userId)}`
     );
 
     const user = data.user;
@@ -99,7 +106,7 @@ async function loadProfile(userId) {
     // tidak membuat profil utama gagal ditampilkan.
     try {
         const avatarData = await requestJson(
-            `${window.robloxChecker.userUrl}/${encodeURIComponent(userId)}/avatar`
+            `${robloxChecker.userUrl}/${encodeURIComponent(userId)}/avatar`
         );
 
         if (avatarData.imageUrl) {
@@ -112,7 +119,7 @@ async function loadProfile(userId) {
 }
 
 
-       
+
 const usernameInput = document.getElementById('username');
 
 let searchTimer;
@@ -163,7 +170,7 @@ usernameInput.addEventListener('input', () => {
 
         try {
             const response = await fetch(
-                window.robloxChecker.searchUrl,
+                robloxChecker.searchUrl,
                 {
                     method: 'POST',
                     signal: controller.signal,

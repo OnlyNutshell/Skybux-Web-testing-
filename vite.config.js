@@ -8,8 +8,7 @@ export default defineConfig({
             input: [ 
                     'resources/css/app.css',
                     'resources/js/app.js',
-                    'resources/js/rate-converter.js',
-                    'resources/js/validate-account.js',
+                    'resources/js/page/home.js'
                 ],
             refresh: true,
         }),

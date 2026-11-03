@@ -7,10 +7,6 @@
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
-    @vite(['resources/css/app.css', 'resources/js/rate-converter.js'])
-    @vite(['resources/css/app.css', 'resources/js/validate-account.js'])
-
-    <!-- Styles / Scripts -->
     @if (file_exists(public_path('build/manifest.json')) || file_exists(public_path('hot')))
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     @else
@@ -46,12 +42,10 @@
     </div>
 
     <!-- Store Form Section -->
-    <section class=" flex mx-4 sm:mx-8 xl:mx-32">
-
-    @include('component.element-bg-circle')
+    <section class="flex mx-4 sm:mx-8 xl:mx-32">
     
-    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-        <div class="relative flex lg:col-span-2 min-w-0 flex-col items-center">
+    <div class="grid grid-cols-1 lg:grid-cols-3 lg:gap-8">
+        <div class="relative flex lg:col-span-2 min-w-0 mb-5 lg:mb-0 flex-col items-center">
             <div class="relative overflow-hidden rounded-2xl w-full bg-sky-900 p-6">
             
             <div class="flex justify-between items-baseline-last mb-5">
@@ -119,12 +113,10 @@
                 </div>
         
         </div>
-        <div class="min-w-0 h-fit"><section class="rounded-2xl border border-white/10
-                            bg-[#171422] p-5 shadow-xl sm:p-7">
-
+        <div class="min-w-0 h-fit">
+            <section class="rounded-2xl border-2 border-black bg-sky-900 p-6 shadow-xl">
                     <div class="space-y-4">
-                        <label for="username"
-                            class="block text-sm font-medium text-gray-200">
+                        <label for="username" class="block text-sm font-medium text-gray-200">
                             Username Roblox
                         </label>
 
@@ -138,7 +130,7 @@
                             autocomplete="off"
                             placeholder="Ketik username Roblox..."
                             class="w-full rounded-xl border border-white/10
-                                bg-[#0D0B16] px-4 py-3 text-white
+                                bg-white px-4 py-3 text-white
                                 outline-none transition
                                 placeholder:text-gray-600
                                 focus:border-violet-400 focus:ring-2
@@ -219,7 +211,9 @@
                             font-medium transition hover:bg-white/5">
                             Buka profil Roblox ↗
                         </a>
+
                     </div>
+                    <button id="checkout">checkout</button>
             </section>
 
             <p class="mt-5 text-xs leading-5 text-gray-500">
@@ -227,20 +221,12 @@
                 Verified badge bukan bukti usia 18+. Status verifikasi usia
                 tidak tersedia melalui pemeriksaan publik ini.
             </p></div>
-    </div>
-        
+        </div>
+    </section>
 
-        </main>
-    </div>
+    <div id="roblox-config" data-search-url="{{ route('roblox.search') }}" data-user-url="{{ url('/roblox-checker/users') }}"></div>
 </body>
 
 </html>
 
-<script>
-    window.robloxChecker = {
-        searchUrl: @json(route('roblox.search')),
-        userUrl: @json(url('/roblox-checker/users'))
-    };
-</script>
-
-@vite(['resources/css/app.css', 'resources/js/validate-account.js'])
+@vite(['resources/css/app.css', 'resources/js/page/home.js'])

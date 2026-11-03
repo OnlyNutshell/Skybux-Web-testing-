@@ -1,4 +1,4 @@
-<div class="bg-white px-2.5 pb-3 pt-4 border-2 border-black shadow-sm hover:bg-sky-600 cursor-pointer hover:shadow-[inset_0_0_8px_rgba(0,0,0,0.45)] rounded-2xl">
+<div data-card data-robux="{{ $item['robux'] }}" data-price="{{ $item['price'] }}" class="bg-white px-2.5 pb-3 pt-4 border-2 border-black shadow-sm hover:bg-sky-600 cursor-pointer hover:shadow-[inset_0_0_8px_rgba(0,0,0,0.45)] rounded-2xl">
         <div class="flex items-center gap-1.5 mb-3">
             <img
                 class="w-5 h-5 object-contain"

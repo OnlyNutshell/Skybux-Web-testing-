@@ -11,7 +11,6 @@
 
     <div class="flex items-center justify-between w-full ml-15">
         <ul class="text-white text-sm font-semibold  md:flex hidden items-center gap-10">
-            <li><a class="border-b-2 border-transparent hover:text-sky-400 hover:border-sky-400 transition-colors duration-200 pb-2" href="#">Beranda</a></li>
             <li><a class="border-b-2 border-transparent hover:text-sky-400 hover:border-sky-400 transition-colors duration-200 pb-2" href="#">Beli Robux</a></li>
             <li><a class="border-b-2 border-transparent hover:text-sky-400 hover:border-sky-400 transition-colors duration-200 pb-2" href="#">Cara Order</a></li>
             <li><a class="border-b-2 border-transparent hover:text-sky-400 hover:border-sky-400 transition-colors duration-200 pb-2" href="#">FAQ</a></li>
