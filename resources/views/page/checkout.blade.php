@@ -1,5 +1,5 @@
 @extends('layout.welcome')
-
+ca
 @section('content')
 <div class="mx-auto max-w-md rounded-2xl bg-[#171421] p-6 text-white">
     <h1 class="text-2xl font-bold">Pembayaran QRIS</h1>
@@ -34,4 +34,6 @@
 </div>
 @endsection
 
-
+@push
+    @vite('resources/js/page/checkout.js')
+@endpush

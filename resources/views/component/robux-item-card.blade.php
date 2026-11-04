@@ -8,5 +8,5 @@
             <span class="block leading-3.75 align-middle">{{ $item['robux'] }}</span>
         </div>
         <div class="dotted-divider mb-6"></div>
-        <span class="font-semibold text-[16px]">{{ number_format($item['price'], 0, ',', '.s') }}</span>
+        <span class="font-semibold text-[16px]">{{ number_format($item['price'], 0, ',', '.') }}</span>
     </div>
