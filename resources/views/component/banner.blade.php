@@ -1,6 +1,6 @@
 <section id="bannerSection">
-    <div class="w-full h-60 md:h-80 xl:h-120 overflow-hidden">
-
+    <div class="relative w-full h-60 md:h-80 xl:h-120 overflow-clip">
+        
         <img
             class="w-full h-full object-cover"
             src="{{ asset('img/banner.jpeg') }}"

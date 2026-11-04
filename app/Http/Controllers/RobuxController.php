@@ -11,6 +11,6 @@ class RobuxController extends Controller
     {
         $robux = require resource_path('/data/robux.php');
 
-        return view('layout/welcome', compact('robux'));
+        return view('page/home', compact('robux'));
     }
 }

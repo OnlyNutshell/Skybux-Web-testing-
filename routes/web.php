@@ -7,7 +7,7 @@ use App\Http\Controllers\RobuxController;
 Route::get('/', [RobuxController::class, 'index']);
 
 Route::get('/checkout', function () {
-    return view('layout.checkout');
+    return view('page.checkout');
 });
 
 Route::middleware('throttle:20,1')->group(function () {

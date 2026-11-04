@@ -1,14 +1,26 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=League+Spartan:wght@100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=League+Spartan:wght@100..900&display=swap');
 @import "tailwindcss";
 
 @theme {
     --font-sans: "League Spartan", sans-serif;
 }
 
+.converter-value {
+    opacity: 1;
+    transition: opacity 200ms ease;
+}
 
+.converter-value.is-hidden {
+    opacity: 0;
+}
 
 .dotted-divider {
     height: 1px;
     background-image: radial-gradient(circle, #94a3b8 1px, transparent 1px);
     background-size: 10px 1px;
+}
+
+.brand-outline {
+    -webkit-text-stroke: 20px #0752b5;
+    paint-order: stroke fill;
 }

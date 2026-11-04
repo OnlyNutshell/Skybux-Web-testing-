@@ -1,25 +1,24 @@
+
+import { updateSelectedItem } from './checkout-sruk.js';
+
 const rupiahInput = document.getElementById('rupiah');
 const robuxInput = document.getElementById('robux');
 const cards = document.querySelectorAll('[data-card]');
 
-// Menyimpan data card yang sedang terpilih
 let selectedItem = {
     robux: null,
     price: null
 };
 
+function parseRupiah(value) {
+    return Number(value.replace(/\D/g, ''));
+}
 
-// Fungsi memilih card
-export function selectCard(card) {
-
+// Mengatur tampilan dan state card saja
+function setSelectedCard(card) {
     cards.forEach(item => {
-        item.classList.remove(
-            'bg-sky-600'
-        );
-        item.classList.add(
-            'bg-white',
-            'border-black'
-        );
+        item.classList.remove('bg-sky-600');
+        item.classList.add('bg-white', 'border-black');
     });
 
     if (!card) {
@@ -27,104 +26,62 @@ export function selectCard(card) {
             robux: null,
             price: null
         };
+        return;
+    }
 
+    selectedItem = {
+        robux: Number(card.dataset.robux),
+        price: Number(card.dataset.price)
+    };
+
+    card.classList.add('bg-sky-600');
+    card.classList.remove('bg-white', 'border-black');
+}
+
+// Dipanggil ketika user mengklik card
+export function selectCard(card) {
+    if (!card) {
+        setSelectedCard(null);
+        updateSelectedItem();
         return;
     }
 
     const robux = Number(card.dataset.robux);
     const price = Number(card.dataset.price);
 
+    rupiahInput.value = price.toLocaleString('id-ID');
     robuxInput.value = robux;
-    rupiahInput.value = price;
 
-    selectedItem = {
-        robux: robux,
-        price: price
-    };
-
-    card.classList.add(
-        'bg-sky-600'
-    );
-
-    card.classList.remove(
-        'bg-white',
-        'border-black'
-    );
+    setSelectedCard(card);
+    updateSelectedItem();
 }
 
-
-// Fungsi mencari card berdasarkan input
-export function findCard(type, value) {
-
-    const card = [...cards].find(item => {
-        return Number(item.dataset[type]) === Number(value);
-    });
-
-    selectCard(card || null);
-}
-
+// Dipanggil oleh rate-converter
+// Tidak mengubah input!
 export function syncSelectedCard() {
     if (!robuxInput.value || !rupiahInput.value) {
-        selectCard(null);
+        setSelectedCard(null);
         return;
     }
 
     const robux = Number(robuxInput.value);
-    const price = Number(rupiahInput.value);
+    const price = parseRupiah(rupiahInput.value);
 
     const card = [...cards].find(item =>
         Number(item.dataset.robux) === robux &&
         Number(item.dataset.price) === price
     );
 
-    selectCard(card || null);
+    setSelectedCard(card || null);
 }
 
-
-// Event input Robux
-robuxInput.addEventListener('input', function () {
-
-    if (this.value === '') {
-        selectCard(null);
-        return;
-    }
-
-    findCard('robux', this.value);
-});
-
-rupiahInput.addEventListener('input', function () {
-
-    if (this.value === '') {
-        selectCard(null);
-        return;
-    }
-
-    findCard('price', this.value);
-});
-
-
+// Event klik card
 cards.forEach(card => {
-
-    card.addEventListener('click', function () {
-        selectCard(this);
+    card.addEventListener('click', () => {
+        selectCard(card);
     });
-
 });
 
-function getSelectedItem() {
+export function getSelectedItem() {
     return selectedItem;
 }
-
-document.getElementById('checkout').addEventListener('click', () => {
-
-    const item = getSelectedItem();
-
-    if (!item.robux) {
-        alert('Pilih Robux terlebih dahulu!');
-        return;
-    }
-
-    console.log('Robux:', item.robux);
-    console.log('Harga:', item.price);
-
-});

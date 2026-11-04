@@ -1,6 +1,6 @@
-@vite(['resources/css/app.css', 'resources/js/app.js'])
+@extends('layout.welcome')
 
-
+@section('content')
 <div class="mx-auto max-w-md rounded-2xl bg-[#171421] p-6 text-white">
     <h1 class="text-2xl font-bold">Pembayaran QRIS</h1>
 
@@ -32,3 +32,6 @@
 
     <p id="error" class="mt-3 text-sm text-red-400"></p>
 </div>
+@endsection
+
+

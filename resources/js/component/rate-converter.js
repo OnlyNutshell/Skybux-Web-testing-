@@ -1,88 +1,188 @@
-import { syncSelectedCard } from '../component/selected-robux.js';
+
+import { updateSelectedItem } from './checkout-sruk.js';
+import { syncSelectedCard } from './selected-robux.js';
 
 const RATE = 170;
 const ROBUX_STEP = 5;
+const DEBOUNCE_DELAY = 1000;
+const ANIMATION_DELAY = 200;
 
 const rupiahInput = document.getElementById('rupiah');
 const robuxInput = document.getElementById('robux');
 
+let rupiahDebounce = null;
+let robuxDebounce = null;
+
+const animationTimers = new WeakMap();
+
+export function formatRupiah(value) {
+    return Number(value).toLocaleString('id-ID');
+}
+
+function parseNumber(value) {
+    return Number(value.replace(/\D/g, '')) || 0;
+}
+
+// Format Rupiah tanpa mengganggu posisi cursor
+function formatRupiahLive(input) {
+    const cursor = input.selectionStart ?? input.value.length;
+
+    const digitsBeforeCursor = input.value
+        .slice(0, cursor)
+        .replace(/\D/g, '').length;
+
+    const rawValue = input.value.replace(/\D/g, '');
+
+    const formatted = rawValue
+        ? Number(rawValue).toLocaleString('id-ID')
+        : '';
+
+    input.value = formatted;
+
+    let newCursor = 0;
+    let digitCount = 0;
+
+    while (
+        newCursor < formatted.length &&
+        digitCount < digitsBeforeCursor
+    ) {
+        if (/\d/.test(formatted[newCursor])) {
+            digitCount++;
+        }
+
+        newCursor++;
+    }
+
+    input.setSelectionRange(newCursor, newCursor);
+}
+
+function refresh() {
+    updateSelectedItem();
+    syncSelectedCard();
+}
+
+// Animasi input hasil konversi
+function animateValue(input, callback) {
+    clearTimeout(animationTimers.get(input));
+
+    input.classList.add('is-hidden');
+
+    const timer = setTimeout(() => {
+        // Ubah nilai setelah fade-out selesai
+        callback();
+
+        // Munculkan kembali setelah browser memproses perubahan
+        requestAnimationFrame(() => {
+            input.classList.remove('is-hidden');
+        });
+
+        animationTimers.delete(input);
+    }, ANIMATION_DELAY);
+
+    animationTimers.set(input, timer);
+}
+
+// RUPIAH -> ROBUX
+function convertRupiah() {
+    const rupiah = parseNumber(rupiahInput.value);
+
+    const robux = Math.floor(
+        rupiah / (RATE * ROBUX_STEP)
+    ) * ROBUX_STEP;
+
+    rupiahInput.value = formatRupiah(robux * RATE);
+    robuxInput.value = robux;
+
+    refresh();
+}
+
+// ROBUX -> RUPIAH
+function convertRobux() {
+    const robux = parseNumber(robuxInput.value);
+
+    const roundedRobux = Math.floor(
+        robux / ROBUX_STEP
+    ) * ROBUX_STEP;
+
+    robuxInput.value = roundedRobux;
+
+    rupiahInput.value = formatRupiah(
+        roundedRobux * RATE
+    );
+
+    refresh();
+}
+
 if (rupiahInput && robuxInput) {
-    // Rupiah -> Robux
+
+    // =========================
+    // RUPIAH -> ROBUX
+    // =========================
+
     rupiahInput.addEventListener('input', () => {
-        if (rupiahInput.value === '') {
+        clearTimeout(rupiahDebounce);
+        clearTimeout(robuxDebounce);
+
+        const rawValue = rupiahInput.value.replace(/\D/g, '');
+
+        if (rawValue === '') {
             robuxInput.value = '';
+            refresh();
             return;
         }
 
-        const rupiah = Number(rupiahInput.value);
+        formatRupiahLive(rupiahInput);
 
-        if (!Number.isFinite(rupiah) || rupiah < 0) {
-            robuxInput.value = '';
-            return;
-        }
+        refresh();
 
-        const robux = Math.floor(
-            rupiah / (RATE * ROBUX_STEP)
-        ) * ROBUX_STEP;
-
-        robuxInput.value = robux;
+        rupiahDebounce = setTimeout(() => {
+            animateValue(robuxInput, convertRupiah);
+        }, DEBOUNCE_DELAY);
     });
 
-    // Sesuaikan Rupiah setelah selesai mengetik
     rupiahInput.addEventListener('blur', () => {
-        if (rupiahInput.value === '' || robuxInput.value === '') {
+        clearTimeout(rupiahDebounce);
+
+        if (rupiahInput.value === '') {
+            refresh();
             return;
         }
 
-        rupiahInput.value = Number(robuxInput.value) * RATE;
-
-        syncSelectedCard();
+        animateValue(robuxInput, convertRupiah);
     });
 
-    // Robux -> Rupiah saat mengetik
+
+    // =========================
+    // ROBUX -> RUPIAH
+    // =========================
+
     robuxInput.addEventListener('input', () => {
-        if (robuxInput.value === '') {
+        clearTimeout(rupiahDebounce);
+        clearTimeout(robuxDebounce);
+
+        const rawValue = robuxInput.value.replace(/\D/g, '');
+
+        if (rawValue === '') {
             rupiahInput.value = '';
+            refresh();
             return;
         }
 
-        const robux = Number(robuxInput.value);
+        refresh();
 
-        if (!Number.isFinite(robux) || robux < 0) {
-            rupiahInput.value = '';
-            return;
-        }
-
-        // Hitung sementara tanpa mengubah input Robux
-        const roundedRobux =
-            Math.floor(robux / ROBUX_STEP) * ROBUX_STEP;
-
-        rupiahInput.value = roundedRobux * RATE;
-
-        syncSelectedCard();
+        robuxDebounce = setTimeout(() => {
+            animateValue(rupiahInput, convertRobux);
+        }, DEBOUNCE_DELAY);
     });
 
-    // Bulatkan Robux setelah selesai mengetik
     robuxInput.addEventListener('blur', () => {
+        clearTimeout(robuxDebounce);
+
         if (robuxInput.value === '') {
-            rupiahInput.value = '';
+            refresh();
             return;
         }
 
-        const robux = Number(robuxInput.value);
-
-        if (!Number.isFinite(robux) || robux < 0) {
-            robuxInput.value = '';
-            rupiahInput.value = '';
-            return;
-        }
-
-        const roundedRobux =
-            Math.floor(robux / ROBUX_STEP) * ROBUX_STEP;
-
-        robuxInput.value = roundedRobux;
-        rupiahInput.value = roundedRobux * RATE;
-
-        syncSelectedCard();
+        animateValue(rupiahInput, convertRobux);
     });
 }
