@@ -21,6 +21,8 @@
     @section('navbar')
         @include('component.header')
     @show
+
+    @yield('progression')
     
     @yield('content')
 

@@ -1,12 +1,23 @@
-import { ref, onValue } from 'firebase/database';
-import { database } from './firebase';
+import { doc, onSnapshot } from 'firebase/firestore';
+import { db } from './firebase';
 
-const stockRef = ref(database, 'stock');
-const totalStock = document.getElementById('stock')
+const stockElement = document.getElementById('stock');
 
-onValue(stockRef, (snapshot) => {
-    const stock = snapshot.val();
+const stockRef = doc(db, 'Stock', 'robux');
 
-    totalStock.textContent = stock['robux']
-    console.log('Firebase Stock:', stock);
+onSnapshot(stockRef, (snapshot) => {
+    if (!snapshot.exists()) {
+        stockElement.textContent = 'Tidak tersedia';
+        return;
+    }
+
+    const stock = snapshot.data();
+
+    stockElement.textContent =
+        stock.total.toLocaleString('id-ID');
+
+}, (error) => {
+    console.error('Firestore Error:', error);
+
+    stockElement.textContent = 'Gagal memuat';
 });

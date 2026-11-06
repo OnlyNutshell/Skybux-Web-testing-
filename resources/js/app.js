@@ -1,5 +1,5 @@
 import './bootstrap';
-import { createIcons, House, ShoppingCart, ShieldCheck, Check, User, Mail, Menu, Info } from 'lucide';
+import { createIcons, QrCode, WalletCards, ClipboardList, House, Download,ShoppingCart, ShieldCheck, Check, User, Mail, Menu, Info } from 'lucide';
 
 createIcons({
     icons: {
@@ -10,6 +10,10 @@ createIcons({
         Check,
         Menu,
         ShieldCheck,
-        Info
+        Download,
+        Info,
+        ClipboardList,
+        WalletCards,
+        QrCode
     }
 });
