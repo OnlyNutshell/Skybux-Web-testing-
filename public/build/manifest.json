@@ -1,6 +1,6 @@
 {
   "resources/css/app.css": {
-    "file": "assets/app-kmoqSurd.css",
+    "file": "assets/app-JnlH7gaW.css",
     "src": "resources/css/app.css",
     "isEntry": true,
     "name": "app",
@@ -14,6 +14,12 @@
     "src": "resources/js/app.js",
     "isEntry": true
   },
+  "resources/js/firebase.js": {
+    "file": "assets/firebase-DTQh3lkK.js",
+    "name": "firebase",
+    "src": "resources/js/firebase.js",
+    "isEntry": true
+  },
   "resources/js/page/checkout.js": {
     "file": "assets/checkout-B4xTlYgl.js",
     "name": "checkout",
@@ -21,9 +27,12 @@
     "isEntry": true
   },
   "resources/js/page/home.js": {
-    "file": "assets/home-Dolyz8Gz.js",
+    "file": "assets/home-FDMhUH3C.js",
     "name": "home",
     "src": "resources/js/page/home.js",
-    "isEntry": true
+    "isEntry": true,
+    "imports": [
+      "resources/js/firebase.js"
+    ]
   }
 }
