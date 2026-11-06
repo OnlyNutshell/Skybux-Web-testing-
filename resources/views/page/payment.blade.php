@@ -114,5 +114,5 @@
 @endsection
 
 @push('scripts')
-    @vite('resources/js/page/checkout.js')
+    @vite('resources/js/page/payment.js')
 @endpush

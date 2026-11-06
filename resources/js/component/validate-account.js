@@ -8,6 +8,8 @@ const profile = document.getElementById('profile');
 
 const configElement = document.getElementById('roblox-config');
 
+export let verifiedAccount = null;
+
 const robloxChecker = {
     searchUrl: configElement.dataset.searchUrl,
     userUrl: configElement.dataset.userUrl
@@ -72,6 +74,8 @@ const robloxChecker = {
 
         
 async function loadProfile(userId) {
+    verifiedAccount = null;
+
     profile.classList.add('hidden');
     showStatus('Mengambil detail profil...');
 
@@ -80,6 +84,14 @@ async function loadProfile(userId) {
     );
 
     const user = data.user;
+
+    verifiedAccount = {
+        id: user.id,
+        username: user.name,
+        displayName: user.displayName,
+    };
+
+    console.log('VERIFIED ACCOUNT:', verifiedAccount);
 
     document.getElementById('displayName').textContent =
         user.displayName;
@@ -142,7 +154,9 @@ function resetSearchResults() {
     profile.classList.add('hidden');
 }
 
-usernameInput.addEventListener('input', () => {
+usernameInput.addEventListener('input', () => { 
+    verifiedAccount = null;
+
     clearTimeout(searchTimer);
 
     // Batalkan pencarian sebelumnya jika masih berjalan.

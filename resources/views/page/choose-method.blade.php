@@ -22,7 +22,7 @@
 
                 <div class="border-b border-slate-200 px-4 py-3">
                     <p class="text-sm font-medium text-slate-700">
-                        👤 jeuyy
+                        👤 {{ $order['username'] }}
                     </p>
                 </div>
 
@@ -35,12 +35,12 @@
                             ROBUX
                         </p>
                         <h3 class="font-semibold text-slate-900">
-                            67
+                            {{ $order['robux'] }}
                         </h3>
                     </div>
 
                     <p class="shrink-0 font-bold text-slate-900">
-                        Rp8.800
+                        {{ $order['price'] }}
                     </p>
 
                 </div>
@@ -383,7 +383,3 @@
 </section>
 
 @endsection
-
-@push('scripts')
-    @vite('resources/js/page/choose-method.blade.php')
-@endpush

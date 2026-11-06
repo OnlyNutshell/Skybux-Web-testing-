@@ -223,7 +223,7 @@
                     <span class="block text-white">
                         Harga: Rp<span id="total-harga">0</span>
                     </span>
-                    <button class="w-full bg-sky-400/20 border mt-3 border-white hover:shadow-[inset_0_0_8px_rgba(0,0,0,0.45)] cursor-pointer py-2 font-bold text-white rounded-2xl" id="checkout">Checkout</button>
+                    <button type="button" id="checkout" class="w-full bg-sky-400/20 border mt-3 border-white hover:shadow-[inset_0_0_8px_rgba(0,0,0,0.45)] cursor-pointer py-2 font-bold text-white rounded-2xl" id="checkout">Checkout</button>
             </section>
 
             <p class="mt-5 text-xs leading-5 text-gray-500">

@@ -19,4 +19,3 @@ const app = initializeApp(firebaseConfig);
 export const database = getDatabase(app);
 export const db = getFirestore(app);
 
-console.log('Firebase Project:', app.options.projectId);

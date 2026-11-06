@@ -1,35 +1,68 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\RobloxAccountController;
 use App\Http\Controllers\RobuxController;
+use App\Http\Controllers\CheckoutController;
+use App\Http\Controllers\RobloxAccountController;
 
-Route::get('/', [RobuxController::class, 'index']);
+/*
+|--------------------------------------------------------------------------
+| Home
+|--------------------------------------------------------------------------
+*/
 
-Route::get('/checkout/payment', function () {
-    return view('page.checkout');
-});
+Route::get('/', [RobuxController::class, 'index'])
+    ->name('home');
 
-Route::get('/checkout', function () {
-    return view('page.choose-method');
-});
 
-Route::middleware('throttle:20,1')->group(function () {
-    Route::post('/roblox-checker/search', [
-        RobloxAccountController::class,
-        'search',
-    ])->name('roblox.search');
+/*
+|--------------------------------------------------------------------------
+| Checkout
+|--------------------------------------------------------------------------
+*/
 
-    Route::get('/roblox-checker/users/{userId}', [
-        RobloxAccountController::class,
-        'showUser',
-    ])->whereNumber('userId')
-      ->name('roblox.user');
+Route::prefix('checkout')->name('checkout.')->group(function () {
+
+    Route::post('/', [CheckoutController::class, 'store'])
+        ->name('store');
+
+    Route::get('/', function () {
+        $order = session('checkout_order');
+
+        if (!$order) {
+            return redirect()->route('home');
+        }
+
+        return view('page.choose-method', compact('order'));
+    })->name('method');
     
-      
-      });
+    Route::get('/payment', function () {
+        return view('page.payment');
+    })->name('payment');
+    
+    });
 
-Route::get('/roblox-checker/users/{userId}/avatar', [
-    RobloxAccountController::class,
-    'avatar',
-])->whereNumber('userId')->name('roblox.avatar');
+
+/*
+|--------------------------------------------------------------------------
+| Roblox Checker
+|--------------------------------------------------------------------------
+*/
+
+Route::prefix('roblox-checker')
+    ->name('roblox.')
+    ->middleware('throttle:20,1')
+    ->group(function () {
+
+        Route::post('/search', [RobloxAccountController::class, 'search'])
+            ->name('search');
+
+        Route::get('/users/{userId}', [RobloxAccountController::class, 'showUser'])
+            ->whereNumber('userId')
+            ->name('user');
+
+        Route::get('/users/{userId}/avatar', [RobloxAccountController::class, 'avatar'])
+            ->whereNumber('userId')
+            ->name('avatar');
+
+    });
