@@ -1,6 +1,6 @@
 {
   "resources/css/app.css": {
-    "file": "assets/app-__wR7nyz.css",
+    "file": "assets/app-LCOEk2f-.css",
     "src": "resources/css/app.css",
     "isEntry": true,
     "name": "app",
@@ -9,15 +9,9 @@
     ]
   },
   "resources/js/app.js": {
-    "file": "assets/app-c-vIDGia.js",
+    "file": "assets/app-wWJ8GuaN.js",
     "name": "app",
     "src": "resources/js/app.js",
-    "isEntry": true
-  },
-  "resources/js/firebase.js": {
-    "file": "assets/firebase-C6fFRuLe.js",
-    "name": "firebase",
-    "src": "resources/js/firebase.js",
     "isEntry": true
   },
   "resources/js/page/checkout.js": {
@@ -27,12 +21,15 @@
     "isEntry": true
   },
   "resources/js/page/home.js": {
-    "file": "assets/home-D6Qmz0uX.js",
+    "file": "assets/home-CsBZIvWw.js",
     "name": "home",
     "src": "resources/js/page/home.js",
-    "isEntry": true,
-    "imports": [
-      "resources/js/firebase.js"
-    ]
+    "isEntry": true
+  },
+  "resources/js/page/payment.js": {
+    "file": "assets/payment-Ddtgg7UA.js",
+    "name": "payment",
+    "src": "resources/js/page/payment.js",
+    "isEntry": true
   }
 }

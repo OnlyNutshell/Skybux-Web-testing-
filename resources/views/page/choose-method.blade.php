@@ -1,14 +1,15 @@
 @extends('layout.welcome')
 
 @section('progression')
-    @include('component.page-proggresion', ['step' => 2])
+@include('component.page-proggresion', ['step' => 2])
 @endsection
 
 @section('content')
     
 <section class="mx-4 sm:mx-8 xl:mx-32">
-
-    <div class="grid grid-cols-1 lg:grid-cols-3 gap-5 lg:gap-8">
+    <form action="{{ route('checkout.confirm') }}" method="POST">
+        @csrf
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-5 lg:gap-8">
 
         <div class="min-w-0 lg:col-span-2 space-y-5">
 
@@ -20,9 +21,10 @@
                     </h2>
                 </div>
 
-                <div class="border-b border-slate-200 px-4 py-3">
+                <div class="border-b border-slate-200 px-4 py-3 flex items-center gap-2">
+                    <img width="30" height="30" src="{{ $order['avatarImage']}}" alt="">
                     <p class="text-sm font-medium text-slate-700">
-                        👤 {{ $order['username'] }}
+                        {{ $order['username'] }}
                     </p>
                 </div>
 
@@ -40,7 +42,7 @@
                     </div>
 
                     <p class="shrink-0 font-bold text-slate-900">
-                        {{ $order['price'] }}
+                        Rp{{ $order['price'] }}
                     </p>
 
                 </div>
@@ -88,6 +90,7 @@
                     type="radio"
                     name="payment_method"
                     value="qris"
+                    required
                     class="size-5 accent-sky-900"
                 >
 
@@ -289,7 +292,7 @@
 
 
             <!-- EMAIL NOTIFICATION -->
-            <div class="border-b border-slate-200 p-5">
+            <!-- <div class="border-b border-slate-200 p-5">
 
                 <h2 class="font-bold text-slate-900">
                     Order Notification
@@ -311,7 +314,7 @@
                     >
                 </label>
 
-            </div>
+            </div> -->
 
 
             <!-- PAYMENT DETAIL -->
@@ -326,7 +329,7 @@
                     <div class="flex justify-between gap-3">
                         <span class="text-slate-500">Total pesanan</span>
                         <span class="font-semibold text-slate-900">
-                            Rp8.800
+                            Rp{{ $order['price'] }}
                         </span>
                     </div>
 
@@ -367,11 +370,14 @@
                     </span>
 
                     <span class="text-xl font-bold text-slate-900">
-                        Rp8.801
+                        Rp{{ 1+$order['price'] }}
                     </span>
                 </div>
 
-                <button class="mt-5 w-full rounded-xl bg-sky-700 px-5 py-3 font-semibold text-white shadow-sm transition hover:bg-sky-800 active:scale-[0.98]">
+                <button
+                    type="submit"
+                    class="mt-5 w-full rounded-xl bg-sky-700 px-5 py-3 font-semibold text-white shadow-sm transition hover:bg-sky-800 active:scale-[0.98]"
+                >
                     Bayar Sekarang
                 </button>
 
@@ -380,6 +386,7 @@
         </aside>
 
     </div>
+    </form>
 </section>
 
 @endsection

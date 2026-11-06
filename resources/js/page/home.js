@@ -4,4 +4,4 @@ import '../component/validate-account.js';
 import '../component/tooltip.js';
 import '../component/checkout-sruk.js';
 import '../component/checkout-submit-validation.js';
-import '../firebase-test.js';
+import '../supabase.js';

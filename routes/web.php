@@ -5,6 +5,8 @@ use App\Http\Controllers\RobuxController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\RobloxAccountController;
 
+use Illuminate\Support\Facades\DB;
+
 /*
 |--------------------------------------------------------------------------
 | Home
@@ -37,8 +39,31 @@ Route::prefix('checkout')->name('checkout.')->group(function () {
     })->name('method');
     
     Route::get('/payment', function () {
-        return view('page.payment');
-    })->name('payment');
+
+    $checkoutOrder = session('checkout_order');
+
+    if (!$checkoutOrder || empty($checkoutOrder['order_id'])) {
+        return redirect()->route('home');
+    }
+
+    $order = DB::table('orders')
+        ->where('order_id', $checkoutOrder['order_id'])
+        ->first();
+
+    if (!$order) {
+        return redirect()->route('home');
+    }
+
+    return view('page.payment', compact('order'));
+
+})->name('payment');
+    
+
+    Route::post('/confirm', [CheckoutController::class, 'confirm'])
+    ->name('confirm');
+
+    Route::post('/payment/proof', [CheckoutController::class, 'uploadProof'])
+    ->name('proof');
     
     });
 

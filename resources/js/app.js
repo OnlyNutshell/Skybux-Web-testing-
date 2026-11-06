@@ -1,5 +1,5 @@
 import './bootstrap';
-import { createIcons, QrCode, WalletCards, ClipboardList, House, Download,ShoppingCart, ShieldCheck, Check, User, Mail, Menu, Info } from 'lucide';
+import { createIcons, CheckCircle, FileImage, X, Paperclip, QrCode, WalletCards, ClipboardList, House, Download,ShoppingCart, ShieldCheck, Check, User, Mail, Menu, Info } from 'lucide';
 
 createIcons({
     icons: {
@@ -14,6 +14,10 @@ createIcons({
         Info,
         ClipboardList,
         WalletCards,
-        QrCode
+        QrCode,
+        Paperclip,
+        X,
+        FileImage,
+        CheckCircle
     }
 });

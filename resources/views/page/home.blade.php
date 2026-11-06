@@ -1,6 +1,42 @@
 @extends('layout.welcome')
 
+
 @section('content')
+@if (session('success'))
+    <div
+        id="success-toast"
+        class="fixed right-5 top-5 z-[9999] flex items-center gap-3 rounded-xl border border-green-200 bg-white px-5 py-4 shadow-xl shadow-green-900/10 transition-all duration-500"
+    >
+        <div class="flex size-9 shrink-0 items-center justify-center rounded-full bg-green-100 text-green-600">
+            <i data-lucide="check-circle" class="size-5"></i>
+        </div>
+
+        <div>
+            <p class="text-sm font-semibold text-gray-900">Berhasil!</p>
+            <p class="text-xs text-gray-500">{{ session('success') }}</p>
+        </div>
+
+        <button
+            type="button"
+            onclick="document.getElementById('success-toast').remove()"
+            class="ml-3 text-gray-400 transition hover:text-gray-700"
+        >
+            <i data-lucide="x" class="size-4"></i>
+        </button>
+    </div>
+
+    <script>
+        setTimeout(() => {
+            const toast = document.getElementById('success-toast');
+
+            if (toast) {
+                toast.classList.add('opacity-0', 'translate-x-5');
+
+                setTimeout(() => toast.remove(), 500);
+            }
+        }, 4000);
+    </script>
+@endif
 
 <!-- Banner Di tengah -->
     @include('component.banner')

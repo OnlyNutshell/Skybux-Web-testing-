@@ -10,7 +10,7 @@ export default defineConfig({
                     'resources/js/app.js',
                     'resources/js/page/home.js',
                     'resources/js/page/checkout.js',
-                    'resources/js/firebase.js'
+                    'resources/js/page/payment.js',
                 ],
             refresh: true,
         }),

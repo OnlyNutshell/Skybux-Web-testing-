@@ -85,13 +85,14 @@ async function loadProfile(userId) {
 
     const user = data.user;
 
+    const avatarImage = document.getElementById('avatarImage');
+
     verifiedAccount = {
         id: user.id,
         username: user.name,
         displayName: user.displayName,
+        avatarImage: null,
     };
-
-    console.log('VERIFIED ACCOUNT:', verifiedAccount);
 
     document.getElementById('displayName').textContent =
         user.displayName;
@@ -99,23 +100,16 @@ async function loadProfile(userId) {
     document.getElementById('usernameResult').textContent =
         `@${user.name}`;
 
-    document.getElementById('userId').textContent =
-        user.id;
+    document.getElementById('userId').textContent = user.id;
 
-    document.getElementById('profileLink').href =
-        user.profileUrl;
+    document.getElementById('profileLink').href = user.profileUrl;
 
-    const avatarImage = document.getElementById('avatarImage');
-
-    // Reset avatar sebelumnya.
     avatarImage.removeAttribute('src');
     avatarImage.classList.add('hidden');
 
     profile.classList.remove('hidden');
     showStatus('Profil berhasil ditemukan.');
 
-    // Ambil avatar secara terpisah supaya error avatar
-    // tidak membuat profil utama gagal ditampilkan.
     try {
         const avatarData = await requestJson(
             `${robloxChecker.userUrl}/${encodeURIComponent(userId)}/avatar`
@@ -124,10 +118,14 @@ async function loadProfile(userId) {
         if (avatarData.imageUrl) {
             avatarImage.src = avatarData.imageUrl;
             avatarImage.classList.remove('hidden');
+
+            verifiedAccount.avatarImage = avatarData.imageUrl;
         }
     } catch (error) {
         console.error('Gagal memuat avatar:', error);
     }
+
+    console.log('VERIFIED ACCOUNT:', verifiedAccount);
 }
 
 

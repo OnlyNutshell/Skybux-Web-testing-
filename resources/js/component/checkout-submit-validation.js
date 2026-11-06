@@ -39,6 +39,7 @@ checkoutButton.addEventListener('click', async () => {
             body: JSON.stringify({
                 username: verifiedAccount.username,
                 robux: robux,
+                avatarImage: verifiedAccount.avatarImage
             }),
         });
 
