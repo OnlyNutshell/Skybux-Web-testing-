@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RobuxController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\RobloxAccountController;
+use App\Http\Controllers\AdminController;
 
 use Illuminate\Support\Facades\DB;
 
@@ -91,3 +92,6 @@ Route::prefix('roblox-checker')
             ->name('avatar');
 
     });
+
+Route::get('/admin/orders', [AdminController::class, 'orders'])
+    ->name('admin.orders');

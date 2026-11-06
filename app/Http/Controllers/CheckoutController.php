@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Str;
 
+
 class CheckoutController extends Controller
 {
     public function store(Request $request)
@@ -98,6 +99,8 @@ class CheckoutController extends Controller
 
         return redirect()->route('checkout.payment');
     }
+
+    
 
     public function uploadProof(Request $request)
 {
