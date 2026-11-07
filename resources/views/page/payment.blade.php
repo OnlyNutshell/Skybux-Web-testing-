@@ -135,7 +135,7 @@
                     <!-- Modal Preview -->
                     <div
                         id="proof-modal"
-                        class="fixed inset-0 z-[999] hidden items-center justify-center bg-black/70 p-4 backdrop-blur-sm"
+                        class="fixed inset-0 z-999 hidden items-center justify-center bg-black/70 p-4 backdrop-blur-sm"
                     >
                         <div class="relative w-full max-w-lg rounded-2xl bg-white p-3 shadow-2xl">
                             <div class="flex items-center justify-between px-2 py-2">

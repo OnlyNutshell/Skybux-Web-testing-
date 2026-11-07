@@ -5,7 +5,7 @@
             px-6 md:px-16 lg:px-24 xl:px-32
             flex items-center bg-sky-900 transition-all">
         
-    <a href="#" class="flex items-center text-white">
+    <a href="{{ route('home') }}" class="flex items-center text-white">
         <img width="70" height="30" src="{{ asset('img/image.png') }}" alt="Skybux-icon.png">
     </a>
 
@@ -26,17 +26,13 @@
     </div>
     </div>
 
-    <div class="mobile-menu absolute top-17.5 left-0 w-full bg-linear-to-r from-indigo-700 to-violet-500 p-6 hidden md:hidden">
+    <div class="mobile-menu absolute top-17.5 left-0 w-full border-t-2 border-black bg-sky-900 p-6 hidden md:hidden">
         <ul class="flex flex-col space-y-4 text-white text-lg">
-            <li><a href="#" class="text-sm">Beranda</a></li>
             <li><a href="#" class="text-sm">Beli Robux</a></li>
             <li><a href="#" class="text-sm">Cara Order</a></li>
             <li><a href="#" class="text-sm">FAQ</a></li>
             <li><a href="#" class="text-sm">Hubungi Kami</a></li>
         </ul>
-        <button type="button" class="bg-white text-gray-700 mt-6 inline md:hidden text-sm hover:opacity-90 active:scale-95 transition-all w-40 h-11 rounded-full">
-        Get started
-        </button>
     </div>
 </nav>
 

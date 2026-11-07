@@ -5,7 +5,7 @@
 @if (session('success'))
     <div
         id="success-toast"
-        class="fixed right-5 top-5 z-[9999] flex items-center gap-3 rounded-xl border border-green-200 bg-white px-5 py-4 shadow-xl shadow-green-900/10 transition-all duration-500"
+        class="fixed right-5 top-5 z-9999 flex items-center gap-3 rounded-xl border border-green-200 bg-white px-5 py-4 shadow-xl shadow-green-900/10 transition-all duration-500"
     >
         <div class="flex size-9 shrink-0 items-center justify-center rounded-full bg-green-100 text-green-600">
             <i data-lucide="check-circle" class="size-5"></i>
