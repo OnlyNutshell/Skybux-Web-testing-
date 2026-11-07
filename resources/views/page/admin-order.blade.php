@@ -16,7 +16,7 @@
             </tr>
         </thead>
 
-        <tbody class="divide-y divide-slate-100">
+        <tbody class="divide-y divide-slate-100" id="admin-orders">
             @forelse ($orders as $order)
                 <tr>
                     <td class="p-4 font-semibold">{{ $order->order_id }}</td>
@@ -55,3 +55,7 @@
     </table>
 </div>
 @endsection
+
+@push('scripts')
+    @vite('resources/js/order-realtime.js')
+@endpush
