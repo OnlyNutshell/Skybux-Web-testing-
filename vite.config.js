@@ -11,6 +11,7 @@ export default defineConfig({
                     'resources/js/page/home.js',
                     'resources/js/page/checkout.js',
                     'resources/js/page/payment.js',
+                    'resources/js/order-realtime.js',
                 ],
             refresh: true,
         }),

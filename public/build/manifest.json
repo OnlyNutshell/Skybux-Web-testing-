@@ -1,4 +1,8 @@
 {
+  "_supabase-test-DOtHnTpX.js": {
+    "file": "assets/supabase-test-DOtHnTpX.js",
+    "name": "supabase-test"
+  },
   "resources/css/app.css": {
     "file": "assets/app-MokN_hhW.css",
     "src": "resources/css/app.css",
@@ -14,6 +18,15 @@
     "src": "resources/js/app.js",
     "isEntry": true
   },
+  "resources/js/order-realtime.js": {
+    "file": "assets/order-realtime-CZPZYiMR.js",
+    "name": "order-realtime",
+    "src": "resources/js/order-realtime.js",
+    "isEntry": true,
+    "imports": [
+      "_supabase-test-DOtHnTpX.js"
+    ]
+  },
   "resources/js/page/checkout.js": {
     "file": "assets/checkout-l0sNRNKZ.js",
     "name": "checkout",
@@ -21,10 +34,13 @@
     "isEntry": true
   },
   "resources/js/page/home.js": {
-    "file": "assets/home-CsBZIvWw.js",
+    "file": "assets/home-DSZaSUbE.js",
     "name": "home",
     "src": "resources/js/page/home.js",
-    "isEntry": true
+    "isEntry": true,
+    "imports": [
+      "_supabase-test-DOtHnTpX.js"
+    ]
   },
   "resources/js/page/payment.js": {
     "file": "assets/payment-Ddtgg7UA.js",
