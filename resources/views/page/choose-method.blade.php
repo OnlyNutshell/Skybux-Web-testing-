@@ -273,21 +273,24 @@
         <!-- RIGHT SIDEBAR -->
         <aside class="min-w-0 h-fit overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
 
-            <!-- PROMO -->
             <div class="border-b border-slate-200 p-4">
-                <button class="flex w-full items-center justify-between rounded-xl bg-slate-100 p-4 text-left transition hover:bg-slate-200">
 
-                    <div>
-                        <p class="font-semibold text-slate-900">
-                            Pakai Promo & Voucher
+                <div class=" flex items-center gap-3 rounded-2xl bg-green-50 p-4">
+
+                    <div class="flex-1">
+                        <p class="text-sm font-semibold text-slate-900">
+                            Pasti Masuk dan Terkirim 100%
                         </p>
-                        <p class="text-sm text-slate-500">
-                            Diskon besar menantimu!
+                        <p class="mt-1 text-xs text-slate-500">
+                            Pesanan aman dijamin oleh Skybux
                         </p>
                     </div>
 
-                    <span class="text-slate-600">›</span>
-                </button>
+                    <div class="flex size-10 shrink-0 items-center justify-center rounded-full bg-green-600 text-white">
+                        ✓
+                    </div>
+
+                </div>
             </div>
 
 
@@ -338,24 +341,6 @@
                         <span class="font-semibold text-slate-900">
                             Rp1
                         </span>
-                    </div>
-
-                </div>
-
-                <!-- GUARANTEE -->
-                <div class="mt-5 flex items-center gap-3 rounded-2xl bg-green-50 p-4">
-
-                    <div class="flex-1">
-                        <p class="text-sm font-semibold text-slate-900">
-                            Pasti Masuk dan Terkirim 100%
-                        </p>
-                        <p class="mt-1 text-xs text-slate-500">
-                            Pesanan aman dijamin oleh Skybux
-                        </p>
-                    </div>
-
-                    <div class="flex size-10 shrink-0 items-center justify-center rounded-full bg-green-600 text-white">
-                        ✓
                     </div>
 
                 </div>

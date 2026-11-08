@@ -1,5 +1,5 @@
 <section id="bannerSection">
-    <div class="relative w-full h-60 md:h-80 xl:h-120 overflow-clip">
+    <div class="relative w-full ip:h-40 h-60 md:h-80 xl:h-120 overflow-clip">
         
         <img
             class="w-full h-full object-cover"

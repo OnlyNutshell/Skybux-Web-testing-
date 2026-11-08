@@ -81,7 +81,7 @@ class CheckoutController extends Controller
                 'order_id' => $orderId,
                 'roblox_username' => $order['username'],
                 'robux_amount' => $order['robux'],
-                'total_price' => $order['price'],
+                'total_price' => $order['price'] + 1,
                 'payment_method' => $validated['payment_method'],
                 'payment_status' => 'pending',
                 'order_status' => 'pending',

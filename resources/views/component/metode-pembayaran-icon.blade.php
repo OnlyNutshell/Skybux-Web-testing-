@@ -1,4 +1,4 @@
-<div class="grid grid-cols-3 gap-2 w-full xl:flex min-w-0 pb-2">
+<div class="grid grid-cols-3 gap-2 w-full xl:flex min-w-0 text-xs ip:text-[10px] pb-2">
 
 <button type="button"
      class="min-w-0 cursor-pointer border-2 xl:w-35 border-sky-700
@@ -12,7 +12,7 @@
                 class="max-w-full max-h-full object-contain">
     </div>
 
-    <span class="font-bold text-xs">QRIS</span>
+    <span class="font-bold">QRIS</span>
 </button>
 
 <button type="button"
@@ -27,7 +27,7 @@
                 class="max-w-full max-h-full object-contain">
     </div>
 
-    <span class="font-bold text-xs">Dana</span>
+    <span class="font-bold">Dana</span>
 </button>
 
 <button type="button"
@@ -42,7 +42,7 @@
                 class="max-w-full max-h-full object-contain">
     </div>
 
-    <span class="font-bold text-xs">GoPay</span>
+    <span class="font-bold">GoPay</span>
 </button>
 
 <button type="button"
@@ -57,7 +57,7 @@
                 class="max-w-full max-h-full object-contain">
     </div>
 
-    <span class="font-bold text-xs">Bank Jago</span>
+    <span class="font-bold">Bank Jago</span>
 </button>
 
 <button type="button"
@@ -72,7 +72,7 @@
                 class="max-w-full max-h-full object-contain">
     </div>
 
-    <span class="font-bold text-xs">SeaBank</span>
+    <span class="font-bold">SeaBank</span>
 </button>
 
 <button type="button"
@@ -87,7 +87,7 @@
                 class="max-w-full max-h-full object-contain p-1">
     </div>
 
-    <span class="font-bold text-xs">ShopeePay</span>
+    <span class="font-bold">ShopeePay</span>
 </button>
 
 </div>

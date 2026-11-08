@@ -1,5 +1,6 @@
 @extends('layout.welcome')
 
+@include('component.header')
 
 @section('content')
 @if (session('success'))
@@ -57,7 +58,7 @@
 
     <div class="sm:mx-8 lg:p-6 px-6 py-4 mx-4 xl:mx-32 rounded-2xl mb-5 bg-sky-900 border-black">
         <h1 class=" text-white font-bold lg:text-2xl text-xl">Top Up Instant Robux Via Username</h1>
-        <h2 class="sm:text-xl text-sm text-slate-500">Harga Rp 160 per Robux. Pilih satu nominal, lalu lengkapi data di kotak pesanan.</h2>
+        <h2 class="sm:text-xl text-sm text-slate-500">Harga Rp 170 per Robux. Pilih satu nominal, lalu lengkapi data di kotak pesanan.</h2>
     </div>
 
     <!-- Store Form Section -->
@@ -67,7 +68,7 @@
         <div class="relative flex lg:col-span-2 min-w-0 mb-5 lg:mb-0 flex-col items-center">
             <div class="relative overflow-hidden rounded-2xl w-full bg-sky-900 p-6">
             <div class="flex justify-between items-baseline-last mb-5">
-                <h2 class="text-l text-white font-bold sm:text-xl">Pilih Nominal Robux</h2>
+                <h2 class="text-l text-white font-bold sm:text-xl">Custom Robux atau Budget sesuai keinginan</h2>
                 <div class="flex justify-between items-center bg-green-500/50 text-green-400 gap-2 px-4 py-1.5 rounded-2xl">
                     <i data-lucide="check" class="w-4 h-4"></i>
 
@@ -90,7 +91,7 @@
                         type="text"
                         inputmode="numeric"
                         autocomplete="off"
-                        placeholder="Enter Robux price"
+                        placeholder="Sesuaikan Budget"
                         class="converter-value min-w-0 w-full border-0 bg-transparent
                             text-base text-slate-800 outline-none
                             placeholder:text-slate-500
@@ -103,14 +104,14 @@
 
                     <label for="robux"
                         class="min-w-0 text-lg text-slate-700">
-                        RBX
+                        Robux
                     </label>
 
                     <input
                         id="robux"
                         type="text"
                         inputmode="numeric"
-                        placeholder="Enter Robux Amount"
+                        placeholder="Sesuaikan Robux"
                         class="converter-value min-w-0 w-full border-0 bg-transparent
                             text-base text-slate-800 outline-none
                             placeholder:text-slate-500
@@ -203,55 +204,54 @@
                         </div>
                     </div>
 
+                    
                     <div id="profile"
-                        class="my-5 hidden rounded-xl border text-white
-                                border-white/10 bg-[#0D0B16] p-5">
+                        class="my-5 hidden items-center gap-5 rounded-2xl border border-white/10 bg-[#0D0B16] p-5 text-white">
 
+                        {{-- Avatar --}}
                         <img
                             id="avatarImage"
                             src=""
                             alt="Avatar Roblox"
-                            class="h-16 w-16 rounded-2xl border border-white/10
-                                bg-white/5 object-cover"
+                            class="size-16 shrink-0 rounded-2xl border border-white/10 bg-white/5 object-cover"
                         />
 
-                        <div class="flex items-start justify-between gap-4">
-                            <div class="min-w-0">
-                                <h2 id="displayName"
-                                    class="wrap-break-word text-xl font-bold"></h2>
+                        {{-- User Information --}}
+                        <div class="min-w-0 flex-1">
+                            <h2 id="displayName"
+                                class="break-words text-lg font-bold">
+                            </h2>
 
-                                <p id="usernameResult"
-                                class="mt-1 wrap-break-word text-sm text-gray-400">
-                                </p>
-                            </div>
+                            <p id="usernameResult"
+                                class="mt-0.5 text-sm text-gray-400">
+                            </p>
+
+                            <p class="mt-2 text-xs text-gray-500">
+                                User ID:
+                                <span id="userId" class="font-medium text-gray-300"></span>
+                            </p>
+                        </div>
+
+                        {{-- Status & Action --}}
+                        <div class="flex shrink-0 flex-col items-end gap-3">
 
                             <span id="accountStatus"
-                                class="shrink-0 rounded-full bg-emerald-400/10
-                                        px-3 py-1 text-xs font-medium
-                                        text-emerald-300">
+                                class="rounded-full bg-emerald-400/10 px-3 py-1 text-xs font-medium text-emerald-300">
                                 Ditemukan
                             </span>
-                        </div>
 
-                        <div class="mt-5 space-y-3 text-sm">
-                            <div class="flex justify-between gap-4">
-                                <span class="text-gray-400">User ID</span>
-                                <span id="userId"
-                                    class="break-all text-right"></span>
-                            </div>
-                        </div>
+                            <a id="profileLink"
+                                href="#"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                class="inline-flex items-center gap-2 rounded-lg border border-white/10 px-3 py-2 text-xs font-semibold transition hover:bg-white/10">
+                                Buka Profil ↗
+                            </a>
 
-                        <a id="profileLink"
-                            href="#"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            class="mt-5 inline-flex rounded-lg border
-                            border-white/10 px-4 py-2 text-sm
-                            font-medium transition hover:bg-white/5">
-                            Buka profil Roblox ↗
-                        </a>
+                        </div>
 
                     </div>
+
                      <span class="block text-white">
                         Total Robux: <span id="total-robux">0</span>
                     </span>
@@ -262,11 +262,7 @@
                     <button type="button" id="checkout" class="w-full bg-sky-400/20 border mt-3 border-white hover:shadow-[inset_0_0_8px_rgba(0,0,0,0.45)] cursor-pointer py-2 font-bold text-white rounded-2xl" id="checkout">Checkout</button>
             </section>
 
-            <p class="mt-5 text-xs leading-5 text-gray-500">
-                Data profil mengikuti informasi yang disediakan Roblox.
-                Verified badge bukan bukti usia 18+. Status verifikasi usia
-                tidak tersedia melalui pemeriksaan publik ini.
-            </p></div>
+            </div>
         </div>
     </section>
 @endsection

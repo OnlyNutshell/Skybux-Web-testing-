@@ -3,6 +3,7 @@
 
 @theme {
     --font-sans: "League Spartan", sans-serif;
+    --breakpoint-ip: 380px;
 }
 
 .converter-value {

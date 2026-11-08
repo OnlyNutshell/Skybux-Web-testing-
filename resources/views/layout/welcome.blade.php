@@ -18,10 +18,7 @@
 <body class="pb-6 bg-sky-500/20 backdrop-blur-[140px]">
 
     <!-- Header -->
-    @section('navbar')
-        @include('component.header')
-    @show
-
+    
     @yield('progression')
     
     @yield('content')

@@ -2,11 +2,11 @@
 
 <!-- navbar home -->
 <nav class="sticky top-0 z-50 h-17.5 w-full
-            px-6 md:px-16 lg:px-24 xl:px-32
+            px-6 py-12 md:px-16 lg:px-24 xl:px-32
             flex items-center bg-sky-900 transition-all">
         
     <a href="{{ route('home') }}" class="flex items-center text-white">
-        <img width="70" height="30" src="{{ asset('img/image.png') }}" alt="Skybux-icon.png">
+        <img width="100" height="40" src="{{ asset('img/image.png') }}" alt="Skybux-icon.png">
     </a>
 
     <div class="w-full">

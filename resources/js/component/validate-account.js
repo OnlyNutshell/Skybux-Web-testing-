@@ -33,6 +33,7 @@ const robloxChecker = {
             statusBox.classList.add('hidden');
             choicesWrapper.classList.add('hidden');
             profile.classList.add('hidden');
+            profile.classList.remove('flex');
 
             choices.replaceChildren();
 
@@ -108,6 +109,7 @@ async function loadProfile(userId) {
     avatarImage.classList.add('hidden');
 
     profile.classList.remove('hidden');
+    profile.classList.add('flex');
     showStatus('Profil berhasil ditemukan.');
 
     try {

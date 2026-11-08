@@ -4,7 +4,7 @@
     "name": "supabase-test"
   },
   "resources/css/app.css": {
-    "file": "assets/app-MokN_hhW.css",
+    "file": "assets/app-p_mTkIV1.css",
     "src": "resources/css/app.css",
     "isEntry": true,
     "name": "app",
@@ -34,7 +34,7 @@
     "isEntry": true
   },
   "resources/js/page/home.js": {
-    "file": "assets/home-DSZaSUbE.js",
+    "file": "assets/home-DVdd3VgN.js",
     "name": "home",
     "src": "resources/js/page/home.js",
     "isEntry": true,
