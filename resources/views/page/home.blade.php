@@ -58,11 +58,11 @@
 
     <div class="sm:mx-8 lg:p-6 px-6 py-4 mx-4 xl:mx-32 rounded-2xl mb-5 bg-sky-900 border-black">
         <h1 class=" text-white font-bold lg:text-2xl text-xl">Top Up Instant Robux Via Username</h1>
-        <h2 class="sm:text-xl text-sm text-slate-500">Harga Rp 170 per Robux. Pilih satu nominal, lalu lengkapi data di kotak pesanan.</h2>
+        <h2 class="sm:text-xl text-sm text-slate-300">Harga Rp 165 per Robux. Pilih satu nominal, lalu lengkapi data di kotak pesanan.</h2>
     </div>
 
     <!-- Store Form Section -->
-    <section class="mx-4 sm:mx-8 xl:mx-32">
+    <section class="mx-4 mb-4 sm:mx-8 xl:mx-32">
     
     <div class="grid grid-cols-1 lg:grid-cols-3 lg:gap-8">
         <div class="relative flex lg:col-span-2 min-w-0 mb-5 lg:mb-0 flex-col items-center">
@@ -184,7 +184,7 @@
                         <p id="status"
                         role="status"
                         aria-live="polite"
-                        class="hidden text-sm text-gray-400">
+                        class="hidden text-sm text-white">
                         </p>
 
                         <div id="choicesWrapper" class="hidden">
@@ -206,7 +206,7 @@
 
                     
                     <div id="profile"
-                        class="my-5 hidden items-center gap-5 rounded-2xl border border-white/10 bg-[#0D0B16] p-5 text-white">
+                        class="mb-5 hidden items-center gap-5 rounded-2xl border border-white/10 bg-[#0D0B16] p-5 text-white">
 
                         {{-- Avatar --}}
                         <img
@@ -219,7 +219,7 @@
                         {{-- User Information --}}
                         <div class="min-w-0 flex-1">
                             <h2 id="displayName"
-                                class="break-words text-lg font-bold">
+                                class="wrap-break-word text-lg font-bold">
                             </h2>
 
                             <p id="usernameResult"
@@ -252,14 +252,22 @@
 
                     </div>
 
-                     <span class="block text-white">
-                        Total Robux: <span id="total-robux">0</span>
-                    </span>
+                    <div class="flex items-center justify-between gap-4 rounded-xl border border-white/10 bg-white/4 px-4 py-3">
+                    <div>
+                        <p class="text-xs font-medium text-white/50">Total Robux</p>
+                        <p class="mt-1 text-lg font-bold tracking-wide text-white">
+                            <span id="total-robux">0</span>
+                        </p>
+                    </div>
 
-                    <span class="block text-white">
-                        Harga: Rp<span id="total-harga">0</span>
-                    </span>
-                    <button type="button" id="checkout" class="w-full bg-sky-400/20 border mt-3 border-white hover:shadow-[inset_0_0_8px_rgba(0,0,0,0.45)] cursor-pointer py-2 font-bold text-white rounded-2xl" id="checkout">Checkout</button>
+                    <div class="text-right">
+                        <p class="text-xs font-medium text-white/50">Total Harga</p>
+                        <p class="mt-1 text-lg font-bold tracking-wide text-sky-400">
+                            Rp<span id="total-harga">0</span>
+                        </p>
+                    </div>
+                </div>
+                    <button type="button" id="checkout" class="w-full bg-sky-400/20 border mt-3 border-white hover:shadow-[inset_0_0_8px_rgba(0,0,0,0.45)] cursor-pointer py-2 font-bold text-white rounded-2xl">Checkout</button>
             </section>
 
             </div>

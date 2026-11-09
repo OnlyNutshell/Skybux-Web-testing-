@@ -20,8 +20,8 @@ checkoutButton.addEventListener('click', async () => {
         robuxInput.value.replace(/\D/g, '')
     );
 
-    if (!Number.isInteger(robux) || robux < 5 || robux % 5 !== 0) {
-        alert('Jumlah Robux tidak valid.');
+    if (!Number.isInteger(robux) || robux < 10 || robux % 10 !== 0) {
+        alert('Jumlah Robux minimal 10');
         return;
     }
 

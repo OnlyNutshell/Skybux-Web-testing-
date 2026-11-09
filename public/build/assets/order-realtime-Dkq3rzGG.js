@@ -1,0 +1,1 @@
+import{s as e}from"./supabase-test-BPvGp7Ti.js";const s=document.getElementById("admin-orders");s&&e.channel("admin-orders").on("postgres_changes",{event:"*",schema:"laravel_test",table:"orders"},()=>{window.location.reload()}).subscribe();

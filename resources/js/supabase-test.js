@@ -5,7 +5,8 @@ export const supabase = createClient(
     import.meta.env.VITE_SUPABASE_ANON_KEY,
     {
         db: {
-            schema: 'laravel',
+            // schema: 'laravel',
+            schema: 'laravel_test',
         },
     }
 );

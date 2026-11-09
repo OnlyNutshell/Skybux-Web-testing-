@@ -9,7 +9,8 @@ if (adminOrders) {
             'postgres_changes',
             {
                 event: '*',
-                schema: 'laravel',
+                // schema: 'laravel',
+                schema: 'laravel_test',
                 table: 'orders',
             },
             () => {

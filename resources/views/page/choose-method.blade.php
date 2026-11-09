@@ -1,13 +1,18 @@
 @extends('layout.welcome')
 
-@section('progression')
-@include('component.page-proggresion', ['step' => 2])
+@section('modal')
+    @include('component.checkout-modal')
 @endsection
+
+@section('progression')
+    @include('component.page-proggresion', ['step' => 2])
+@endsection
+
 
 @section('content')
     
-<section class="mx-4 sm:mx-8 xl:mx-32">
-    <form action="{{ route('checkout.confirm') }}" method="POST">
+<section class="mx-4 mb-4 sm:mx-8 xl:mx-32">
+    <form id="checkoutForm" action="{{ route('checkout.confirm') }}" method="POST" novalidate>
         @csrf
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-5 lg:gap-8">
 
@@ -42,7 +47,7 @@
                     </div>
 
                     <p class="shrink-0 font-bold text-slate-900">
-                        Rp{{ $order['price'] }}
+                        Rp{{ number_format($order['price'], 0, ',', '.') }}
                     </p>
 
                 </div>
@@ -66,27 +71,20 @@
 
 
     <!-- QRIS -->
-    <details class="group border-b border-slate-100 py-3">
+    <details id="qrisAccordion" class="group border-b border-slate-100 py-3">
 
         <summary class="flex cursor-pointer list-none items-center justify-between py-2">
-            <h3 class="font-bold text-slate-900">
-                QRIS
-            </h3>
+            <h3 class="font-bold text-slate-900">QRIS</h3>
 
-            <span class="text-2xl font-light leading-none text-slate-900 group-open:hidden">
-                +
-            </span>
-
-            <span class="hidden text-2xl font-light leading-none text-slate-900 group-open:inline">
-                −
-            </span>
+            <span class="text-2xl font-light leading-none text-slate-900 group-open:hidden">+</span>
+            <span class="hidden text-2xl font-light leading-none text-slate-900 group-open:inline">−</span>
         </summary>
 
         <div class="pb-3 pt-2">
-
             <label class="flex cursor-pointer items-center gap-4 rounded-xl border border-sky-200 bg-sky-50/50 p-4 transition hover:bg-sky-50">
 
                 <input
+                    id="qrisRadio"
                     type="radio"
                     name="payment_method"
                     value="qris"
@@ -109,10 +107,8 @@
                 </span>
 
             </label>
-
         </div>
     </details>
-
 
     <!-- E-WALLET -->
     <details class="group border-b border-slate-100 py-3">
@@ -295,29 +291,48 @@
 
 
             <!-- EMAIL NOTIFICATION -->
-            <!-- <div class="border-b border-slate-200 p-5">
+            <div class="border-b border-slate-200 p-5">
 
-                <h2 class="font-bold text-slate-900">
-                    Order Notification
-                </h2>
+            <h2 class="font-bold text-slate-900">
+                Contact Information
+            </h2>
 
-                <p class="mb-4 text-sm text-slate-500">
-                    Get order status notifications via email
-                </p>
+            <p class="mb-4 text-sm text-slate-500">
+                Your contact details in case we need to reach you regarding your order.
+            </p>
+
+            <div class="space-y-4">
 
                 <label class="block">
                     <span class="mb-1 block text-xs text-slate-500">
-                        Email*
+                        WhatsApp Number*
                     </span>
 
                     <input
-                        type="email"
-                        placeholder="example@gmail.com"
+                        type="tel"
+                        name="whatsapp"
+                        required
+                        placeholder="08xxxxxxxxxx"
                         class="w-full rounded-xl border border-slate-300 px-4 py-3 text-sm outline-none transition focus:border-sky-500 focus:ring-2 focus:ring-sky-500/20"
                     >
                 </label>
 
-            </div> -->
+                <label class="block">
+                    <span class="mb-1 block text-xs text-slate-500">
+                        TikTok Username <span class="text-slate-400">(Optional)</span>
+                    </span>
+
+                    <input
+                        type="text"
+                        name="tiktok"
+                        placeholder="@username"
+                        class="w-full rounded-xl border border-slate-300 px-4 py-3 text-sm outline-none transition focus:border-sky-500 focus:ring-2 focus:ring-sky-500/20"
+                    >
+                </label>
+
+            </div>
+
+        </div>
 
 
             <!-- PAYMENT DETAIL -->
@@ -332,14 +347,7 @@
                     <div class="flex justify-between gap-3">
                         <span class="text-slate-500">Total pesanan</span>
                         <span class="font-semibold text-slate-900">
-                            Rp{{ $order['price'] }}
-                        </span>
-                    </div>
-
-                    <div class="flex justify-between gap-3">
-                        <span class="text-slate-500">Biaya admin</span>
-                        <span class="font-semibold text-slate-900">
-                            Rp1
+                            Rp{{ number_format($order['price'], 0, ',', '.') }}
                         </span>
                     </div>
 
@@ -355,16 +363,18 @@
                     </span>
 
                     <span class="text-xl font-bold text-slate-900">
-                        Rp{{ 1+$order['price'] }}
+                        Rp{{ number_format($order['totalPrice'], 0, ',', '.') }}
                     </span>
                 </div>
 
                 <button
-                    type="submit"
-                    class="mt-5 w-full rounded-xl bg-sky-700 px-5 py-3 font-semibold text-white shadow-sm transition hover:bg-sky-800 active:scale-[0.98]"
+                    id="checkoutButton"
+                    type="button"
+                    class="mt-5 w-full rounded-xl bg-sky-900 px-5 py-3 font-semibold text-white shadow-sm transition hover:bg-sky-800 active:scale-[0.98]"
                 >
                     Bayar Sekarang
                 </button>
+
 
             </div>
 
@@ -372,6 +382,16 @@
 
     </div>
     </form>
+
+    
+
+    
 </section>
 
 @endsection
+
+
+
+@push('scripts')
+    @vite('resources/js/page/checkout.js')
+@endpush

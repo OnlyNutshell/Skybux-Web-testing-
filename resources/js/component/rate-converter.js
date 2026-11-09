@@ -2,10 +2,11 @@
 import { updateSelectedItem } from './checkout-sruk.js';
 import { syncSelectedCard } from './selected-robux.js';
 
-const RATE = 170;
+const RATE = 165;
 const ROBUX_STEP = 5;
 const DEBOUNCE_DELAY = 1000;
 const ANIMATION_DELAY = 200;
+const MIN_ROBUX = 10;
 
 const rupiahInput = document.getElementById('rupiah');
 const robuxInput = document.getElementById('robux');
@@ -90,8 +91,10 @@ function convertRupiah() {
         rupiah / (RATE * ROBUX_STEP)
     ) * ROBUX_STEP;
 
-    rupiahInput.value = formatRupiah(robux * RATE);
-    robuxInput.value = robux;
+    const finalRobux = Math.max(robux, MIN_ROBUX);
+
+    rupiahInput.value = formatRupiah(finalRobux * RATE);
+    robuxInput.value = finalRobux;
 
     refresh();
 }
@@ -104,10 +107,12 @@ function convertRobux() {
         robux / ROBUX_STEP
     ) * ROBUX_STEP;
 
-    robuxInput.value = roundedRobux;
+    const finalRobux = Math.max(roundedRobux, MIN_ROBUX);
+
+    robuxInput.value = finalRobux;
 
     rupiahInput.value = formatRupiah(
-        roundedRobux * RATE
+        finalRobux * RATE
     );
 
     refresh();

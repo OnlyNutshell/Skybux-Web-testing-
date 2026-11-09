@@ -15,8 +15,9 @@
         </style>
     @endif
 </head>
-<body class="pb-6 bg-sky-500/20 backdrop-blur-[140px]">
-
+<body class="bg-sky-500/20">
+    
+    @yield('modal')
     <!-- Header -->
     
     @yield('progression')

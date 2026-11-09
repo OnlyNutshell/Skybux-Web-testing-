@@ -20,6 +20,8 @@ return new class extends Migration
         $table->unsignedBigInteger('total_price');
 
         $table->string('payment_method')->nullable();
+        $table->string('whatsapp', 20)->nullable();
+        $table->string('tiktok_username')->nullable();
 
         $table->string('payment_status')->default('pending');
         $table->string('order_status')->default('pending');

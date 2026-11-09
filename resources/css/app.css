@@ -25,3 +25,33 @@
     -webkit-text-stroke: 20px #0752b5;
     paint-order: stroke fill;
 }
+
+body.modal-open {
+    overflow: hidden;
+}
+
+@keyframes checkout-shake {
+    0%, 100% { transform: translateX(0); }
+    20%, 60% { transform: translateX(-5px); }
+    40%, 80% { transform: translateX(5px); }
+}
+
+.shake {
+    animation: checkout-shake 0.35s ease-in-out;
+}
+
+/* #checkoutModal {
+    position: fixed !important;
+    inset: 0 !important;
+    width: 100vw !important;
+    height: 100dvh !important;
+    margin: 0 !important;
+    transform: none !important;
+    overflow: hidden !important;
+}
+
+body {
+    transform: none !important;
+    filter: none !important;
+    perspective: none !important;
+} */

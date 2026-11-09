@@ -5,8 +5,7 @@
 @endsection
 
 @section('content')
-
-<section class="mx-4 sm:mx-8 xl:mx-32 px-6">
+<section class="mx-4 mb-4 sm:mx-8 xl:mx-32 px-6">
     <div class="w-full ">
 
         <!-- Payment Information -->
@@ -14,6 +13,10 @@
             <div class="relative w-full overflow-hidden rounded-2xl border-2 shadow-xl border-black bg-sky-900 p-6">
                 <div class="flex flex-col items-center text-white">
                     <span class=" text-lg font-semibold mb-5">Mohon Screenshoot Layar ini</span>
+                    <button type="button" id="download-qr" class="inline-flex items-center gap-2 mb-5 rounded-lg border border-sky-200 bg-white px-4 py-2 text-sm font-semibold text-sky-700 shadow-sm transition hover:border-sky-300 hover:bg-sky-50 active:scale-95">
+                        <i data-lucide="download" class="size-4"></i>
+                            Unduh QR
+                    </button>
                     <div
                         id="payment-data"
                         data-amount="{{ $order->total_price }}"
@@ -27,23 +30,20 @@
                     </div>
 
                     <p id="qr-error" class="hidden mb-4 text-sm text-red-200"></p>
-                    <button type="button" id="download-qr" class="inline-flex items-center gap-2 mb-5 rounded-lg border border-sky-200 bg-white px-4 py-2 text-sm font-semibold text-sky-700 shadow-sm transition hover:border-sky-300 hover:bg-sky-50 active:scale-95">
-                        <i data-lucide="download" class="size-4"></i>
-                            Unduh QR
-                    </button>
-                    <span class="block">Expires in :</span>
+                    <!-- <span class="block">Expires in :</span>
                     <span
                         id="payment-timer"
                         data-expires-at="{{ $order->expires_at }}"
                         class="block text-yellow-300 text-2xl tracking-wider font-bold mb-5"
-                    >--:--</span>
+                    >--:--</span> -->
                     
 
                     <form
+                        id="proofForm"
                         action="{{ route('checkout.proof') }}"
                         method="POST"
                         enctype="multipart/form-data"
-                        class="mt-7 rounded-2xl border text-white bg-white w-full mb-6 p-5 sm:p-6"
+                        class=" rounded-2xl border text-white bg-white w-full mb-6 p-5 sm:p-6"
                     >
                         @csrf
 
@@ -121,10 +121,11 @@
 
                         <button
                             type="submit"
-                            class="mt-6 flex w-full items-center justify-center gap-2 rounded-xl bg-slate-900 px-5 py-3.5 text-sm font-semibold text-white transition hover:bg-slate-800 active:scale-[0.99]"
+                            id="uploadProofButton"
+                            class="mt-6 flex w-full items-center justify-center gap-2 rounded-xl bg-slate-900 px-5 py-3.5 text-sm font-semibold text-white transition hover:bg-slate-800 active:scale-[0.99] disabled:cursor-not-allowed disabled:opacity-60"
                         >
                             <i data-lucide="send" class="size-4"></i>
-                            Kirim Bukti Pembayaran
+                            <span>Kirim Bukti Pembayaran</span>
                         </button>
 
                         <p class="mt-3 text-center text-[11px] text-slate-400">
@@ -218,38 +219,6 @@
 
     </div>
 </section>
-
-<!-- <div class="mx-auto max-w-md rounded-2xl bg-[#171421] p-6 text-white">
-    <h1 class="text-2xl font-bold">Pembayaran QRIS</h1>
-
-    <label for="amount" class="mt-5 block text-sm text-gray-300">
-        Nominal pembayaran
-    </label>
-
-    <input id="amount"
-        class="mt-2 w-full rounded-xl bg-white/10 p-3">
-        <option value="10000">Rp10.000</option>
-        <option value="25000" selected>Rp25.000</option>
-        <option value="50000">Rp50.000</option>
-        <option value="100000">Rp100.000</option>
-    </input>
-
-    <button id="generate"
-        class="mt-4 w-full rounded-xl bg-violet-600 p-3 font-semibold">
-        Buat QRIS
-    </button>
-
-    <div id="result" class="mt-5 hidden text-center">
-        <canvas id="qr" class="mx-auto rounded-lg bg-white p-3"></canvas>
-        <p id="total" class="mt-3 text-xl font-bold"></p>
-        <p class="mt-2 text-xs text-gray-400">
-            QR hasil konversi. Validitas pembayaran harus diuji
-            dengan penerbit QRIS.
-        </p>
-    </div>
-
-    <p id="error" class="mt-3 text-sm text-red-400"></p>
-</div> -->
 @endsection
 
 @push('scripts')

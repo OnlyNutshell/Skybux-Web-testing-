@@ -1,10 +1,21 @@
 {
-  "_supabase-test-DOtHnTpX.js": {
-    "file": "assets/supabase-test-DOtHnTpX.js",
+  "_iconsAndAliases-BCGg4zvn.js": {
+    "file": "assets/iconsAndAliases-BCGg4zvn.js",
+    "name": "iconsAndAliases",
+    "imports": [
+      "_lucide-CWFQxLDY.js"
+    ]
+  },
+  "_lucide-CWFQxLDY.js": {
+    "file": "assets/lucide-CWFQxLDY.js",
+    "name": "lucide"
+  },
+  "_supabase-test-BPvGp7Ti.js": {
+    "file": "assets/supabase-test-BPvGp7Ti.js",
     "name": "supabase-test"
   },
   "resources/css/app.css": {
-    "file": "assets/app-p_mTkIV1.css",
+    "file": "assets/app-THYoCfs8.css",
     "src": "resources/css/app.css",
     "isEntry": true,
     "name": "app",
@@ -13,39 +24,50 @@
     ]
   },
   "resources/js/app.js": {
-    "file": "assets/app-wWJ8GuaN.js",
+    "file": "assets/app-CrIucsmh.js",
     "name": "app",
     "src": "resources/js/app.js",
-    "isEntry": true
+    "isEntry": true,
+    "imports": [
+      "_lucide-CWFQxLDY.js"
+    ]
   },
   "resources/js/order-realtime.js": {
-    "file": "assets/order-realtime-CZPZYiMR.js",
+    "file": "assets/order-realtime-Dkq3rzGG.js",
     "name": "order-realtime",
     "src": "resources/js/order-realtime.js",
     "isEntry": true,
     "imports": [
-      "_supabase-test-DOtHnTpX.js"
+      "_supabase-test-BPvGp7Ti.js"
     ]
   },
   "resources/js/page/checkout.js": {
-    "file": "assets/checkout-l0sNRNKZ.js",
+    "file": "assets/checkout-CDucSY7L.js",
     "name": "checkout",
     "src": "resources/js/page/checkout.js",
-    "isEntry": true
+    "isEntry": true,
+    "imports": [
+      "_lucide-CWFQxLDY.js",
+      "_iconsAndAliases-BCGg4zvn.js"
+    ]
   },
   "resources/js/page/home.js": {
-    "file": "assets/home-DVdd3VgN.js",
+    "file": "assets/home-E99BvKAh.js",
     "name": "home",
     "src": "resources/js/page/home.js",
     "isEntry": true,
     "imports": [
-      "_supabase-test-DOtHnTpX.js"
+      "_supabase-test-BPvGp7Ti.js"
     ]
   },
   "resources/js/page/payment.js": {
-    "file": "assets/payment-Ddtgg7UA.js",
+    "file": "assets/payment-CsaFDAei.js",
     "name": "payment",
     "src": "resources/js/page/payment.js",
-    "isEntry": true
+    "isEntry": true,
+    "imports": [
+      "_lucide-CWFQxLDY.js",
+      "_iconsAndAliases-BCGg4zvn.js"
+    ]
   }
 }

@@ -39,7 +39,7 @@ class CheckoutController extends Controller
             ], 422);
         }
 
-        $price = $robux * 170;
+        $price = $robux * 165;
 
         session()->put('checkout_order', [
             'username' => $validated['username'],
@@ -60,6 +60,16 @@ class CheckoutController extends Controller
                 'required',
                 'in:qris',
             ],
+
+            'whatsapp' => [
+                'required', 
+                'string'
+                ],
+
+    '       tiktok' => [
+                'nullable', 
+                'string'
+                ],
         ]);
 
         $order = session('checkout_order');
@@ -77,14 +87,16 @@ class CheckoutController extends Controller
             ->first();
 
         if (!$existingOrder) {
-            DB::table('orders')->insert([
+            DB::table('orders')->insertOrIgnore([
                 'order_id' => $orderId,
                 'roblox_username' => $order['username'],
                 'robux_amount' => $order['robux'],
-                'total_price' => $order['price'] + 1,
+                'total_price' => $order['price'],
                 'payment_method' => $validated['payment_method'],
                 'payment_status' => 'pending',
                 'order_status' => 'pending',
+                'whatsapp' => $validated['whatsapp'],
+                'tiktok_username' => $validated['tiktok'] ?? null,
                 'expires_at' => now()->addMinutes(14),
                 'created_at' => now(),
                 'updated_at' => now(),

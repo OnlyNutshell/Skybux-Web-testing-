@@ -14,7 +14,7 @@
 
     {{-- DESKTOP MODE --}}
     <div class="hidden md:block mx-auto w-2/3 px-2 py-4">
-        <div class="relative">
+        <div class="relative ">
 
             {{-- PROGRESS LINE --}}
             <div class="absolute left-5 right-5 top-5 z-0 flex gap-2">

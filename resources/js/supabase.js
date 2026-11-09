@@ -1,4 +1,3 @@
-
 import { supabase } from './supabase-test';
 
 const stockElement = document.getElementById('stock');
@@ -18,7 +17,7 @@ if (stockElement) {
         }
 
         stockElement.textContent =
-            data.total.toLocaleString('id-ID');
+            "Stock Tersedia";
     }
 
     // Ambil stok pertama kali
@@ -31,14 +30,15 @@ if (stockElement) {
             'postgres_changes',
             {
                 event: '*',
-                schema: 'laravel',
+                schema: 'laravel_test',
+                // schema: 'laravel',
                 table: 'stocks',
                 filter: 'product=eq.robux',
             },
             (payload) => {
                 if (payload.new?.total !== undefined) {
                     stockElement.textContent =
-                        payload.new.total.toLocaleString('id-ID');
+                        "Stock Tersedia";
                 }
             }
         )

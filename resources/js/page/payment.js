@@ -3,6 +3,7 @@ import QRCode from 'qrcode';
 import { convertQRIS } from '../qris-core/index.ts';
 import '../component/preview-img.js'
 import '../component/timer.js'
+import '../component/loading-payment-proff.js'
 
 // Payload QRIS statis milik Skybux
 const staticQris = '00020101021126610016ID.CO.SHOPEE.WWW01189360091800236871100208236871100303UMI51440014ID.CO.QRIS.WWW0215ID10265956808140303UMI5204594753033605802ID5909SKY ROBUX6005DEPOK61051645562070703A01630462DB';
@@ -14,7 +15,6 @@ const downloadButton = document.getElementById('download-qr');
 
 async function generatePaymentQR() {
     if (!paymentData || !canvas) return;
-
     
     try {
         // Ambil nominal dari data order Supabase yang dikirim Laravel
