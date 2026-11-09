@@ -363,7 +363,7 @@
                     </span>
 
                     <span class="text-xl font-bold text-slate-900">
-                        Rp{{ number_format($order['totalPrice'], 0, ',', '.') }}
+                        Rp{{ number_format($order['price'], 0, ',', '.') }}
                     </span>
                 </div>
 
