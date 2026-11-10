@@ -30,13 +30,14 @@
                 <tr>
                     <th class="px-6 py-4">Order ID</th>
                     <th class="px-6 py-4">Username</th>
+                    <th class="px-6 py-4">Display Name</th>
                     <th class="px-6 py-4">Robux</th>
                     <th class="px-6 py-4">Total</th>
                     <th class="px-6 py-4">Metode</th>
                     <th class="px-6 py-4">Bukti</th>
-                    <th class="px-6 py-4">Payment</th>
+                    <th class="px-6 py-4">Whatapp</th>
+                    <th class="px-6 py-4">Tiktok</th>
                     <th class="px-6 py-4">Order</th>
-                    <th class="px-6 py-4">Created At</th>
                 </tr>
             </thead>
 
@@ -54,8 +55,26 @@
 
                         {{-- Username --}}
                         <td class="px-6 py-5">
-                            <span class="font-semibold text-slate-700">
-                                {{ $order->roblox_username }}
+                            <div class="flex items-center gap-3">
+
+                                <img
+                                    src="{{ $order->avatar_url ?? 'https://tr.rbxcdn.com/180DAY-AvatarHeadshot-Placeholder.png' }}"
+                                    alt="Roblox Avatar"
+                                    class="size-10 rounded-xl border border-slate-200 bg-slate-100 object-cover"
+                                    onerror="this.src='https://placehold.co/150x150?text=User'"
+                                >
+
+                                <span class="font-bold text-slate-600">
+                                    {{ $order->roblox_username }}
+                                </span>
+
+                            </div>
+                        </td>
+
+                        {{-- Display Name --}}
+                        <td class="px-6 py-5 text-center">
+                            <span class="font-bold text-slate-600">
+                                {{ $order->display_name }}
                             </span>
                         </td>
 
@@ -93,25 +112,23 @@
 
                         {{-- Payment Status --}}
                         <td class="px-6 py-5">
-                            @php
-                                $paymentStyle = match (strtolower($order->payment_status ?? '')) {
-                                    'paid', 'success' => 'bg-emerald-50 text-emerald-700 ring-emerald-600/20',
-                                    'pending' => 'bg-amber-50 text-amber-700 ring-amber-600/20',
-                                    'failed', 'cancelled', 'canceled' => 'bg-red-50 text-red-700 ring-red-600/20',
-                                    default => 'bg-slate-100 text-slate-600 ring-slate-500/20',
-                                };
-                            @endphp
 
-                            <span class="inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-[11px] font-bold ring-1 ring-inset {{ $paymentStyle }}">
-                                <span class="size-1.5 rounded-full bg-current"></span>
-                                {{ strtoupper($order->payment_status ?? 'UNKNOWN') }}
+                            <span class="font-bold text-blue underline">
+                                <a href="https://wa.me/6285182566640?">{{ $order->whatsapp }}</a>
                             </span>
                         </td>
 
                         {{-- Order Status --}}
                         <td class="px-6 py-5">
-                            <span class="rounded-full bg-sky-50 px-3 py-1.5 text-[11px] font-bold text-sky-700">
-                                {{ strtoupper($order->order_status ?? 'UNKNOWN') }}
+                            @if ($order->tiktok_username)
+                                <span class="font-bold text-slate-700">
+                                    {{ $order->tiktok_username }}
+                                </span>
+                                @else
+                                    <span class="text-xs text-slate-400">
+                                        Kaga dikirim mas Bems
+                                    </span>
+                                @endif
                             </span>
                         </td>
 
