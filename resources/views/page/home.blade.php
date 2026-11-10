@@ -93,7 +93,7 @@
                         autocomplete="off"
                         placeholder="Sesuaikan Budget"
                         class="converter-value min-w-0 w-full border-0 bg-transparent
-                            text-base text-slate-800 outline-none
+                            text-base font-semibold placeholder:font-normal text-slate-800 outline-none
                             placeholder:text-slate-500
                             focus:ring-0"
                     >
@@ -113,7 +113,7 @@
                         inputmode="numeric"
                         placeholder="Sesuaikan Robux"
                         class="converter-value min-w-0 w-full border-0 bg-transparent
-                            text-base text-slate-800 outline-none
+                            text-base font-semibold placeholder:font-normal text-slate-800 outline-none
                             placeholder:text-slate-500
                             focus:ring-0"
                     >

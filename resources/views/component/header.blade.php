@@ -23,10 +23,10 @@
                     <path d="M3 7a1 1 0 1 0 0 2h24a1 1 0 1 0 0-2zm0 7a1 1 0 1 0 0 2h24a1 1 0 1 0 0-2zm0 7a1 1 0 1 0 0 2h24a1 1 0 1 0 0-2z"/>
                 </svg>
             </button>
+        </div>
     </div>
-    </div>
-
-    <div class="mobile-menu absolute top-17.5 left-0 w-full border-t-2 border-black bg-sky-900 p-6 hidden md:hidden">
+            
+            <div class="mobile-menu absolute top-17.5 left-0 w-full border-t-2 border-black bg-sky-900 p-6 hidden md:hidden">
         <ul class="flex flex-col space-y-4 text-white text-lg">
             <li><a href="#" class="text-sm">Beli Robux</a></li>
             <li><a href="#" class="text-sm">Cara Order</a></li>
@@ -34,6 +34,7 @@
             <li><a href="#" class="text-sm">Hubungi Kami</a></li>
         </ul>
     </div>
+
 </nav>
 
 <script>
