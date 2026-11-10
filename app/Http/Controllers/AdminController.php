@@ -14,7 +14,7 @@ class AdminController extends Controller
         // Ambil semua order
         $orders = DB::table('orders')
             ->orderByDesc('created_at')
-            ->paginate(15);
+            ->paginate(8);
 
         // Total Robux yang sudah dikirim
         $totalRobuxSent = DB::table('orders')
