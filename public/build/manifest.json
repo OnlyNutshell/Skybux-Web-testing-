@@ -1,13 +1,13 @@
 {
-  "_iconsAndAliases-BCGg4zvn.js": {
-    "file": "assets/iconsAndAliases-BCGg4zvn.js",
+  "_iconsAndAliases-AVICERAx.js": {
+    "file": "assets/iconsAndAliases-AVICERAx.js",
     "name": "iconsAndAliases",
     "imports": [
-      "_lucide-CWFQxLDY.js"
+      "_lucide-D8eNeZd9.js"
     ]
   },
-  "_lucide-CWFQxLDY.js": {
-    "file": "assets/lucide-CWFQxLDY.js",
+  "_lucide-D8eNeZd9.js": {
+    "file": "assets/lucide-D8eNeZd9.js",
     "name": "lucide"
   },
   "_supabase-test-BPvGp7Ti.js": {
@@ -15,7 +15,7 @@
     "name": "supabase-test"
   },
   "resources/css/app.css": {
-    "file": "assets/app-CpgN4w7t.css",
+    "file": "assets/app-BBQhl1am.css",
     "src": "resources/css/app.css",
     "isEntry": true,
     "name": "app",
@@ -24,16 +24,16 @@
     ]
   },
   "resources/js/app.js": {
-    "file": "assets/app-CrIucsmh.js",
+    "file": "assets/app-ou0tmkOR.js",
     "name": "app",
     "src": "resources/js/app.js",
     "isEntry": true,
     "imports": [
-      "_lucide-CWFQxLDY.js"
+      "_lucide-D8eNeZd9.js"
     ]
   },
   "resources/js/order-realtime.js": {
-    "file": "assets/order-realtime-Dkq3rzGG.js",
+    "file": "assets/order-realtime-BokTwXk7.js",
     "name": "order-realtime",
     "src": "resources/js/order-realtime.js",
     "isEntry": true,
@@ -42,13 +42,13 @@
     ]
   },
   "resources/js/page/checkout.js": {
-    "file": "assets/checkout-CDucSY7L.js",
+    "file": "assets/checkout-CVVs0irI.js",
     "name": "checkout",
     "src": "resources/js/page/checkout.js",
     "isEntry": true,
     "imports": [
-      "_lucide-CWFQxLDY.js",
-      "_iconsAndAliases-BCGg4zvn.js"
+      "_lucide-D8eNeZd9.js",
+      "_iconsAndAliases-AVICERAx.js"
     ]
   },
   "resources/js/page/home.js": {
@@ -61,13 +61,13 @@
     ]
   },
   "resources/js/page/payment.js": {
-    "file": "assets/payment-CsaFDAei.js",
+    "file": "assets/payment-GnNstF2K.js",
     "name": "payment",
     "src": "resources/js/page/payment.js",
     "isEntry": true,
     "imports": [
-      "_lucide-CWFQxLDY.js",
-      "_iconsAndAliases-BCGg4zvn.js"
+      "_lucide-D8eNeZd9.js",
+      "_iconsAndAliases-AVICERAx.js"
     ]
   }
 }

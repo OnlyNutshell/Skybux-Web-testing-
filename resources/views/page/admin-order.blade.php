@@ -39,6 +39,7 @@
 
             <thead class="bg-slate-50/80 text-[11px] font-bold uppercase tracking-wider text-slate-400">
                 <tr>
+                    <th class="min-w-[150px] px-6 py-4">Status Order</th>
                     <th class="min-w-[150px] px-6 py-4">Order ID</th>
                     <th class="min-w-[90px] px-6 py-4">Avatar</th>
                     <th class="min-w-[190px] px-6 py-4">Display / Usn</th>
@@ -56,6 +57,20 @@
 
                 @forelse ($orders as $order)
                     <tr class="transition-colors duration-200 hover:bg-sky-50/40">
+
+                        <td class="px-6 py-5">
+                            @if (strtolower($order->order_status) === 'done')
+                                <span class="inline-flex items-center gap-1.5 rounded-full bg-emerald-50 px-3 py-1.5 text-xs font-bold text-emerald-700">
+                                    <span class="size-1.5 rounded-full bg-emerald-500"></span>
+                                    DONE
+                                </span>
+                            @else
+                                <span class="inline-flex items-center gap-1.5 rounded-full bg-amber-50 px-3 py-1.5 text-xs font-bold text-amber-700">
+                                    <span class="size-1.5 rounded-full bg-amber-500"></span>
+                                    {{ strtoupper($order->order_status ?? 'PENDING') }}
+                                </span>
+                            @endif
+                        </td>
 
                         {{-- Order ID --}}
                         <td class="px-6 py-5">
