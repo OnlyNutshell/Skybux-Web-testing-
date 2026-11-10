@@ -3,142 +3,228 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
 
 class AdminController extends Controller
 {
+    public function orders()
+    {
+        // Ambil semua order
+        $orders = DB::table('orders')
+            ->orderByDesc('created_at')
+            ->paginate(15);
 
-public function orders()
-{
-    $orders = DB::table('orders')
-        ->orderByDesc('created_at')
-        ->get();
+        // Total Robux yang sudah dikirim
+        $totalRobuxSent = DB::table('orders')
+            ->where('order_status', 'done')
+            ->sum('robux_amount');
 
-    $totalRobuxSent = DB::table('orders')
-    ->where('order_status', 'done')
-    ->sum('robux_amount');
+        // Ambil username Roblox unik
+        $usernames = $orders
+            ->pluck('roblox_username')
+            ->filter()
+            ->unique()
+            ->values();
 
-        // Ambil username unik dari semua order
-    $usernames = $orders
-        ->pluck('roblox_username')
-        ->filter()
-        ->unique()
-        ->values()
-        ->all();
+        $avatarMap = [];
+        $displayNameMap = [];
 
-    $avatarMap = [];
-    $displayNameMap = [];
+        /*
+         * CACHE DATA ROBLOX
+         * Cache selama 24 jam per username.
+         */
+        $missingUsernames = [];
 
-    if (!empty($usernames)) {
-        // Cari Roblox User ID berdasarkan username
-        $usersResponse = Http::post(
-            'https://users.roblox.com/v1/usernames/users',
-            [
-                'usernames' => $usernames,
-                'excludeBannedUsers' => false,
-            ]
-        );
+        foreach ($usernames as $username) {
+            $cacheKey = 'roblox-user:' . strtolower($username);
 
-        if ($usersResponse->successful()) {
-            $users = $usersResponse->json('data', []);
+            $cachedUser = Cache::get($cacheKey);
 
-            foreach ($users as $user) {
-                $displayNameMap[$user['name']] = $user['displayName'] ?? $user['name'];
+            if ($cachedUser !== null) {
+                $avatarMap[$username] = $cachedUser['avatar_url'];
+                $displayNameMap[$username] = $cachedUser['display_name'];
+            } else {
+                $missingUsernames[] = $username;
             }
+        }
 
-            $userIds = collect($users)
-                ->pluck('id')
-                ->filter()
-                ->implode(',');
+        // Hanya request username yang belum ada di cache
+        if (!empty($missingUsernames)) {
+            $usersResponse = Http::timeout(8)->post(
+                'https://users.roblox.com/v1/usernames/users',
+                [
+                    'usernames' => $missingUsernames,
+                    'excludeBannedUsers' => false,
+                ]
+            );
 
-            if ($userIds) {
-                // Ambil avatar headshot sekaligus
-                $avatarResponse = Http::get(
-                    'https://thumbnails.roblox.com/v1/users/avatar-headshot',
-                    [
-                        'userIds' => $userIds,
-                        'size' => '150x150',
-                        'format' => 'Png',
-                        'isCircular' => 'false',
-                    ]
-                );
+            if ($usersResponse->successful()) {
+                $users = $usersResponse->json('data', []);
 
-                if ($avatarResponse->successful()) {
-                    $thumbnailData = $avatarResponse->json('data', []);
+                $userIds = collect($users)
+                    ->pluck('id')
+                    ->filter()
+                    ->values();
 
-                    foreach ($users as $user) {
-                        $thumbnail = collect($thumbnailData)->firstWhere(
-                            'targetId',
-                            $user['id']
-                        );
+                $thumbnailMap = [];
 
-                        $avatarMap[$user['name']] = $thumbnail['imageUrl'] ?? null;
+                if ($userIds->isNotEmpty()) {
+                    $avatarResponse = Http::timeout(8)->get(
+                        'https://thumbnails.roblox.com/v1/users/avatar-headshot',
+                        [
+                            'userIds' => $userIds->implode(','),
+                            'size' => '150x150',
+                            'format' => 'Png',
+                            'isCircular' => 'false',
+                        ]
+                    );
+
+                    if ($avatarResponse->successful()) {
+                        foreach ($avatarResponse->json('data', []) as $thumbnail) {
+                            $thumbnailMap[$thumbnail['targetId']] =
+                                $thumbnail['imageUrl'] ?? null;
+                        }
                     }
+                }
+
+                foreach ($users as $user) {
+                    $username = $user['name'];
+
+                    $userData = [
+                        'avatar_url' => $thumbnailMap[$user['id']] ?? null,
+                        'display_name' => $user['displayName'] ?? $username,
+                    ];
+
+                    Cache::put(
+                        'roblox-user:' . strtolower($username),
+                        $userData,
+                        now()->addHours(24)
+                    );
+
+                    $avatarMap[$username] = $userData['avatar_url'];
+                    $displayNameMap[$username] = $userData['display_name'];
                 }
             }
         }
-    }
 
-    // Masukkan URL avatar ke setiap order
-    foreach ($orders as $order) {
-        $order->avatar_url = $avatarMap[$order->roblox_username] ?? null;
-        $order->display_name = $displayNameMap[$order->roblox_username] ?? $order->roblox_username;
-    }
+        // Pasang data Roblox ke setiap order
+        foreach ($orders as $order) {
+            $username = $order->roblox_username;
 
-    $supabaseUrl = config('services.supabase.url');
-    $secretKey = config('services.supabase.secret_key');
+            $order->avatar_url = $avatarMap[$username] ?? null;
 
-    foreach ($orders as $order) {
-        $order->proof_url = null;
-
-        if ($order->payment_proof_path) {
-            $response = Http::withHeaders([
-                'apikey' => $secretKey,
-                'Authorization' => 'Bearer ' . $secretKey,
-            ])->post(
-                rtrim($supabaseUrl, '/') . '/storage/v1/object/sign/payment-proofs/' . 
-                implode('/', array_map('rawurlencode', explode('/', $order->payment_proof_path))),
-                ['expiresIn' => 3600]
-            );
-
-
-            if ($response->successful()) {
-                $order->proof_url = rtrim($supabaseUrl, '/') .
-                    '/storage/v1' . $response->json('signedURL');
-            }
+            $order->display_name = $displayNameMap[$username]
+                ?? $username;
         }
+
+        /*
+         * CACHE SIGNED URL SUPABASE
+         * URL berlaku 60 menit, cache hanya 50 menit.
+         */
+        $supabaseUrl = config('services.supabase.url');
+        $secretKey = config('services.supabase.secret_key');
+
+        foreach ($orders as $order) {
+            $order->proof_url = null;
+
+            if (!$order->payment_proof_path) {
+                continue;
+            }
+
+            $path = $order->payment_proof_path;
+
+            $cacheKey = 'payment-proof:' . sha1($path);
+
+            $order->proof_url = Cache::remember(
+                $cacheKey,
+                now()->addMinutes(50),
+                function () use ($path, $supabaseUrl, $secretKey) {
+                    if (!$supabaseUrl || !$secretKey) {
+                        return null;
+                    }
+
+                    $response = Http::timeout(8)
+                        ->withHeaders([
+                            'apikey' => $secretKey,
+                            'Authorization' => 'Bearer ' . $secretKey,
+                        ])
+                        ->post(
+                            rtrim($supabaseUrl, '/') .
+                            '/storage/v1/object/sign/payment-proofs/' .
+                            implode(
+                                '/',
+                                array_map(
+                                    'rawurlencode',
+                                    explode('/', $path)
+                                )
+                            ),
+                            [
+                                'expiresIn' => 3600,
+                            ]
+                        );
+
+                    if (!$response->successful()) {
+                        return null;
+                    }
+
+                    $signedUrl = $response->json('signedURL');
+
+                    if (!$signedUrl) {
+                        return null;
+                    }
+
+                    return rtrim($supabaseUrl, '/') .
+                        '/storage/v1' . $signedUrl;
+                }
+            );
+        }
+
+        return view(
+            'page.admin-order',
+            compact('orders', 'totalRobuxSent')
+        );
     }
 
-    return view('page.admin-order', compact('orders', 'totalRobuxSent'));
-}
+    public function approve($order)
+    {
+        $updated = DB::table('orders')
+            ->where('order_id', $order)
+            ->update([
+                'order_status' => 'done',
+                'updated_at' => now(),
+            ]);
 
-public function approve($order)
-{
-    $updated = DB::table('orders')
-        ->where('order_id', $order)
-        ->update([
-            'order_status' => 'done',
-            'updated_at' => now(),
-        ]);
+        if (!$updated) {
+            return back()->with(
+                'error',
+                'Order tidak ditemukan atau sudah diproses.'
+            );
+        }
 
-    if (!$updated) {
-        return back()->with('error', 'Order tidak ditemukan atau sudah diproses.');
+        return back()->with(
+            'success',
+            'Pembayaran berhasil disetujui!'
+        );
     }
 
-    return back()->with('success', 'Pembayaran berhasil disetujui!');
-}
+    public function destroy($order)
+    {
+        $deleted = DB::table('orders')
+            ->where('order_id', $order)
+            ->delete();
 
-public function destroy($order)
-{
-    $deleted = DB::table('orders')
-        ->where('order_id', $order)
-        ->delete();
+        if (!$deleted) {
+            return back()->with(
+                'error',
+                'Order tidak ditemukan.'
+            );
+        }
 
-    if (!$deleted) {
-        return back()->with('error', 'Order tidak ditemukan.');
+        return back()->with(
+            'success',
+            'Order berhasil dihapus!'
+        );
     }
-
-    return back()->with('success', 'Order berhasil dihapus!');
-}
 }

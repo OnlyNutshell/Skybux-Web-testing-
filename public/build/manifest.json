@@ -15,7 +15,7 @@
     "name": "supabase-test"
   },
   "resources/css/app.css": {
-    "file": "assets/app-BbYT_jNt.css",
+    "file": "assets/app-CzYy8ubD.css",
     "src": "resources/css/app.css",
     "isEntry": true,
     "name": "app",
@@ -33,7 +33,7 @@
     ]
   },
   "resources/js/order-realtime.js": {
-    "file": "assets/order-realtime-BokTwXk7.js",
+    "file": "assets/order-realtime-0bQZbSQR.js",
     "name": "order-realtime",
     "src": "resources/js/order-realtime.js",
     "isEntry": true,

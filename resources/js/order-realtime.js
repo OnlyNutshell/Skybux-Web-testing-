@@ -19,7 +19,7 @@ if (adminOrders && status && indicator && statusText) {
         };
 
         status.className =
-            `inline-flex items-center gap-2 rounded-lg px-3 py-1.5 text-xs font-semibold ${styles[type]}`;
+            `inline-flex items-center w-fit gap-2 rounded-lg px-3 py-1.5 text-xs font-semibold ${styles[type]} self-end md:self-auto`;
 
         indicator.className = 'size-2 rounded-full bg-current';
 

@@ -67,12 +67,12 @@
     <div class="grid grid-cols-1 lg:grid-cols-3 lg:gap-8">
         <div class="relative flex lg:col-span-2 min-w-0 mb-5 lg:mb-0 flex-col items-center">
             <div class="relative overflow-hidden rounded-2xl w-full bg-sky-900 p-6">
-            <div class="flex justify-between items-baseline-last mb-5">
-                <h2 class="text-l text-white font-bold sm:text-xl">Custom Robux atau Budget sesuai keinginan</h2>
-                <div class="flex justify-between items-center bg-green-500/50 text-green-400 gap-2 px-4 py-1.5 rounded-2xl">
+            <div class="flex md:justify-between md:items-baseline-last mb-5 flex-col md:flex-row">
+                <h2 class="text-xl text-white font-bold md:text-l">Custom Robux atau Budget sesuai keinginan</h2>
+                <div class="flex justify-between w-fit items-center md:mb-0 mt-2 bg-green-500/50 text-green-400 gap-2 px-4 py-1.5 rounded-2xl">
                     <i data-lucide="check" class="w-4 h-4"></i>
 
-                    <span id="stock" class="tabular-nums">
+                    <span id="stock" class="tabular-nums text-sm md:text-l">
                         <span class="inline-block animate-pulse">memuat...</span>
                     </span>
                 </div>

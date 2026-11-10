@@ -7,22 +7,27 @@
 <div class="overflow-hidden rounded-2xl border border-slate-200/80 bg-white shadow-[0_8px_30px_rgba(15,23,42,0.04)]">
 
     {{-- Table Header --}}
-    <div class="flex md:flex-row flex-col items-center justify-between border-b border-slate-100 px-6 py-5">
+    <div class="flex md:flex-row flex-col items-start md:items-center justify-between border-b border-slate-100 px-6 py-5">
         <div>
             <h2 class="text-lg font-bold tracking-tight text-slate-800">
                 Recent Transactions
             </h2>
+
             <p class="mt-1 text-xs text-slate-400">
                 Manage and monitor customer orders
             </p>
+
             <div class="mt-1 text-sm font-bold text-slate-400">
-                Total Robux dikirim : <p class="font-bold"> {{ number_format($totalRobuxSent) }}</p>
+                Total Robux dikirim :
+                <span class="font-bold">
+                    {{ number_format($totalRobuxSent) }}
+                </span>
             </div>
         </div>
 
         <div
             id="liveOrderStatus"
-            class="inline-flex items-center gap-2 rounded-lg bg-amber-50 px-3 py-1.5 text-xs font-semibold text-amber-700"
+            class="inline-flex items-center w-fit gap-2 rounded-lg bg-amber-50 px-3 py-1.5 text-xs font-semibold text-amber-700 self-end md:self-auto"
         >
             <span
                 id="liveOrderIndicator"
