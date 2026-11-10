@@ -12,13 +12,13 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
-<body class="min-h-screen bg-slate-50">
+<body class="min-h-screen bg-slate-50 ">
 
     {{-- Sidebar --}}
     @include('component.admin-sidebar')
 
     {{-- Main Content --}}
-    <main class="ml-64 min-h-screen px-8 py-8">
+    <main class="min-h-screen px-4 pt-24 pb-8 md:ml-64 md:px-8 md:py-8">
 
         @yield('content')
 

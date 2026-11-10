@@ -1,9 +1,9 @@
 
 <div
     id="checkoutModal"
-    class="fixed hidden inset-0 z-[99999999] items-center justify-center overflow-clip bg-slate-950/60 backdrop-blur-sm"
+    class="fixed hidden inset-0 z-99999999 items-center justify-center overflow-clip bg-slate-950/60 backdrop-blur-sm"
 >
-    <div class="flex ip:w-3/4 ip:max-w-[420px] ip:h-[min(520px,calc(100dvh-32px))] h-[min(600px,calc(100dvh-24px))]
+    <div class="flex ip:w-3/4 ip:max-w-105 ip:h-[min(520px,calc(100dvh-32px))] h-[min(600px,calc(100dvh-24px))]
                 w-full max-w-md flex-col overflow-hidden
                 rounded-2xl bg-white shadow-2xl">
 
@@ -99,7 +99,7 @@
             <!-- Agreements -->
             <div class="mt-5 space-y-3 ip:mt-3 ip:space-y-2">
 
-                <label class="flex cursor-pointer items-start gap-3 rounded-xl border border-sky-200 bg-sky-50 p-4 transition has-[:checked]:border-sky-900 has-[:checked]:bg-sky-100 ip:gap-2 ip:p-2.5">
+                <label class="flex cursor-pointer items-start gap-3 rounded-xl border border-sky-200 bg-sky-50 p-4 transition has-checked:border-sky-900 has-checked:bg-sky-100 ip:gap-2 ip:p-2.5">
                     <input
                         id="ageAgreement"
                         type="checkbox"
@@ -112,7 +112,7 @@
                     </span>
                 </label>
 
-                <label class="flex cursor-pointer items-start gap-3 rounded-xl border border-slate-200 p-4 transition has-[:checked]:border-sky-900 has-[:checked]:bg-sky-50 ip:gap-2 ip:p-2.5">
+                <label class="flex cursor-pointer items-start gap-3 rounded-xl border border-slate-200 p-4 transition has-checked:border-sky-900 has-checked:bg-sky-50 ip:gap-2 ip:p-2.5">
                     <input
                         id="ruleAgreement"
                         type="checkbox"

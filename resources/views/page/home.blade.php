@@ -58,7 +58,7 @@
 
     <div class="sm:mx-8 lg:p-6 px-6 py-4 mx-4 xl:mx-32 rounded-2xl mb-5 bg-sky-900 border-black">
         <h1 class=" text-white font-bold lg:text-2xl text-xl">Top Up Instant Robux Via Username</h1>
-        <h2 class="sm:text-xl text-sm text-slate-300">Harga Rp 165 per Robux. Pilih satu nominal, lalu lengkapi data di kotak pesanan.</h2>
+        <h2 class="sm:text-xl text-sm text-slate-300">Harga Rp 160 per Robux. Pilih satu nominal, lalu lengkapi data di kotak pesanan.</h2>
     </div>
 
     <!-- Store Form Section -->

@@ -2,7 +2,7 @@
 import { updateSelectedItem } from './checkout-sruk.js';
 import { syncSelectedCard } from './selected-robux.js';
 
-const RATE = 165;
+const RATE = 160;
 const ROBUX_STEP = 5;
 const DEBOUNCE_DELAY = 1000;
 const ANIMATION_DELAY = 200;

@@ -278,7 +278,7 @@
                             Pasti Masuk dan Terkirim 100%
                         </p>
                         <p class="mt-1 text-xs text-slate-500">
-                            Pesanan aman dijamin oleh Skybux
+                            Pesanan aman dijamin oleh Bang Bemsky!!
                         </p>
                     </div>
 
@@ -294,41 +294,70 @@
             <div class="border-b border-slate-200 p-5">
 
             <h2 class="font-bold text-slate-900">
-                Contact Information
+                Informasi Kontak
             </h2>
 
             <p class="mb-4 text-sm text-slate-500">
-                Your contact details in case we need to reach you regarding your order.
+                Masukkan kontak yang aktif agar kami bisa menghubungi kamu jika ada informasi terkait pesanan.
             </p>
 
             <div class="space-y-4">
 
-                <label class="block">
-                    <span class="mb-1 block text-xs text-slate-500">
-                        WhatsApp Number*
-                    </span>
+                
+            <label class="block">
+                <span class="mb-1 block text-xs text-slate-500">
+                    WhatsApp Number*
+                </span>
 
+                <div class="relative">
                     <input
                         type="tel"
+                        id="whatsapp"
                         name="whatsapp"
                         required
+                        inputmode="numeric"
+                        maxlength="15"
+                        autocomplete="tel"
                         placeholder="08xxxxxxxxxx"
-                        class="w-full rounded-xl border border-slate-300 px-4 py-3 text-sm outline-none transition focus:border-sky-500 focus:ring-2 focus:ring-sky-500/20"
+                        class="w-full rounded-xl border border-slate-300 px-4 py-3 pr-11 text-sm outline-none transition focus:border-sky-500 focus:ring-2 focus:ring-sky-500/20"
                     >
-                </label>
 
-                <label class="block">
-                    <span class="mb-1 block text-xs text-slate-500">
-                        TikTok Username <span class="text-slate-400">(Optional)</span>
+                    <span
+                        id="whatsappIcon"
+                        class="pointer-events-none absolute right-4 top-1/2 hidden -translate-y-1/2"
+                    ></span>
+                </div>
+
+                <p
+                    id="whatsappError"
+                    class="mt-1.5 hidden text-xs font-medium text-red-500"
+                ></p>
+            </label>
+
+
+                
+            <label class="block">
+                <span class="mb-1 block text-xs text-slate-500">
+                    TikTok Username
+                    <span class="text-slate-400">(Optional)</span>
+                </span>
+
+                <div class="flex overflow-hidden rounded-xl border border-slate-300 transition focus-within:border-sky-500 focus-within:ring-2 focus-within:ring-sky-500/20">
+                    <span class="flex items-center bg-slate-100 px-4 text-sm text-slate-500">
+                        @
                     </span>
 
                     <input
                         type="text"
+                        id="tiktok"
                         name="tiktok"
-                        placeholder="@username"
-                        class="w-full rounded-xl border border-slate-300 px-4 py-3 text-sm outline-none transition focus:border-sky-500 focus:ring-2 focus:ring-sky-500/20"
+                        maxlength="30"
+                        placeholder="username"
+                        class="min-w-0 w-full bg-transparent px-3 py-3 text-sm outline-none"
                     >
-                </label>
+                </div>
+            </label>
+
 
             </div>
 
@@ -370,7 +399,8 @@
                 <button
                     id="checkoutButton"
                     type="button"
-                    class="mt-5 w-full rounded-xl bg-sky-900 px-5 py-3 font-semibold text-white shadow-sm transition hover:bg-sky-800 active:scale-[0.98]"
+                    disabled
+                    class="mt-5 w-full rounded-xl bg-sky-900 opacity-50 px-5 py-3 font-semibold text-white shadow-sm transition hover:bg-sky-800 active:scale-[0.98]"
                 >
                     Bayar Sekarang
                 </button>

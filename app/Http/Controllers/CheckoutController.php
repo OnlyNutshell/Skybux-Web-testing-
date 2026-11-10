@@ -39,7 +39,7 @@ class CheckoutController extends Controller
             ], 422);
         }
 
-        $price = $robux * 165;
+        $price = $robux * 160;
 
         session()->put('checkout_order', [
             'username' => $validated['username'],
@@ -62,14 +62,15 @@ class CheckoutController extends Controller
             ],
 
             'whatsapp' => [
-                'required', 
-                'string'
-                ],
+                'required',
+                'string',
+            ],
 
-    '       tiktok' => [
-                'nullable', 
-                'string'
-                ],
+            'tiktok' => [
+                'nullable',
+                'string',
+                'max:30',
+            ],
         ]);
 
         $order = session('checkout_order');
@@ -96,7 +97,9 @@ class CheckoutController extends Controller
                 'payment_status' => 'pending',
                 'order_status' => 'pending',
                 'whatsapp' => $validated['whatsapp'],
-                'tiktok_username' => $validated['tiktok'] ?? null,
+                'tiktok_username' => filled($validated['tiktok'])
+                                    ? '@' . ltrim($validated['tiktok'], '@')
+                                    : null,
                 'expires_at' => now()->addMinutes(14),
                 'created_at' => now(),
                 'updated_at' => now(),
@@ -164,7 +167,7 @@ class CheckoutController extends Controller
         );
 
     if (!$response->successful()) {
-        dd([
+        logger()->error('Supabase upload failed', [
             'status' => $response->status(),
             'response' => $response->body(),
         ]);

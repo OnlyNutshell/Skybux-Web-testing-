@@ -1,28 +1,168 @@
+
 import { createIcons, icons } from 'lucide';
 
 const form = document.getElementById('checkoutForm');
+const modal = document.getElementById('checkoutModal');
 
-    const modal = document.getElementById('checkoutModal');
+const checkoutButton = document.getElementById('checkoutButton');
+const agreeButton = document.getElementById('agreeButton');
 
-    const checkoutButton = document.getElementById('checkoutButton');
-    const agreeButton = document.getElementById('agreeButton');
+const closeModal = document.getElementById('closeModal');
+const cancelModal = document.getElementById('cancelModal');
 
-    const closeModal = document.getElementById('closeModal');
-    const cancelModal = document.getElementById('cancelModal');
+const qrisAccordion = document.getElementById('qrisAccordion');
+const qrisRadio = document.getElementById('qrisRadio');
 
-    const qrisAccordion = document.getElementById('qrisAccordion');
-    const qrisRadio = document.getElementById('qrisRadio');
+const ageAgreement = document.getElementById('ageAgreement');
+const ruleAgreement = document.getElementById('ruleAgreement');
+const agreementError = document.getElementById('agreementError');
 
-    const ageAgreement = document.getElementById('ageAgreement');
-    const ruleAgreement = document.getElementById('ruleAgreement');
+const whatsappInput = document.getElementById('whatsapp');
+const whatsappError = document.getElementById('whatsappError');
 
-    const agreementError = document.getElementById('agreementError');
+const paymentRadios = document.querySelectorAll(
+    'input[name="payment_method"]'
+);
 
-    let approved = false;
+const whatsappIcon = document.getElementById('whatsappIcon');
+const tiktokInput = document.getElementById('tiktok');
+
+let approved = false;
+let whatsappTouched = false;
 
 
-    // Validasi seluruh required form
-    function validateCheckout() {
+// ==========================================
+// VALIDASI WHATSAPP
+// ==========================================
+
+function validateWhatsapp() {
+    const value = whatsappInput.value;
+
+    let error = '';
+
+    if (value.length === 0) {
+        error = 'Nomor WhatsApp wajib diisi.';
+    } else if (!value.startsWith('08')) {
+        error = 'Nomor WhatsApp harus diawali 08.';
+    } else if (value.length < 10) {
+        error = 'Nomor WhatsApp minimal 10 digit.';
+    } else if (value.length > 15) {
+        error = 'Nomor WhatsApp maksimal 15 digit.';
+    }
+
+    const isValid = error === '';
+    const showError = whatsappTouched && !isValid;
+
+    // Ikon WhatsApp
+    if (isValid && whatsappTouched) {
+        whatsappIcon.innerHTML = `
+            <i data-lucide="check-circle-2"
+            class="size-5 text-emerald-500"></i>
+        `;
+        whatsappIcon.classList.remove('hidden');
+    } else if (showError) {
+        whatsappIcon.innerHTML = `
+            <i data-lucide="alert-circle"
+            class="size-5 text-red-500"></i>
+        `;
+        whatsappIcon.classList.remove('hidden');
+    } else {
+        whatsappIcon.innerHTML = '';
+        whatsappIcon.classList.add('hidden');
+    }
+
+    createIcons({ icons });
+
+    whatsappInput.classList.toggle('border-red-500', showError);
+    whatsappInput.classList.toggle('focus:border-red-500', showError);
+    whatsappInput.classList.toggle('focus:ring-red-500/20', showError);
+
+    whatsappInput.classList.toggle('border-slate-300', !showError);
+    whatsappInput.classList.toggle('focus:border-sky-500', !showError);
+    whatsappInput.classList.toggle('focus:ring-sky-500/20', !showError);
+
+    whatsappError.textContent = showError ? error : '';
+    whatsappError.classList.toggle('hidden', !showError);
+
+    updateCheckoutButton();
+
+    return isValid;
+}
+
+
+// ==========================================
+// VALIDASI METODE PEMBAYARAN
+// ==========================================
+
+function validatePayment() {
+    return [...paymentRadios].some(radio => radio.checked);
+}
+
+
+// ==========================================
+// STATUS TOMBOL CHECKOUT
+// ==========================================
+
+function updateCheckoutButton() {
+    const whatsappValid = /^08[0-9]{8,13}$/.test(
+        whatsappInput.value
+    );
+
+    const paymentValid = validatePayment();
+
+    const canCheckout = whatsappValid && paymentValid;
+
+    checkoutButton.disabled = !canCheckout;
+
+    checkoutButton.classList.toggle('opacity-50', !canCheckout);
+    checkoutButton.classList.toggle('cursor-not-allowed', !canCheckout);
+}
+
+
+// ==========================================
+// EVENT WHATSAPP
+// ==========================================
+
+whatsappInput.addEventListener('input', function () {
+    whatsappTouched = true;
+
+    this.value = this.value.replace(/\D/g, '').slice(0, 15);
+
+    validateWhatsapp();
+});
+
+whatsappInput.addEventListener('blur', function () {
+    if (this.value.length > 0) {
+        whatsappTouched = true;
+        validateWhatsapp();
+    }
+});
+
+
+// ==========================================
+// EVENT RADIO PEMBAYARAN
+// ==========================================
+
+paymentRadios.forEach(radio => {
+    radio.addEventListener('change', function () {
+        updateCheckoutButton();
+    });
+});
+
+
+// ==========================================
+// KONDISI AWAL
+// ==========================================
+
+checkoutButton.disabled = true;
+checkoutButton.classList.add('opacity-50', 'cursor-not-allowed');
+
+
+// ==========================================
+// VALIDASI SELURUH FORM
+// ==========================================
+
+function validateCheckout() {
     const requiredFields = form.querySelectorAll(
         'input[required], select[required], textarea[required]'
     );
@@ -31,11 +171,18 @@ const form = document.getElementById('checkoutForm');
         field => !field.checkValidity()
     );
 
-    if (invalidFields.length === 0) {
+    const whatsappValid = validateWhatsapp();
+    const paymentValid = validatePayment();
+
+    if (!whatsappValid) {
+        whatsappTouched = true;
+        validateWhatsapp();
+    }
+
+    if (invalidFields.length === 0 && whatsappValid && paymentValid) {
         return true;
     }
 
-    // Buka semua accordion yang memiliki input invalid
     invalidFields.forEach(field => {
         const accordion = field.closest('details');
 
@@ -43,12 +190,26 @@ const form = document.getElementById('checkoutForm');
             accordion.open = true;
         }
 
-        // Tandai input yang belum valid
         field.classList.add('border-red-500');
     });
 
-    // Fokus ke input invalid pertama
-    const firstInvalid = invalidFields[0];
+    let firstInvalid;
+
+    if (!whatsappValid) {
+        firstInvalid = whatsappInput;
+    } else if (!paymentValid) {
+        firstInvalid = paymentRadios[0];
+    } else {
+        firstInvalid = invalidFields[0];
+    }
+
+    if (!firstInvalid) return false;
+
+    const accordion = firstInvalid.closest('details');
+
+    if (accordion) {
+        accordion.open = true;
+    }
 
     requestAnimationFrame(() => {
         firstInvalid.scrollIntoView({
@@ -56,58 +217,67 @@ const form = document.getElementById('checkoutForm');
             block: 'center'
         });
 
-        firstInvalid.reportValidity();
+        firstInvalid.focus();
+
+        if (
+            firstInvalid !== whatsappInput &&
+            !paymentRadios.includes(firstInvalid)
+        ) {
+            firstInvalid.reportValidity();
+        }
     });
 
     return false;
 }
 
 
-    // Buka modal
-    function openModal() {
+// ==========================================
+// BUKA MODAL
+// ==========================================
 
-        modal.classList.remove('hidden');
-        modal.classList.add('flex');
+function openModal() {
+    modal.classList.remove('hidden');
+    modal.classList.add('flex');
 
-        document.body.classList.add('overflow-hidden');
+    document.body.classList.add('overflow-hidden');
+}
+
+
+// ==========================================
+// TUTUP MODAL
+// ==========================================
+
+function hideModal() {
+    modal.classList.add('hidden');
+    modal.classList.remove('flex');
+
+    document.body.classList.remove('overflow-hidden');
+}
+
+closeModal.addEventListener('click', hideModal);
+cancelModal.addEventListener('click', hideModal);
+
+
+// ==========================================
+// TOMBOL CHECKOUT
+// ==========================================
+
+checkoutButton.addEventListener('click', function () {
+    if (!validateCheckout()) {
+        return;
     }
 
-
-    // Tutup modal
-    function hideModal() {
-
-        modal.classList.add('hidden');
-        modal.classList.remove('flex');
-
-        document.body.classList.remove('overflow-hidden');
-    }
+    openModal();
+});
 
 
-    // Tombol checkout
-    checkoutButton.addEventListener('click', function () {
+// ==========================================
+// PERSETUJUAN CHECKBOX
+// ==========================================
 
-        // 1. Validasi dahulu
-        if (!validateCheckout()) {
-            return;
-        }
-
-        // 2. Kalau valid, baru tampilkan popup
-        openModal();
-
-    });
-
-
-    // Tutup popup
-    closeModal.addEventListener('click', hideModal);
-    cancelModal.addEventListener('click', hideModal);
-
-
-    // Persetujuan
-    agreeButton.addEventListener('click', function () {
-
+agreeButton.addEventListener('click', function () {
     if (agreeButton.disabled) return;
 
-    // Cari checkbox yang belum dicentang
     const unchecked = [ageAgreement, ruleAgreement].filter(
         checkbox => !checkbox.checked
     );
@@ -115,7 +285,6 @@ const form = document.getElementById('checkoutForm');
     if (unchecked.length > 0) {
         agreementError.classList.remove('hidden');
 
-        // Prioritaskan checkbox pertama yang belum dicentang
         const firstUnchecked = unchecked[0];
         const label = firstUnchecked.closest('label');
 
@@ -124,7 +293,6 @@ const form = document.getElementById('checkoutForm');
             block: 'center'
         });
 
-        // Trigger ulang animasi shake
         label.classList.remove('shake');
         void label.offsetWidth;
         label.classList.add('shake');
@@ -153,31 +321,31 @@ const form = document.getElementById('checkoutForm');
 });
 
 
-    // Cegah form dikirim tanpa melewati popup
-    form.addEventListener('submit', function (e) {
+// ==========================================
+// CEGAH SUBMIT TANPA PERSETUJUAN
+// ==========================================
 
-        if (approved) {
-            return;
+form.addEventListener('submit', function (e) {
+    if (approved) {
+        return;
+    }
+
+    e.preventDefault();
+
+    if (validateCheckout()) {
+        openModal();
+    }
+});
+
+
+// ==========================================
+// EVENT CHECKBOX AGREEMENT
+// ==========================================
+
+[ageAgreement, ruleAgreement].forEach(checkbox => {
+    checkbox.addEventListener('change', function () {
+        if (ageAgreement.checked && ruleAgreement.checked) {
+            agreementError.classList.add('hidden');
         }
-
-        e.preventDefault();
-
-        if (validateCheckout()) {
-            openModal();
-        }
-
     });
-
-
-    // Hilangkan pesan error saat checkbox dicentang
-    [ageAgreement, ruleAgreement].forEach(checkbox => {
-
-        checkbox.addEventListener('change', function () {
-
-            if (ageAgreement.checked && ruleAgreement.checked) {
-                agreementError.classList.add('hidden');
-            }
-
-        });
-
-    });
+});
