@@ -93,5 +93,18 @@ Route::prefix('roblox-checker')
 
     });
 
-Route::get('/admin/orders', [AdminController::class, 'orders'])
-    ->name('admin.orders');
+    /*
+|--------------------------------------------------------------------------
+| Admin Page
+|--------------------------------------------------------------------------
+*/
+
+Route::prefix('admin')->name('admin.')->group(function () {
+    Route::get('/orders', [AdminController::class, 'orders'])->name('orders');
+
+    Route::patch('/orders/{order}/approve', [AdminController::class, 'approve'])
+        ->name('orders.approve');
+
+    Route::delete('/orders/{order}', [AdminController::class, 'destroy'])
+        ->name('orders.destroy');
+});

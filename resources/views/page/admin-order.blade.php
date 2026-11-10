@@ -15,29 +15,40 @@
             <p class="mt-1 text-xs text-slate-400">
                 Manage and monitor customer orders
             </p>
+            <div class="mt-1 text-sm font-bold text-slate-400">
+                Total Robux dikirim : <p class="font-bold"> {{ number_format($totalRobuxSent) }}</p>
+            </div>
         </div>
 
-        <span class="rounded-lg bg-sky-50 px-3 py-1.5 text-xs font-semibold text-sky-700">
-            Live Orders
-        </span>
+        <div
+            id="liveOrderStatus"
+            class="inline-flex items-center gap-2 rounded-lg bg-amber-50 px-3 py-1.5 text-xs font-semibold text-amber-700"
+        >
+            <span
+                id="liveOrderIndicator"
+                class="size-2 rounded-full bg-current animate-pulse"
+            ></span>
+
+            <span id="liveOrderText">Menghubungkan...</span>
+        </div>
     </div>
 
     {{-- Table --}}
     <div class="overflow-x-auto">
-        <table class="w-full whitespace-nowrap text-left text-sm">
+        <table class="w-full min-w-312.5 whitespace-nowrap text-left text-sm">
 
             <thead class="bg-slate-50/80 text-[11px] font-bold uppercase tracking-wider text-slate-400">
                 <tr>
-                    <th class="px-6 py-4">Order ID</th>
-                    <th class="px-6 py-4">Username</th>
-                    <th class="px-6 py-4">Display Name</th>
-                    <th class="px-6 py-4">Robux</th>
-                    <th class="px-6 py-4">Total</th>
-                    <th class="px-6 py-4">Metode</th>
-                    <th class="px-6 py-4">Bukti</th>
-                    <th class="px-6 py-4">Whatapp</th>
-                    <th class="px-6 py-4">Tiktok</th>
-                    <th class="px-6 py-4">Order</th>
+                    <th class="min-w-[150px] px-6 py-4">Order ID</th>
+                    <th class="min-w-[90px] px-6 py-4">Avatar</th>
+                    <th class="min-w-[190px] px-6 py-4">Display / Usn</th>
+                    <th class="min-w-[90px] px-6 py-4">Robux</th>
+                    <th class="min-w-[120px] px-6 py-4">Total</th>
+                    <th class="min-w-[110px] px-6 py-4">Metode</th>
+                    <th class="min-w-[150px] px-6 py-4">Bukti</th>
+                    <th class="min-w-[180px] px-6 py-4">WhatsApp / TikTok</th>
+                    <th class="min-w-[180px] text-center px-6 py-4">Acc / delete</th>
+                    <th class="min-w-[150px] px-6 py-4">Order</th>
                 </tr>
             </thead>
 
@@ -63,19 +74,17 @@
                                     class="size-10 rounded-xl border border-slate-200 bg-slate-100 object-cover"
                                     onerror="this.src='https://placehold.co/150x150?text=User'"
                                 >
-
-                                <span class="font-bold text-slate-600">
-                                    {{ $order->roblox_username }}
-                                </span>
-
                             </div>
                         </td>
 
                         {{-- Display Name --}}
-                        <td class="px-6 py-5 text-center">
-                            <span class="font-bold text-slate-600">
-                                {{ $order->display_name }}
-                            </span>
+                        <td class="px-6 py-5 flex flex-col text-center">
+                                <span class="font-bold text-slate-600">
+                                    Dis : {{ $order->display_name }}
+                                </span>
+                                <span class="font-bold text-slate-600">
+                                    Usn : @ {{ $order->roblox_username }}
+                                    </span>
                         </td>
 
                         {{-- Robux --}}
@@ -109,27 +118,68 @@
                                 </span>
                             @endif
                         </td>
-
-                        {{-- Payment Status --}}
-                        <td class="px-6 py-5">
-
-                            <span class="font-bold text-blue underline">
-                                <a href="https://wa.me/6285182566640?">{{ $order->whatsapp }}</a>
-                            </span>
-                        </td>
-
-                        {{-- Order Status --}}
-                        <td class="px-6 py-5">
-                            @if ($order->tiktok_username)
+                            
+                            {{-- Order Status --}}
+                            <td class="px-6 py-5 flex-col flex text-center">
+                                @if ($order->whatsapp)
+                                <span class="font-bold text-blue underline">
+                                    <a href="https://wa.me/6285182566640?">{{ $order->whatsapp }}</a>
+                                </span>
                                 <span class="font-bold text-slate-700">
-                                    {{ $order->tiktok_username }}
+                                    {{ $order->tiktok_username ?? 'gada tiktok'}}
                                 </span>
                                 @else
                                     <span class="text-xs text-slate-400">
                                         Kaga dikirim mas Bems
                                     </span>
                                 @endif
-                            </span>
+                        </td>
+
+                        {{-- ACC --}}
+                        {{-- Actions --}}
+                        <td class="py-5">
+                            <div class="flex items-center justify-center gap-2">
+
+                                {{-- ACC --}}
+                                @if ($order->order_status != 'done')
+                                    <form
+                                    action="{{ route('admin.orders.approve', $order->order_id) }}"
+                                        method="POST"
+                                        onsubmit="return confirm('Yakin ingin ACC order {{ $order->order_id }}?')"
+                                    >
+                                        @csrf
+                                        @method('PATCH')
+
+                                        <button
+                                            type="submit"
+                                            class="rounded-lg bg-emerald-50 p-2 text-emerald-700 transition hover:bg-emerald-100"
+                                            title="Approve"
+                                        >
+                                            <i data-lucide="check" class="size-4"></i>
+                                        </button>
+                                    </form>
+                                @endif
+
+                                {{-- DEL --}}
+                                <form
+                                    action="{{ route('admin.orders.destroy', $order->order_id) }}"
+                                    method="POST"
+                                    onsubmit="return confirm('Yakin ingin menghapus order {{ $order->order_id }}? Data tidak bisa dikembalikan!')"
+                                >
+                                    @csrf
+                                    @method('DELETE')
+
+                                    <button
+                                        type="submit"
+                                        class="rounded-lg bg-red-50 p-2 text-red-700 transition hover:bg-red-100"
+                                        title="Delete"
+                                    >
+                                        <i data-lucide="trash-2" class="size-4"></i>
+                                    </button>
+                                </form>
+
+                            </div>
+                        </td>
                         </td>
 
                         {{-- Created At --}}

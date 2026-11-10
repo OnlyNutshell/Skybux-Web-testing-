@@ -15,6 +15,10 @@ public function orders()
         ->orderByDesc('created_at')
         ->get();
 
+    $totalRobuxSent = DB::table('orders')
+    ->where('order_status', 'done')
+    ->sum('robux_amount');
+
         // Ambil username unik dari semua order
     $usernames = $orders
         ->pluck('roblox_username')
@@ -106,6 +110,35 @@ public function orders()
         }
     }
 
-    return view('page.admin-order', compact('orders'));
+    return view('page.admin-order', compact('orders', 'totalRobuxSent'));
+}
+
+public function approve($order)
+{
+    $updated = DB::table('orders')
+        ->where('order_id', $order)
+        ->update([
+            'order_status' => 'done',
+            'updated_at' => now(),
+        ]);
+
+    if (!$updated) {
+        return back()->with('error', 'Order tidak ditemukan atau sudah diproses.');
+    }
+
+    return back()->with('success', 'Pembayaran berhasil disetujui!');
+}
+
+public function destroy($order)
+{
+    $deleted = DB::table('orders')
+        ->where('order_id', $order)
+        ->delete();
+
+    if (!$deleted) {
+        return back()->with('error', 'Order tidak ditemukan.');
+    }
+
+    return back()->with('success', 'Order berhasil dihapus!');
 }
 }
