@@ -60,6 +60,15 @@
       "_supabase-test-BPvGp7Ti.js"
     ]
   },
+  "resources/js/page/live-overlay.js": {
+    "file": "assets/live-overlay-DXYxjmZ_.js",
+    "name": "live-overlay",
+    "src": "resources/js/page/live-overlay.js",
+    "isEntry": true,
+    "imports": [
+      "_supabase-test-BPvGp7Ti.js"
+    ]
+  },
   "resources/js/page/payment.js": {
     "file": "assets/payment-Cczu9Wdj.js",
     "name": "payment",
