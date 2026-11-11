@@ -15,7 +15,7 @@
     "name": "supabase-test"
   },
   "resources/css/app.css": {
-    "file": "assets/app-BxGhtaJf.css",
+    "file": "assets/app-CW3XR6x6.css",
     "src": "resources/css/app.css",
     "isEntry": true,
     "name": "app",
@@ -61,7 +61,7 @@
     ]
   },
   "resources/js/page/live-overlay.js": {
-    "file": "assets/live-overlay-DXYxjmZ_.js",
+    "file": "assets/live-overlay-D2oxrLHB.js",
     "name": "live-overlay",
     "src": "resources/js/page/live-overlay.js",
     "isEntry": true,

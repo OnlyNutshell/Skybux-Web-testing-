@@ -1,4 +1,9 @@
+
 import { supabase } from '../supabase-test';
+
+// ========================================
+// ELEMENTS
+// ========================================
 
 const card = document.getElementById('alert-card');
 
@@ -11,45 +16,110 @@ if (!card) {
     const description = document.getElementById('alert-description');
 
     let hideTimer;
-    let audioEnabled = false;
-    let audioContext;
+    let currentSource = null;
 
-    document.addEventListener('click', async () => {
-        if (audioEnabled) return;
+    // ========================================
+    // AUDIO ENGINE
+    // ========================================
+
+    const AudioContextClass =
+        window.AudioContext || window.webkitAudioContext;
+
+    const audioContext = AudioContextClass
+        ? new AudioContextClass()
+        : null;
+
+    let sounds = {
+        order: null,
+        done: null
+    };
+
+    async function loadSound(url) {
+        try {
+            const response = await fetch(url);
+
+            if (!response.ok) {
+                throw new Error(`HTTP ${response.status}`);
+            }
+
+            const buffer = await response.arrayBuffer();
+
+            return await audioContext.decodeAudioData(buffer);
+        } catch (error) {
+            console.error(`Gagal memuat ${url}:`, error);
+            return null;
+        }
+    }
+
+    async function setupSounds() {
+        if (!audioContext) {
+            console.error('Web Audio API tidak tersedia!');
+            return;
+        }
+
+        const [order, done] = await Promise.all([
+            loadSound('/sound/order-masuk.mpeg'),
+            loadSound('/sound/order-selesai.mpeg')
+        ]);
+
+        sounds.order = order;
+        sounds.done = done;
+
+        console.log('Skybux audio loaded:', {
+            order: !!order,
+            done: !!done
+        });
+
+        if (audioContext.state === 'suspended') {
+            audioContext.resume().catch(error => {
+                console.warn('Audio resume gagal:', error);
+            });
+        }
+    }
+
+    function playSound(type) {
+        if (!audioContext || audioContext.state !== 'running') {
+            console.warn('AudioContext belum aktif:', audioContext?.state);
+            return;
+        }
+
+        const buffer = sounds[type];
+
+        if (!buffer) {
+            console.warn(`Audio ${type} belum tersedia!`);
+            return;
+        }
 
         try {
-            audioContext = new (
-                window.AudioContext || window.webkitAudioContext
-            )();
+            if (currentSource) {
+                currentSource.stop();
+                currentSource.disconnect();
+            }
 
-            await audioContext.resume();
-            audioEnabled = true;
+            const source = audioContext.createBufferSource();
+
+            source.buffer = buffer;
+            source.connect(audioContext.destination);
+            source.start(0);
+
+            currentSource = source;
+
+            source.onended = () => {
+                if (currentSource === source) {
+                    currentSource = null;
+                }
+                source.disconnect();
+            };
         } catch (error) {
-            console.error('Audio error:', error);
+            console.error('Gagal memutar audio:', error);
         }
-    }, { once: true });
-
-    function playSound() {
-        if (!audioEnabled || !audioContext) return;
-
-        const oscillator = audioContext.createOscillator();
-        const gain = audioContext.createGain();
-
-        oscillator.connect(gain);
-        gain.connect(audioContext.destination);
-
-        oscillator.frequency.value = 880;
-        oscillator.type = 'sine';
-
-        gain.gain.setValueAtTime(0.15, audioContext.currentTime);
-        gain.gain.exponentialRampToValueAtTime(
-            0.001,
-            audioContext.currentTime + 0.35
-        );
-
-        oscillator.start();
-        oscillator.stop(audioContext.currentTime + 0.35);
     }
+
+    setupSounds();
+
+    // ========================================
+    // ALERT
+    // ========================================
 
     function showAlert(data) {
         clearTimeout(hideTimer);
@@ -63,7 +133,7 @@ if (!card) {
         }
 
         if (username) {
-            username.textContent = `${data.username || '-'}`;
+            username.textContent = data.username || '-';
         }
 
         if (amount) {
@@ -80,7 +150,7 @@ if (!card) {
         card.classList.remove('opacity-0', '-translate-y-8');
         card.classList.add('opacity-100', 'translate-y-0');
 
-        playSound();
+        playSound(done ? 'done' : 'order');
 
         hideTimer = setTimeout(() => {
             card.classList.remove('opacity-100', 'translate-y-0');
@@ -88,7 +158,10 @@ if (!card) {
         }, 3500);
     }
 
-    // TEST MANUAL
+    // ========================================
+    // MANUAL TEST
+    // ========================================
+
     window.testSkybuxAlert = function(type = 'order') {
         showAlert({
             type,
@@ -97,7 +170,10 @@ if (!card) {
         });
     };
 
-    // REALTIME SUPABASE
+    // ========================================
+    // SUPABASE REALTIME
+    // ========================================
+
     const channel = supabase
         .channel('skybux-live-events')
         .on(
@@ -127,7 +203,19 @@ if (!card) {
             }
         });
 
+    // ========================================
+    // CLEANUP
+    // ========================================
+
     window.addEventListener('beforeunload', () => {
         supabase.removeChannel(channel);
+
+        if (currentSource) {
+            try {
+                currentSource.stop();
+            } catch {}
+        }
+
+        audioContext?.close();
     });
 }

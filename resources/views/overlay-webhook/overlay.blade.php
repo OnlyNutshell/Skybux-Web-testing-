@@ -8,13 +8,20 @@
 
     <title>{{ config('app.name', 'Skybux') }}</title>
 
+    <!-- <audio id="sound-order" preload="auto">
+        <source src="{{ asset('sound/order-masuk.mpeg') }}" type="audio/mpeg">
+    </audio>
+
+    <audio id="sound-done" preload="auto">
+        <source src="{{ asset('sound/order-selesai.mpeg') }}" type="audio/mpeg">
+    </audio> -->
+
     @if (file_exists(public_path('build/manifest.json')) || file_exists(public_path('hot')))
         @vite(['resources/css/app.css', 'resources/js/app.js', 'resources/js/page/live-overlay.js'])
     @endif
 </head>
 
 <body class="m-0 overflow-hidden bg-transparent">
-
     <div id="live-overlay"
          class="fixed inset-0 z-[9999] flex items-start justify-center
                 bg-transparent p-10 pointer-events-none">
@@ -36,12 +43,12 @@
                 src="{{ asset('img/masuk-icon.png') }}"
                 alt="Skybux Mascot"
                 class="absolute
-                       -left-[198px] top-[172px]
-                       z-20
-                       h-[500px] w-[500px]
-                       -translate-y-1/2
-                       object-contain
-                       drop-shadow-2xl"
+                    -left-[198px] top-[172px]
+                    z-20
+                    h-[500px] w-[500px]
+                    -translate-y-1/2
+                    object-contain
+                    drop-shadow-2xl"
             >
 
             <!-- CONTENT -->
@@ -49,14 +56,12 @@
 
                 <!-- TITLE -->
                 <h2 id="alert-title"
-                    class="text-[64px] leading-tight
-                           tracking-wide font-black">
+                    class="text-[64px] leading-tighttracking-wide font-black">
                     ORDER BARU !
                 </h2>
 
                 <!-- USERNAME -->
-                <p id="alert-username"
-                   class="mt-5 text-[36px] font-extrabold">
+                <p id="alert-username" class="mt-5 text-[36px] font-extrabold">
                     Player123
                 </p>
 
