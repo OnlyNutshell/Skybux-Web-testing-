@@ -15,14 +15,12 @@
         </style>
     @endif
 </head>
-<body class="m-0 overflow-hidden">
-
 <body class="m-0 overflow-hidden bg-transparent">
 
     <div
         id="live-overlay"
         class="fixed w-full inset-0 z-[9999] flex items-start justify-center
-               bg-white p-8 pointer-events-none"
+               bg-transparent p-8 pointer-events-none"
     >
  <div
         id="alert-card"
