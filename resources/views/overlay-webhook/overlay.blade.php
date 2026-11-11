@@ -23,8 +23,8 @@
         <div id="alert-card"
              class="w-full max-w-md rounded-2xl border border-sky-400/30
        bg-[#0D1726]/95 p-5 text-white shadow-2xl
-       opacity-0 -translate-y-8
-       transition-all duration-1200 ease-in-out">
+       opacity-100 translate-y-0
+       ">
 
             <div class="mb-4 flex items-center justify-between">
                 <div class="flex items-center gap-2">
@@ -73,7 +73,7 @@
         </div>
     </div>
 
-    <script>
+    <!-- <script>
         function showAlert() {
         const card = document.getElementById('alert-card');
 
@@ -92,7 +92,7 @@
 
     setTimeout(showAlert, 500);
     setTimeout(hideAlert, 3000);
-    </script>
+    </script> -->
 
 </body>
 
