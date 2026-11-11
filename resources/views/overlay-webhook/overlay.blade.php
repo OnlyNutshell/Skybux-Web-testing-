@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
@@ -5,154 +6,108 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('app.name', 'Skybux') }}</title>
 
     @if (file_exists(public_path('build/manifest.json')) || file_exists(public_path('hot')))
         @vite(['resources/css/app.css', 'resources/js/app.js'])
-
-    @else
-        <style>
-        </style>
     @endif
 </head>
+
 <body class="m-0 overflow-hidden bg-transparent">
 
-    <div
-        id="live-overlay"
-        class="fixed w-full inset-0 z-[9999] flex items-start justify-center
-               bg-transparent p-8 pointer-events-none"
-    >
- <div
-        id="alert-card"
-        class="relative mt-16 ml-16 w-[520px] max-w-[calc(100vw-5rem)]
-               rounded-[4rem] border border-black border-3
-               bg-sky-700 px-6 py-6 pl-39
-               text-white shadow-[0_15px_50px_rgba(0,0,0,0.4)]
-               opacity-100 translate-y-0
-               transition-all duration-500 ease-out"
-    >
-
-        <!-- MASKOT OVERFLOW -->
-        <img
-            src="{{ asset('img/masuk-icon.png') }}"
-            alt="Skybux Mascot"
-            class="absolute -left-30 top-[90px] z-20
-                   h-70 w-70 -translate-y-1/2
-                   object-contain drop-shadow-2xl"
-        >
-
-        <!-- CONTENT -->
-        <div class="relative z-10">
-
-            <!-- TITLE -->
-            <div class="flex items-center gap-2">
-                <h2
-                    id="alert-title"
-                    class="text-5xl tracking-[0.1rem] font-extrabold"
-                >
-                    Order Baru!
-                </h2>
-            </div>
-
-            <!-- USERNAME -->
-            <p
-                id="alert-username"
-                class="mt-2 ml-2 text-2xl font-bold text-white"
-            >
-                Player123
-            </p>
-
-            <!-- AMOUNT -->
-            <p
-                id="alert-amount"
-                class="mt-1 ml-2 text-xl font-bold text-white"
-            >
-                100 Robux
-            </p>
-
-            <!-- DIVIDER -->
-            <div class="my-3 h-px bg-white"></div>
-
-            <!-- DESCRIPTION -->
-            <p
-                id="alert-description"
-                class="text-l ml-2 leading-relaxed text-white"
-            >
-                Pesanan masuk, mohon ditunggu yaaaaaa! 
-            </p>
-
-        </div>
-
-        <!-- DECORATION -->
-        <div
-            class="pointer-events-none absolute right-5 top-5
-                   h-16 w-16 rounded-full bg-sky-400/10 blur-2xl"
-        ></div>
-
-    </div>
-</div>
-
-    <!-- <div id="live-overlay"
-         class="fixed inset-0 bg-black w-full z-[9999] flex items-start justify-center p-18 pointer-events-none">
+    <div id="live-overlay"
+         class="fixed inset-0 z-[9999] flex items-start justify-center
+                bg-transparent p-10 pointer-events-none">
 
         <div id="alert-card"
-             class="w-1/3 rounded-2xl border border-sky-400/30
-       bg-[#0D1726]/95 p-5 text-white shadow-2xl
-       opacity-100 translate-y-0
-       ">
+             class="relative mt-20 ml-24
+                    w-[850px] max-w-[calc(100vw-8rem)]
+                    rounded-[4rem]
+                    border-[5px] border-black
+                    bg-sky-700
+                    px-12 py-12 pl-[270px]
+                    text-white
+                    shadow-[0_25px_80px_rgba(0,0,0,0.5)]
+                    opacity-100 translate-y-0
+                    transition-all duration-700 ease-in-out">
 
-            <div class="flex items-center gap-4">
-                <img src="{{ asset('img/Masuk-icon.png') }}"  class="absolute bg-transparent" alt="" srcset="">
-                <div id="alert-icon"
-                     class="flex h-14 w-14 shrink-0 items-center justify-center
-                            rounded-xl bg-sky-400/15 text-2xl">
-                </div>
+            <!-- MASKOT -->
+            <img
+                src="{{ asset('img/masuk-icon.png') }}"
+                alt="Skybux Mascot"
+                class="absolute
+                       -left-[198px] top-[172px]
+                       z-20
+                       h-[500px] w-[500px]
+                       -translate-y-1/2
+                       object-contain
+                       drop-shadow-2xl"
+            >
 
-                <div class="min-w-0">
-                    <h2 id="alert-title" class="text-lg font-extrabold">
-                        Order Baru!
-                    </h2>
+            <!-- CONTENT -->
+            <div class="relative z-10">
 
-                    <p id="alert-username" class="mt-1 text-sm text-slate-300">
-                        Roblox: Player123
-                    </p>
+                <!-- TITLE -->
+                <h2 id="alert-title"
+                    class="text-[64px] leading-tight
+                           tracking-wide font-black">
+                    ORDER BARU!
+                </h2>
 
-                    <p id="alert-amount"
-                       class="mt-1 text-sm font-bold text-sky-300">
-                        100 Robux
-                    </p>
-                </div>
+                <!-- USERNAME -->
+                <p id="alert-username"
+                   class="mt-5 text-[36px] font-extrabold">
+                    Player123
+                </p>
+
+                <!-- AMOUNT -->
+                <p id="alert-amount"
+                   class="mt-3 text-[32px] font-black text-sky-200">
+                    100 Robux
+                </p>
+
+                <!-- DIVIDER -->
+                <div class="my-6 h-[3px] bg-white/50"></div>
+
+                <!-- DESCRIPTION -->
+                <p id="alert-description"
+                   class="text-[23px] font-semibold leading-relaxed">
+                    Pesanan masuk, mohon ditunggu yaaaaaa!
+                </p>
+
             </div>
 
-            <div class="mt-4 h-px bg-white/10"></div>
+            <!-- DECORATION -->
+            <div class="pointer-events-none absolute
+                        right-8 top-8 h-32 w-32
+                        rounded-full bg-sky-300/20 blur-3xl">
+            </div>
 
-            <p id="alert-description"
-               class="mt-3 text-xs text-slate-400">
-                Terima kasih sudah melakukan order!
-            </p>
         </div>
-    </div> -->
+    </div>
 
     <!-- <script>
-        function showAlert() {
-        const card = document.getElementById('alert-card');
+        function testSkybuxAlert(type = 'order') {
+            const card = document.getElementById('alert-card');
 
-        requestAnimationFrame(() => {
-            card.classList.remove('opacity-0', '-translate-y-8');
-            card.classList.add('opacity-100', 'translate-y-0');
-        });
-    }
+            clearTimeout(window.skybuxAlertTimeout);
 
-    function hideAlert() {
-        const card = document.getElementById('alert-card');
+            card.classList.remove('opacity-100', 'translate-y-0');
+            card.classList.add('opacity-0', '-translate-y-12');
 
-        card.classList.remove('opacity-100', 'translate-y-0');
-        card.classList.add('opacity-0', '-translate-y-8');
-    }
+            requestAnimationFrame(() => {
+                requestAnimationFrame(() => {
+                    card.classList.remove('opacity-0', '-translate-y-12');
+                    card.classList.add('opacity-100', 'translate-y-0');
+                });
+            });
 
-    setTimeout(showAlert, 500);
-    setTimeout(hideAlert, 3000);
+            window.skybuxAlertTimeout = setTimeout(() => {
+                card.classList.remove('opacity-100', 'translate-y-0');
+                card.classList.add('opacity-0', '-translate-y-12');
+            }, 5000);
+        }
     </script> -->
 
 </body>
-
+</html>
