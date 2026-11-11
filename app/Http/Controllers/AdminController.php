@@ -1,28 +1,38 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
 
 class AdminController extends Controller
 {
     public function orders()
     {
-        // Ambil semua order
+
+        /*
+        |--------------------------------------------------------------------------
+        | 1. DATABASE QUERY
+        |--------------------------------------------------------------------------
+        */
+
         $orders = DB::table('orders')
             ->orderByDesc('created_at')
             ->paginate(8);
 
-        // Total Robux yang sudah dikirim
         $totalRobuxSent = DB::table('orders')
             ->where('order_status', 'done')
             ->sum('robux_amount');
 
-        // Ambil username Roblox unik
-        $usernames = $orders
+        /*
+        |--------------------------------------------------------------------------
+        | 2. ROBLOX USERNAME & AVATAR
+        |--------------------------------------------------------------------------
+        */
+
+        $usernames = $orders->getCollection()
             ->pluck('roblox_username')
             ->filter()
             ->unique()
@@ -31,12 +41,9 @@ class AdminController extends Controller
         $avatarMap = [];
         $displayNameMap = [];
 
-        /*
-         * CACHE DATA ROBLOX
-         * Cache selama 24 jam per username.
-         */
         $missingUsernames = [];
 
+        // Periksa cache Roblox
         foreach ($usernames as $username) {
             $cacheKey = 'roblox-user:' . strtolower($username);
 
@@ -50,7 +57,7 @@ class AdminController extends Controller
             }
         }
 
-        // Hanya request username yang belum ada di cache
+        // Request hanya untuk username yang belum ada di cache
         if (!empty($missingUsernames)) {
             $usersResponse = Http::timeout(8)->post(
                 'https://users.roblox.com/v1/usernames/users',
@@ -70,6 +77,7 @@ class AdminController extends Controller
 
                 $thumbnailMap = [];
 
+                // Ambil avatar sekaligus
                 if ($userIds->isNotEmpty()) {
                     $avatarResponse = Http::timeout(8)->get(
                         'https://thumbnails.roblox.com/v1/users/avatar-headshot',
@@ -89,6 +97,7 @@ class AdminController extends Controller
                     }
                 }
 
+                // Simpan hasil Roblox ke cache
                 foreach ($users as $user) {
                     $username = $user['name'];
 
@@ -109,8 +118,8 @@ class AdminController extends Controller
             }
         }
 
-        // Pasang data Roblox ke setiap order
-        foreach ($orders as $order) {
+        // Pasang data Roblox ke order
+        foreach ($orders->getCollection() as $order) {
             $username = $order->roblox_username;
 
             $order->avatar_url = $avatarMap[$username] ?? null;
@@ -120,13 +129,16 @@ class AdminController extends Controller
         }
 
         /*
-         * CACHE SIGNED URL SUPABASE
-         * URL berlaku 60 menit, cache hanya 50 menit.
-         */
+        |--------------------------------------------------------------------------
+        | 3. SUPABASE SIGNED URL
+        |--------------------------------------------------------------------------
+        */
+
+
         $supabaseUrl = config('services.supabase.url');
         $secretKey = config('services.supabase.secret_key');
 
-        foreach ($orders as $order) {
+        foreach ($orders->getCollection() as $order) {
             $order->proof_url = null;
 
             if (!$order->payment_proof_path) {
@@ -187,27 +199,55 @@ class AdminController extends Controller
         );
     }
 
+    /*
+    |--------------------------------------------------------------------------
+    | APPROVE ORDER
+    |--------------------------------------------------------------------------
+    */
+
+    
     public function approve($order)
     {
-        $updated = DB::table('orders')
+        $orderData = DB::table('orders')
             ->where('order_id', $order)
-            ->update([
-                'order_status' => 'done',
-                'updated_at' => now(),
-            ]);
+            ->where('order_status', '!=', 'done')
+            ->first();
 
-        if (!$updated) {
+        if (!$orderData) {
             return back()->with(
                 'error',
                 'Order tidak ditemukan atau sudah diproses.'
             );
         }
 
+        DB::transaction(function () use ($orderData, $order) {
+            DB::table('orders')
+                ->where('order_id', $order)
+                ->update([
+                    'order_status' => 'done',
+                    'updated_at' => now(),
+                ]);
+
+            DB::table('live_order_events')->insert([
+                'event_type' => 'done',
+                'roblox_username' => $orderData->roblox_username,
+                'robux_amount' => $orderData->robux_amount,
+                'created_at' => now(),
+            ]);
+        });
+
         return back()->with(
             'success',
             'Pembayaran berhasil disetujui!'
         );
     }
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | DELETE ORDER
+    |--------------------------------------------------------------------------
+    */
 
     public function destroy($order)
     {

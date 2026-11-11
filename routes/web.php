@@ -108,3 +108,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::delete('/orders/{order}', [AdminController::class, 'destroy'])
         ->name('orders.destroy');
 });
+
+Route::get('/live/overlay', function () {
+    return view('overlay-webhook.overlay');
+})->name('overlay-webhook.overlay');

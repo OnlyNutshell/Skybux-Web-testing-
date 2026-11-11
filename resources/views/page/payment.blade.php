@@ -82,7 +82,7 @@
                         </label>
 
                         <p class="mt-2 text-[11px] text-slate-400">
-                            JPG, PNG, WEBP · Maksimal 5 MB
+                            JPG, PNG, WEBP · Maksimal 15 MB
                         </p>
 
                         <!-- File terpilih -->

@@ -53,42 +53,48 @@ class CheckoutController extends Controller
         ]);
     }
 
-    public function confirm(Request $request)
-    {
-        $validated = $request->validate([
-            'payment_method' => [
-                'required',
-                'in:qris',
-            ],
+    
+public function confirm(Request $request)
+{
+    $validated = $request->validate([
+        'payment_method' => [
+            'required',
+            'in:qris',
+        ],
 
-            'whatsapp' => [
-                'required',
-                'string',
-            ],
+        'whatsapp' => [
+            'required',
+            'string',
+        ],
 
-            'tiktok' => [
-                'nullable',
-                'string',
-                'max:30',
-            ],
-        ]);
+        'tiktok' => [
+            'nullable',
+            'string',
+            'max:30',
+        ],
+    ]);
 
-        $order = session('checkout_order');
+    $order = session('checkout_order');
 
-        if (!$order) {
-            return redirect()->route('home');
-        }
+    if (!$order) {
+        return redirect()->route('home');
+    }
 
-        // Gunakan ID yang sama jika tombol diklik berulang kali.
-        $orderId = $order['order_id'] ?? 'SKY-' . strtoupper(Str::random(12));
+    $orderId = $order['order_id'] ?? 'SKY-' . strtoupper(Str::random(12));
 
-        // Cek apakah order sudah pernah disimpan.
-        $existingOrder = DB::table('orders')
-            ->where('order_id', $orderId)
-            ->first();
+    $existingOrder = DB::table('orders')
+        ->where('order_id', $orderId)
+        ->first();
 
-        if (!$existingOrder) {
-            DB::table('orders')->insertOrIgnore([
+    if (!$existingOrder) {
+
+        DB::transaction(function () use (
+            $order,
+            $orderId,
+            $validated
+        ) {
+
+            $inserted = DB::table('orders')->insertOrIgnore([
                 'order_id' => $orderId,
                 'roblox_username' => $order['username'],
                 'robux_amount' => $order['robux'],
@@ -98,22 +104,34 @@ class CheckoutController extends Controller
                 'order_status' => 'pending',
                 'whatsapp' => $validated['whatsapp'],
                 'tiktok_username' => filled($validated['tiktok'])
-                                    ? '@' . ltrim($validated['tiktok'], '@')
-                                    : null,
+                    ? '@' . ltrim($validated['tiktok'], '@')
+                    : null,
                 'expires_at' => now()->addMinutes(14),
                 'created_at' => now(),
                 'updated_at' => now(),
             ]);
-        }
 
-        // Simpan informasi order ke session.
-        $order['order_id'] = $orderId;
-        $order['payment_method'] = $validated['payment_method'];
-
-        session()->put('checkout_order', $order);
-
-        return redirect()->route('checkout.payment');
+            // Kirim notifikasi hanya jika order benar-benar baru dibuat.
+            if ($inserted > 0) {
+                DB::table('live_order_events')->insert([
+                    'event_type' => 'new_order',
+                    'roblox_username' => $order['username'],
+                    'robux_amount' => $order['robux'],
+                    'created_at' => now(),
+                ]);
+            }
+        });
     }
+
+    // Simpan informasi order ke session.
+    $order['order_id'] = $orderId;
+    $order['payment_method'] = $validated['payment_method'];
+
+    session()->put('checkout_order', $order);
+
+    return redirect()->route('checkout.payment');
+}
+
 
     
 
@@ -124,7 +142,7 @@ class CheckoutController extends Controller
             'required',
             'image',
             'mimes:jpg,jpeg,png,webp',
-            'max:5120',
+            'max:15000',
         ],
     ]);
 

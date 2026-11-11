@@ -15,7 +15,7 @@
     "name": "supabase-test"
   },
   "resources/css/app.css": {
-    "file": "assets/app-CzYy8ubD.css",
+    "file": "assets/app-CVkU1QAk.css",
     "src": "resources/css/app.css",
     "isEntry": true,
     "name": "app",
@@ -24,11 +24,12 @@
     ]
   },
   "resources/js/app.js": {
-    "file": "assets/app-YVXT1ub8.js",
+    "file": "assets/app-Dk3KfiZ_.js",
     "name": "app",
     "src": "resources/js/app.js",
     "isEntry": true,
     "imports": [
+      "_supabase-test-BPvGp7Ti.js",
       "_lucide-Cdy28ShW.js"
     ]
   },

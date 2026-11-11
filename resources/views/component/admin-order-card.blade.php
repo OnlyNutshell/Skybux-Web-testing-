@@ -1,4 +1,4 @@
-<div
+<!-- <div
     class="overflow-hidden rounded-2xl border border-slate-200 bg-white p-4 shadow-sm transition hover:shadow-md"
     data-order-id="{{ $order->order_id }}"
 >
@@ -254,4 +254,4 @@
 
     </div>
 
-</div>
+</div> -->
