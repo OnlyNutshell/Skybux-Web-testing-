@@ -24,12 +24,11 @@
     ]
   },
   "resources/js/app.js": {
-    "file": "assets/app-Dxz2BVYk.js",
+    "file": "assets/app-B6_qqQyI.js",
     "name": "app",
     "src": "resources/js/app.js",
     "isEntry": true,
     "imports": [
-      "_supabase-test-BPvGp7Ti.js",
       "_lucide-C-D2ZbF0.js"
     ]
   },
