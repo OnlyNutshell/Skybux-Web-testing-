@@ -12,8 +12,8 @@
             "src": "/img/(.*)", 
             "dest": "/public/img/" },
         {
-            "src": "/sounds/(.*)",
-            "dest": "/public/sounds/$1"},
+            "src": "/sound/(.*)",
+            "dest": "/public/sound/$1"},
         { 
             "src": "/(.*)", 
             "dest": "/api/index.php" }
