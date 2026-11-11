@@ -21,14 +21,14 @@
 
         <div id="alert-card"
              class="relative mt-20 ml-24
-                    w-[850px] max-w-[calc(100vw-8rem)]
+                    w-[860px] max-w-[calc(100vw-8rem)]
                     rounded-[4rem]
                     border-[5px] border-black
                     bg-sky-700
                     px-12 py-12 pl-[270px]
                     text-white
                     shadow-[0_25px_80px_rgba(0,0,0,0.5)]
-                    opacity-100 translate-y-0
+                    opacity-0 -translate-y-8
                     transition-all duration-700 ease-in-out">
 
             <!-- MASKOT -->
@@ -51,7 +51,7 @@
                 <h2 id="alert-title"
                     class="text-[64px] leading-tight
                            tracking-wide font-black">
-                    ORDER BARU!
+                    ORDER BARU !
                 </h2>
 
                 <!-- USERNAME -->
@@ -85,29 +85,6 @@
 
         </div>
     </div>
-
-    <!-- <script>
-        function testSkybuxAlert(type = 'order') {
-            const card = document.getElementById('alert-card');
-
-            clearTimeout(window.skybuxAlertTimeout);
-
-            card.classList.remove('opacity-100', 'translate-y-0');
-            card.classList.add('opacity-0', '-translate-y-12');
-
-            requestAnimationFrame(() => {
-                requestAnimationFrame(() => {
-                    card.classList.remove('opacity-0', '-translate-y-12');
-                    card.classList.add('opacity-100', 'translate-y-0');
-                });
-            });
-
-            window.skybuxAlertTimeout = setTimeout(() => {
-                card.classList.remove('opacity-100', 'translate-y-0');
-                card.classList.add('opacity-0', '-translate-y-12');
-            }, 5000);
-        }
-    </script> -->
 
 </body>
 </html>

@@ -1,21 +1,19 @@
-
 import { supabase } from '../supabase-test';
 
 const card = document.getElementById('alert-card');
 
-if (card) {
-    const label = document.getElementById('alert-label');
+if (!card) {
+    console.error('Alert card tidak ditemukan!');
+} else {
     const title = document.getElementById('alert-title');
     const username = document.getElementById('alert-username');
     const amount = document.getElementById('alert-amount');
-    const icon = document.getElementById('alert-icon');
     const description = document.getElementById('alert-description');
 
     let hideTimer;
     let audioEnabled = false;
     let audioContext;
 
-    // Aktifkan suara lewat interaksi pertama
     document.addEventListener('click', async () => {
         if (audioEnabled) return;
 
@@ -58,19 +56,26 @@ if (card) {
 
         const done = data.type === 'done';
 
-        label.textContent = done ? 'ORDER SELESAI' : 'NEW ORDER';
-        title.textContent = done
-            ? 'Robux Berhasil Dikirim!'
-            : 'Order Baru Masuk!';
+        if (title) {
+            title.textContent = done
+                ? 'ROBUX DIKIRIM !'
+                : 'ORDER BARU !';
+        }
 
-        username.textContent = `Roblox: ${data.username || '-'}`;
-        amount.textContent = `${Number(data.amount || 0).toLocaleString('id-ID')} Robux`;
+        if (username) {
+            username.textContent = `${data.username || '-'}`;
+        }
 
-        icon.textContent = done ? '🎉' : '🛒';
+        if (amount) {
+            amount.textContent =
+                `${Number(data.amount || 0).toLocaleString('id-ID')} Robux`;
+        }
 
-        description.textContent = done
-            ? 'Pesanan berhasil diselesaikan. Terima kasih!'
-            : 'Ada pesanan baru masuk ke Skybux!';
+        if (description) {
+            description.textContent = done
+                ? 'Pesanan berhasil diselesaikan. Terima kasih!'
+                : 'Pesanan masuk, mohon ditunggu yaaaaaa!';
+        }
 
         card.classList.remove('opacity-0', '-translate-y-8');
         card.classList.add('opacity-100', 'translate-y-0');
@@ -80,56 +85,47 @@ if (card) {
         hideTimer = setTimeout(() => {
             card.classList.remove('opacity-100', 'translate-y-0');
             card.classList.add('opacity-0', '-translate-y-8');
-        }, 6000);
+        }, 3500);
     }
 
-    // Untuk pengujian tampilan
-    window.addEventListener('skybux-alert', (event) => {
-        showAlert(event.detail);
-    });
-
-    // Fungsi testing dari browser console
+    // TEST MANUAL
     window.testSkybuxAlert = function(type = 'order') {
-        window.dispatchEvent(new CustomEvent('skybux-alert', {
-            detail: {
-                type,
-                username: 'Player123',
-                amount: 100
-            }
-        }));
+        showAlert({
+            type,
+            username: 'Player123',
+            amount: 100
+        });
     };
-    
-const channel = supabase
-    .channel('skybux-live-events')
 
-    .on(
-        'postgres_changes',
-        {
-            event: 'INSERT',
-            schema: 'laravel_test',
-            table: 'live_order_events'
-        },
-        (payload) => {
-            console.log('LIVE EVENT:', payload);
+    // REALTIME SUPABASE
+    const channel = supabase
+        .channel('skybux-live-events')
+        .on(
+            'postgres_changes',
+            {
+                event: 'INSERT',
+                schema: 'laravel_test',
+                table: 'live_order_events'
+            },
+            (payload) => {
+                console.log('LIVE EVENT:', payload);
 
-            const event = payload.new;
+                const event = payload.new;
 
-            showAlert({
-                type: event.event_type === 'done' ? 'done' : 'order',
-                username: event.roblox_username,
-                amount: event.robux_amount
-            });
-        }
-    )
+                showAlert({
+                    type: event.event_type === 'done' ? 'done' : 'order',
+                    username: event.roblox_username,
+                    amount: event.robux_amount
+                });
+            }
+        )
+        .subscribe((status, error) => {
+            console.log('Skybux Live:', status);
 
-    .subscribe((status, error) => {
-        console.log('Skybux Live:', status);
-
-        if (error) {
-            console.error('Realtime Error:', error);
-        }
-    });
-
+            if (error) {
+                console.error('Realtime Error:', error);
+            }
+        });
 
     window.addEventListener('beforeunload', () => {
         supabase.removeChannel(channel);
