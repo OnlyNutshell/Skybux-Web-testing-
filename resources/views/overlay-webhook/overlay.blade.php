@@ -34,7 +34,7 @@
 
         <!-- MASKOT OVERFLOW -->
         <img
-            src="{{ asset('img/Masuk-icon.png') }}"
+            src="{{ asset('img/masuk-icon.png') }}"
             alt="Skybux Mascot"
             class="absolute -left-30 top-[90px] z-20
                    h-70 w-70 -translate-y-1/2
